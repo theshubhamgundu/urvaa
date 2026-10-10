@@ -32,10 +32,6 @@ const AdminCustomers = lazy(() => import('./pages/admin/AdminCustomers'));
 const AdminTransactions = lazy(() => import('./pages/admin/AdminTransactions'));
 const AdminOrders = lazy(() => import('./pages/admin/AdminOrders'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
-const AdminEnquiries = lazy(() => import('./pages/admin/AdminEnquiries'));
-const AdminBookings = lazy(() => import('./pages/admin/AdminBookings'));
-const AdminPageSections = lazy(() => import('./pages/admin/AdminPageSections'));
-const AdminMediaLibrary = lazy(() => import('./pages/admin/AdminMediaLibrary'));
 const AdminAddProduct = lazy(() => import('./components/admin/AddProduct'));
 const AdminCoupons = lazy(() => import('./pages/admin/Coupons'));
 const AdminFeaturedProducts = lazy(() => import('./pages/admin/FeaturedProduct'));
@@ -47,13 +43,6 @@ const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 const MyOrders = lazy(() => import('./pages/MyOrders'));
 const OrderDetails = lazy(() => import('./pages/OrderDetails'));
 const TrackShipment = lazy(() => import('./pages/TrackShipment'));
-const ALCAHomePage = lazy(() => import('./pages/ALCAHomePage'));
-const CateringPage = lazy(() => import('./pages/CateringPage'));
-const CelebrationsPage = lazy(() => import('./pages/CelebrationsPage'));
-const CraftsGiftsPage = lazy(() => import('./pages/CraftsGiftsPage'));
-const DesignerStudioPage = lazy(() => import('./pages/DesignerStudioPage'));
-const MakeupBeautyPage = lazy(() => import('./pages/MakeupBeautyPage'));
-const SupplyPage = lazy(() => import('./pages/SupplyPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 const App: React.FC = () => {
@@ -65,22 +54,8 @@ const App: React.FC = () => {
                 <Router>
                     <Suspense fallback={<Loader />}>
                         <Routes>
-                            {/* ALCA landing-page collection. Kept outside the Julina shop layout. */}
-                            <Route path="/alca" element={<ALCAHomePage />} />
-                            <Route path="/celebrations" element={<CelebrationsPage />} />
-                            <Route path="/catering" element={<CateringPage />} />
-                            <Route path="/crafts" element={<CraftsGiftsPage />} />
-                            <Route path="/crafts-gifts" element={<CraftsGiftsPage />} />
-                            <Route path="/designer-studio" element={<DesignerStudioPage />} />
-                            <Route path="/beauty" element={<MakeupBeautyPage />} />
-                            <Route path="/makeup-beauty" element={<MakeupBeautyPage />} />
-                            <Route path="/supply" element={<SupplyPage />} />
-
-                            {/* ALCA is the public landing homepage. */}
-                            <Route path="/" element={<ALCAHomePage />} />
-
-                            {/* Original Julina storefront remains available under /shop. */}
-                            <Route path="/shop" element={<Layout />}>
+                            {/* Public routes */}
+                            <Route path="/" element={<Layout />}>
                                 <Route index element={<HomePage />} />
                                 <Route path="about" element={<AboutPage />} />
                                 <Route path="products" element={<ProductsPage />} />
@@ -93,8 +68,7 @@ const App: React.FC = () => {
                                 <Route path="refund-policy" element={<RefundPolicy />} />
                                 <Route path="cart" element={<CartPage />} />
                                 <Route path="my-orders" element={<MyOrders />} />
-                                <Route path="order/:id" element={<OrderDetails />} />
-                                
+                                <Route path="/order/:id" element={<OrderDetails />} />
                             </Route>
 
                             <Route path="shipping" element={<Shipping />} />
@@ -107,10 +81,6 @@ const App: React.FC = () => {
                             <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
                                 <Route index element={<Navigate to="/admin/dashboard" replace />} />
                                 <Route path="dashboard" element={<AdminDashboard />} />
-                                <Route path="enquiries" element={<AdminEnquiries />} />
-                                <Route path="bookings" element={<AdminBookings />} />
-                                <Route path="page-sections" element={<AdminPageSections />} />
-                                <Route path="media" element={<AdminMediaLibrary />} />
                                 <Route path="products" element={<AdminProducts />} />
                                 <Route path="featured" element={<AdminFeaturedProducts />} />
                                 <Route path="products/new" element={<AdminAddProduct />} />

@@ -19,8 +19,8 @@ const INDIAN_STATES = [
 
 const Shipping: React.FC = () => {
     usePageSEO({
-        title: 'Shipping Address | ALCA',
-        description: 'Enter your delivery address for ALCA.',
+        title: 'Shipping Address | Julina Candles & Melts',
+        description: 'Enter your delivery address for Julina Candles & Melts.',
         canonical: '/shipping',
         noIndex: true,
     });

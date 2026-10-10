@@ -27,7 +27,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
   amount,
   currency = 'INR',
   receipt = `order_${Date.now()}`,
-  description = 'ALCA Purchase',
+  description = 'Julina Candles & Melts Purchase',
   customer_name = 'Guest',
   customer_email = '',
   customer_phone = '',
@@ -102,9 +102,9 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
         amount: orderResponse.amount,
         currency: orderResponse.currency,
         order_id: orderResponse.order_id,
-        name: 'ALCA',
+        name: 'Julina Candles & Melts',
         description: description,
-        image: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+        image: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
         customer_name: customer_name,
         customer_email: customer_email,
         customer_phone: customer_phone,
@@ -125,7 +125,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
           contact: customer_phone,
         },
         theme: {
-          color: '#185e33', // ALCA green
+          color: '#185e33', // Julina green
         },
       };
 

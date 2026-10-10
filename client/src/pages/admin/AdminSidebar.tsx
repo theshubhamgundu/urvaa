@@ -11,9 +11,6 @@ import {
   FaStar
 } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedBusinessId } from '../../redux/reducers/adminBusiness.reducer';
-import { RootState } from '../../redux/store';
 
 interface AdminSidebarProps {
   isSidebarOpen: boolean;
@@ -22,12 +19,7 @@ interface AdminSidebarProps {
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const selectedBusinessId = useSelector((state: RootState) => state.adminBusiness.selectedBusinessId);
 
-  const businessesData = { businesses: [] }; // Mocked
-  const isLoading = false; // Mocked
-  
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     sessionStorage.removeItem('vh_admin_auth');
@@ -36,11 +28,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
 
   const navItems = [
     { to: '/admin/dashboard', label: 'Dashboard', icon: FaTachometerAlt },
-    { to: '/admin/businesses', label: 'Businesses', icon: FaBox },
-    { to: '/admin/page-sections', label: 'Page Builder', icon: FaStar },
-    { to: '/admin/media', label: 'Media Library', icon: FaExternalLinkAlt },
-    { to: '/admin/enquiries', label: 'Enquiries', icon: FaClipboardList },
-    { to: '/admin/bookings', label: 'Bookings', icon: FaClipboardList },
     { to: '/admin/products', label: 'Products Catalog', icon: FaBox },
     { to: '/admin/featured', label: 'Featured Items', icon: FaStar },
     { to: '/admin/orders', label: 'Orders', icon: FaClipboardList },
@@ -75,37 +62,16 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
             </button>
           </div>
           
-          {/* Business Selector */}
-          <div className="mb-4">
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1 px-1">
-              Active Business
-            </label>
-            <select
-              value={selectedBusinessId || ''}
-              onChange={(e) => dispatch(setSelectedBusinessId(e.target.value || null))}
-              className="w-full bg-white/10 border border-white/20 text-sm text-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#C79A56] appearance-none"
-            >
-              <option value="" className="text-gray-900 font-bold bg-[#e4b97a]">All Businesses (Global)</option>
-              {isLoading ? (
-                <option value="" disabled>Loading businesses...</option>
-              ) : (
-                businessesData?.businesses?.map((b) => (
-                  <option key={b.id} value={b.id} className="text-gray-900">{b.name}</option>
-                ))
-              )}
-            </select>
-          </div>
-          
           {/* Brand Header */}
           <div className="mb-6 pb-5 border-b border-white/10">
             <Link to="/admin/dashboard" onClick={toggleSidebar} className="group block">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#C79A56] to-[#e4b97a] flex items-center justify-center text-[#1a2e1d] font-serif font-bold text-xl shadow-md border border-[#C79A56]/40">
-                  🏢
+                  🕯️
                 </div>
                 <div>
                   <h1 className="text-base font-serif font-bold text-white tracking-wide group-hover:text-[#e4b97a] transition-colors leading-tight">
-                    ALCA Platform
+                    Julina Candles
                   </h1>
                   <span className="text-[10px] text-[#C79A56] tracking-[0.18em] uppercase font-semibold block mt-0.5">
                     Admin Console

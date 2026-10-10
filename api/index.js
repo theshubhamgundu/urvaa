@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://wfugiuojwqykcjscutki.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmdWdpdW9qd3F5a2Nqc2N1dGtpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4OTc0MzcwNywiZXhwIjoyMTA1MzE5NzA3fQ.pouo_GAzsnC7lysGyEdxDY7T--2upduDdbTWe9UhkOc';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://lzsjohnscesymlkuvmng.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2pvaG5zY2VzeW1sa3V2bW5nIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjgwMDQzNCwiZXhwIjoyMTAyMzc2NDM0fQ.ywgq8iG-UWSfeqBCqGgsX_aOt9ZiN5Dav2n4zN1aLlU';
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Simple password hashing and comparison (use bcrypt in production)
@@ -71,8 +71,8 @@ function verifyRazorpaySignature(orderId, paymentId, signature) {
 
 // Resend Email API Configuration
 const RESEND_CONFIG = {
-  get KEY() { return process.env.RESEND_API_KEY || ''; },
-  get FROM() { return process.env.RESEND_FROM_EMAIL || 'ALCA <sales@ALCAproducts.in>'; }
+  get KEY() { return process.env.RESEND_API_KEY || 're_UZ29KUAH_PjdpPNsPbAWveZDj48Tv5woU'; },
+  get FROM() { return process.env.RESEND_FROM_EMAIL || 'Julina Candles & Melts <sales@julinacandles.in>'; }
 };
 
 // Send email using Resend REST API
@@ -154,7 +154,7 @@ async function handleOrderSuccess(orderId) {
     const recipientEmail = userRow?.email || shippingInfo?.email;
     const customerName = userRow?.name || shippingInfo?.name || 'Customer';
 
-    const baseUrl = 'https://ALCAproducts.in';
+    const baseUrl = 'https://julinacandles.in';
 
     const orderItems = typeof order.order_items === 'string' ? JSON.parse(order.order_items) : order.order_items;
     const itemsListHtml = (orderItems || []).map(item => `
@@ -181,14 +181,14 @@ async function handleOrderSuccess(orderId) {
           
           <!-- Header Logo -->
           <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-            <h1 style="color: #5C2333; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">ALCA</h1>
+            <h1 style="color: #5C2333; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Julina Candles & Melts</h1>
             <span style="font-size: 10px; color: #C79A56; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Handcrafted Luxury & Essential Oils</span>
           </div>
 
           <!-- Greeting -->
           <h2 style="color: #5C2333; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Confirmed! 🕯️</h2>
           <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-          <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with ALCA. Your payment was successful, and our team is preparing your handcrafted products for shipment. Below are your order details.</p>
+          <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with Julina Candles & Melts. Your payment was successful, and our team is preparing your handcrafted candles for shipment. Below are your order details.</p>
           
           <!-- Status Card -->
           <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
@@ -254,7 +254,7 @@ async function handleOrderSuccess(orderId) {
           <!-- Footer Notes -->
           <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
             <p style="margin: 0 0 5px 0;">If you have any questions, contact support at +91 7304888197 or pranita311096@gmail.com.</p>
-            <p style="margin: 0;">© ${new Date().getFullYear()} ALCA. All rights reserved.</p>
+            <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
           </div>
 
         </div>
@@ -265,7 +265,7 @@ async function handleOrderSuccess(orderId) {
     if (recipientEmail && recipientEmail.includes('@')) {
       await sendEmail({
         to: recipientEmail,
-        subject: `ALCA — Order Confirmed #${order.id}`,
+        subject: `Julina Candles & Melts — Order Confirmed #${order.id}`,
         html: emailHtml
       });
     }
@@ -454,7 +454,7 @@ export default async function handler(req, res) {
           currency: 'INR',
           receipt: orderId,
           notes: {
-            customer_name: req.body?.name || 'ALCA Customer',
+            customer_name: req.body?.name || 'Julina Customer',
             customer_email: req.body?.email || '',
             customer_phone: req.body?.phone || '',
           },
@@ -502,8 +502,8 @@ export default async function handler(req, res) {
             currency: currency || 'INR',
             receipt: orderReceipt,
             notes: {
-              customer_name: customer_name || 'ALCA Customer',
-              customer_email: customer_email || 'support@ALCAproducts.in',
+              customer_name: customer_name || 'Julina Customer',
+              customer_email: customer_email || 'support@julinacandles.in',
               customer_phone: customer_phone || '',
             },
           });
@@ -599,7 +599,7 @@ export default async function handler(req, res) {
       }
 
       // Always redirect to production — payments only run on prod.
-      const origin = 'https://ALCAproducts.in';
+      const origin = 'https://julinacandles.in';
       const host = req.headers.host || '';
 
       // Verify SecureHash
@@ -755,7 +755,7 @@ export default async function handler(req, res) {
               .from('users')
               .insert({
                 uid: guestUid,
-                email: guestEmail || `${guestPhone}@guest.ALCAproducts.in`,
+                email: guestEmail || `${guestPhone}@guest.julinacandles.in`,
                 name: guestName,
                 provider: 'guest',
                 role: 'user',
@@ -848,12 +848,6 @@ export default async function handler(req, res) {
         if (userId) {
           query = query.eq('user_uid', userId);
         }
-      } else if (url.includes('/api/v1/orders/all')) {
-        const urlObj = new URL(url, 'http://localhost');
-        const businessId = urlObj.searchParams.get('businessId');
-        if (businessId) {
-          query = query.eq('business_id', businessId);
-        }
       }
 
       const { data, error } = await query.order('created_at', { ascending: false });
@@ -888,7 +882,7 @@ export default async function handler(req, res) {
           user: 'guest',
           shippingInfo: {
             name: 'Valued Customer',
-            email: 'customer@ALCAproducts.in',
+            email: 'customer@julinacandles.in',
             phone: '+91 7304888197',
             address: 'Room No. 28, Sai Shraddha Apartment, Sai Nagari',
             city: 'Ulhasnagar',
@@ -899,10 +893,10 @@ export default async function handler(req, res) {
           orderItems: [
             {
               _id: '1',
-              name: 'Premium ALCA product',
+              name: 'Caramel Coffee Cream Candle',
               price: 499,
               quantity: 1,
-              photo: '/images/productshttps://placehold.co/600x600/185e33/FFF?text=ALCA+Product'
+              photo: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png'
             }
           ],
           subTotal: 499,
@@ -979,7 +973,7 @@ export default async function handler(req, res) {
         const recipientEmail = userRow?.email || shippingInfo?.email || 'shubhamvasantgundu@gmail.com';
         const customerName = userRow?.name || shippingInfo?.name || 'Customer';
 
-        const baseUrl = 'https://ALCAproducts.in';
+        const baseUrl = 'https://julinacandles.in';
 
         // If status is "Shipped" and we have tracking data, send tracking email
         if (status === 'Shipped' && updated.awb_number) {
@@ -989,13 +983,13 @@ export default async function handler(req, res) {
                 
                 <!-- Header Logo -->
                 <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">ALCA</h1>
+                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Julina Candles & Melts</h1>
                   <span style="font-size: 10px; color: #c4633c; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Pure & Organic</span>
                 </div>
 
                 <h2 style="color: #1f5133; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">📦 Your Order Has Been Shipped!</h2>
                 <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Great news! Your ALCA order has been dispatched and is on its way to you.</p>
+                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Great news! Your Julina Candles & Melts order has been dispatched and is on its way to you.</p>
                 
                 <!-- Tracking Information Box -->
                 <div style="background: linear-gradient(135deg, #1f5133 0%, #2d7a4d 100%); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 6px 20px rgba(31, 81, 51, 0.15);">
@@ -1043,8 +1037,8 @@ export default async function handler(req, res) {
 
                 <!-- Footer Notes -->
                 <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
-                  <p style="margin: 0 0 5px 0;">Thank you for choosing ALCA! 🌾</p>
-                  <p style="margin: 0;">© ${new Date().getFullYear()} ALCA. All rights reserved.</p>
+                  <p style="margin: 0 0 5px 0;">Thank you for choosing Julina Candles & Melts! 🌾</p>
+                  <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
                 </div>
 
               </div>
@@ -1065,13 +1059,13 @@ export default async function handler(req, res) {
                 
                 <!-- Header Logo -->
                 <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">ALCA</h1>
+                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Julina Candles & Melts</h1>
                   <span style="font-size: 10px; color: #c4633c; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Pure & Organic</span>
                 </div>
 
                 <h2 style="color: #1f5133; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Status Updated! 📦</h2>
                 <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">We wanted to let you know that the status of your ALCA order has been updated.</p>
+                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">We wanted to let you know that the status of your Julina Candles & Melts order has been updated.</p>
                 
                 <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
                   <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
@@ -1095,7 +1089,7 @@ export default async function handler(req, res) {
                 <!-- Footer Notes -->
                 <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
                   <p style="margin: 0 0 5px 0;">If you have any questions, reply to this email or contact support.</p>
-                  <p style="margin: 0;">© ${new Date().getFullYear()} ALCA. All rights reserved.</p>
+                  <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
                 </div>
 
               </div>
@@ -1104,7 +1098,7 @@ export default async function handler(req, res) {
 
           await sendEmail({
             to: recipientEmail,
-            subject: `ALCA — Order #${updated.id} Status: ${status}`,
+            subject: `Julina Candles & Melts — Order #${updated.id} Status: ${status}`,
             html: emailHtml
           });
         }
@@ -1447,14 +1441,8 @@ export default async function handler(req, res) {
       let productsList = [];
       let totalProducts = 0;
 
-      const businessId = urlObj.searchParams.get('businessId');
+      const { data, error, count } = await supabase.from('products').select('*', { count: 'exact' }).order('created_at', { ascending: false });
 
-      let query = supabase.from('products').select('*', { count: 'exact' }).order('created_at', { ascending: false });
-      if (businessId) {
-        query = query.eq('business_id', businessId);
-      }
-
-      const { data, error, count } = await query;
       if (!error && data) {
         productsList = data.map(mapProduct);
         totalProducts = count || data.length;
@@ -1487,12 +1475,12 @@ export default async function handler(req, res) {
       }
       if (categories.length === 0) {
         categories = [
-          'Festive premium products',
-          'Wooden Dough Bowl products',
-          'Mithai products',
-          'Floral products',
-          'Glass Jar products',
-          'Premium Collections'
+          'Festive Urli Candles',
+          'Wooden Dough Bowl Candles',
+          'Mithai Candles',
+          'Floral Candles',
+          'Glass Jar Candles',
+          'Fragrances'
         ];
       }
 
@@ -1793,8 +1781,8 @@ export default async function handler(req, res) {
       const cleanEmail = String(email).trim().toLowerCase();
 
       // Default built-in admin credentials
-      const ADMIN_EMAIL = 'admin@alca.in';
-      const DEFAULT_ADMIN_HASH = hashAdminPassword('admin@2026');
+      const ADMIN_EMAIL = 'admin@julinacandles.in';
+      const DEFAULT_ADMIN_HASH = hashAdminPassword('julinacandles@2026');
       const providedPasswordHash = hashAdminPassword(password);
 
       let isAdminValid = false;
@@ -1862,7 +1850,7 @@ export default async function handler(req, res) {
           success: true,
           admin: {
             id: 'admin_001',
-            email: 'admin@ALCAproducts.in',
+            email: 'admin@julinacandles.in',
             name: 'Admin',
           }
         });
@@ -2027,151 +2015,6 @@ export default async function handler(req, res) {
       }
 
       return res.status(200).json({ success: true, companyValues: data || [] });
-    }
-
-    // ─── MULTI-BUSINESS API ENDPOINTS ───
-    if (url.includes('/api/v1/businesses')) {
-      if (req.method === 'GET') {
-        try {
-          const { data, error } = await supabase.from('businesses').select('*').order('name', { ascending: true });
-          if (error) throw error;
-          return res.status(200).json({ success: true, businesses: data || [] });
-        } catch (error) {
-          return res.status(500).json({ success: false, message: error.message });
-        }
-      }
-      if (req.method === 'POST') {
-        try {
-          const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-          const { data, error } = await supabase.from('businesses').insert(body).select().single();
-          if (error) throw error;
-          return res.status(201).json({ success: true, business: data });
-        } catch (error) {
-          return res.status(500).json({ success: false, message: error.message });
-        }
-      }
-      if (req.method === 'PUT') {
-        try {
-          const id = url.split('/').pop();
-          const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-          const { data, error } = await supabase.from('businesses').update(body).eq('id', id).select().single();
-          if (error) throw error;
-          return res.status(200).json({ success: true, business: data });
-        } catch (error) {
-          return res.status(500).json({ success: false, message: error.message });
-        }
-      }
-    }
-
-    if (url.includes('/api/v1/enquiries')) {
-      if (req.method === 'GET') {
-        const urlObj = new URL(url, 'http://localhost');
-        const businessId = urlObj.searchParams.get('businessId');
-        let query = supabase.from('enquiries').select('*').order('created_at', { ascending: false });
-        if (businessId) query = query.eq('business_id', businessId);
-        
-        const { data, error } = await query;
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, enquiries: data || [] });
-      }
-      if (req.method === 'POST') {
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('enquiries').insert(body).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(201).json({ success: true, enquiry: data });
-      }
-      if (req.method === 'PATCH') {
-        const id = url.split('/').pop();
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('enquiries').update({ status: body.status }).eq('id', id).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, enquiry: data });
-      }
-    }
-
-    if (url.includes('/api/v1/bookings')) {
-      if (req.method === 'GET') {
-        const urlObj = new URL(url, 'http://localhost');
-        const businessId = urlObj.searchParams.get('businessId');
-        let query = supabase.from('bookings').select('*').order('booking_date', { ascending: true });
-        if (businessId) query = query.eq('business_id', businessId);
-        
-        const { data, error } = await query;
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, bookings: data || [] });
-      }
-      if (req.method === 'POST') {
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('bookings').insert(body).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(201).json({ success: true, booking: data });
-      }
-      if (req.method === 'PATCH') {
-        const id = url.split('/').pop();
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('bookings').update({ status: body.status }).eq('id', id).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, booking: data });
-      }
-    }
-
-    // ─── CMS: Page Sections ───
-    if (url.includes('/api/v1/page-sections')) {
-      if (req.method === 'GET') {
-        const urlObj = new URL(url, 'http://localhost');
-        const businessId = urlObj.searchParams.get('businessId');
-        let query = supabase.from('page_sections').select('*').order('sort_order', { ascending: true });
-        if (businessId) query = query.eq('business_id', businessId);
-
-        const { data, error } = await query;
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, sections: data || [] });
-      }
-      if (req.method === 'POST') {
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('page_sections').insert(body).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(201).json({ success: true, section: data });
-      }
-      if (req.method === 'PUT') {
-        const id = url.split('/').pop();
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('page_sections').update(body).eq('id', id).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, section: data });
-      }
-      if (req.method === 'DELETE') {
-        const id = url.split('/').pop();
-        const { error } = await supabase.from('page_sections').delete().eq('id', id);
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, message: 'Section deleted' });
-      }
-    }
-
-    // ─── Media Library ───
-    if (url.includes('/api/v1/media')) {
-      if (req.method === 'GET') {
-        const urlObj = new URL(url, 'http://localhost');
-        const businessId = urlObj.searchParams.get('businessId');
-        let query = supabase.from('media_library').select('*').order('created_at', { ascending: false });
-        if (businessId) query = query.eq('business_id', businessId);
-
-        const { data, error } = await query;
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, media: data || [] });
-      }
-      if (req.method === 'POST') {
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { data, error } = await supabase.from('media_library').insert(body).select().single();
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(201).json({ success: true, item: data });
-      }
-      if (req.method === 'DELETE') {
-        const id = url.split('/').pop();
-        const { error } = await supabase.from('media_library').delete().eq('id', id);
-        if (error) return res.status(500).json({ success: false, message: error.message });
-        return res.status(200).json({ success: true, message: 'Media deleted' });
-      }
     }
 
     // ─── Fallback: Return all products ───

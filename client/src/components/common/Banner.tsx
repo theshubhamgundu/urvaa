@@ -2,13 +2,13 @@ import React from 'react';
 
 const Banner: React.FC = () => {
     const highlights = [
-        { icon: '✨', title: '100% high-quality', desc: 'Eco-friendly, soot-free clean burn' },
-        { icon: '🏆', title: 'Premium Products', desc: 'hand-crafted traditional decorative designs' },
-        { icon: '🎨', title: 'Artisan Collection', desc: 'Premium quality handcrafted products' },
-        { icon: '🌟', title: 'Quality Materials', desc: 'High-grade materials & superior craftsmanship' },
+        { icon: '✨', title: '100% Soy Wax', desc: 'Eco-friendly, soot-free clean burn' },
+        { icon: '🪔', title: 'Decorative Urli Candles', desc: 'Hand-poured traditional lotus & peacock designs' },
+        { icon: '☕', title: 'Coffee Collection', desc: 'Espresso & caramel aroma candles' },
+        { icon: '🌸', title: 'Floral Embeds', desc: 'Real dried flower petals & botanical scents' },
         { icon: '🚢', title: 'Global Exporter', desc: 'Supplying wholesalers & retailers worldwide' },
         { icon: '🎁', title: 'Luxury Gift Sets', desc: 'Perfect for festivals, weddings & events' },
-        { icon: '⏰', title: 'Long Lasting', desc: 'Durable products with extended lifespan' },
+        { icon: '🕯️', title: 'Long Burn Time', desc: '25 to 50+ hours of lingering fragrance' },
         { icon: '🇮🇳', title: 'Made in India', desc: 'Handcrafted in Ulhasnagar, Maharashtra' },
     ];
 

@@ -7,7 +7,7 @@ import { usePageSEO } from '../hooks/usePageSEO';
 const OrderDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     usePageSEO({
-        title: `Order #${id || ''} | ALCA`,
+        title: `Order #${id || ''} | Julina Candles & Melts`,
         description: 'View order details and status.',
         canonical: `/order/${id || ''}`,
         noIndex: true,

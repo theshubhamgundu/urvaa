@@ -52,7 +52,7 @@ const ProfilePage: React.FC = () => {
 
             {/* User Info */}
             <h1 className="text-2xl font-bold text-[#185e33] mb-1 font-serif">
-              {user.name || 'ALCA Customer'}
+              {user.name || 'Julina Candles & Melts Customer'}
             </h1>
             <p className="text-gray-500 text-sm mb-6 font-medium">{user.email}</p>
 

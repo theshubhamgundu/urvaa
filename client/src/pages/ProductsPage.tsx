@@ -25,8 +25,8 @@ const ProductsPage: React.FC = () => {
     }, [location.search]);
 
     usePageSEO({
-        title: 'Shop Luxury Handcrafted products | ALCA',
-        description: 'Shop our luxury hand-crafted high-quality products, premium products, glass jar products, and festive gift sets.',
+        title: 'Shop Luxury Handcrafted Candles | Julina Candles & Melts',
+        description: 'Shop our luxury hand-poured soy wax candles, urli candles, glass jar candles, and festive gift sets.',
         canonical: '/products',
     });
 
@@ -40,12 +40,12 @@ const ProductsPage: React.FC = () => {
     });
 
     const categoriesList = categoriesData?.categories || [
-        'Festive premium products',
-        'Wooden Dough Bowl products',
-        'Mithai products',
-        'Floral products',
-        'Glass products',
-        'Premium Collections',
+        'Festive Urli Candles',
+        'Wooden Dough Bowl Candles',
+        'Mithai Candles',
+        'Floral Candles',
+        'Glass Jar Candles',
+        'Fragrances',
     ];
 
     const handleCategoryClick = (catName: string) => {
@@ -65,13 +65,13 @@ const ProductsPage: React.FC = () => {
                 {/* Top Wide Banner */}
                 <div className="w-full h-36 sm:h-44 rounded-2xl overflow-hidden relative shadow-sm border border-[#E6DACB]">
                   <img 
-                    src="https://placehold.co/600x600/185e33/FFF?text=ALCA+Product"
-                    alt="Shop product Banner"
+                    src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389862/julina_candles/products/peacock_pink_wax_urli.png"
+                    alt="Shop Candle Banner"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
                     <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white tracking-wider">
-                      Shop products & services
+                      Shop Candles & Melts
                     </h1>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ const ProductsPage: React.FC = () => {
                                       selectedCategory === '' ? 'text-[#5C2333] font-bold' : 'text-gray-600 hover:text-[#5C2333]'
                                   }`}
                                 >
-                                  <span>All products</span>
+                                  <span>All Candles</span>
                                 </li>
 
                                 {categoriesList.map((catName) => (
@@ -112,52 +112,52 @@ const ProductsPage: React.FC = () => {
                             </ul>
                         </div>
 
-                        {/* Quality Standards Box */}
+                        {/* Fragrance By Mood Accordion Box */}
                         <div className="bg-white rounded-2xl p-5 border border-[#E6DACB] shadow-xs">
                             <h3 className="text-lg font-serif font-bold text-[#2A1C22] pb-3 border-b border-[#E6DACB] mb-3">
-                                Quality Standards
+                                Fragrance By Mood
                             </h3>
                             <ul className="space-y-2 text-xs sm:text-sm text-gray-600 font-sans">
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Premium Quality</span>
+                                <span>Calming & Relaxation</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Handcrafted</span>
+                                <span>Festive & Energetic</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Eco-Friendly</span>
+                                <span>Romantic & Passionate</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Durable Design</span>
+                                <span>Wellness & Hopeful</span>
                               </li>
                             </ul>
                         </div>
 
-                        {/* Usage Categories Box */}
+                        {/* Fragrance By Room Box */}
                         <div className="bg-white rounded-2xl p-5 border border-[#E6DACB] shadow-xs">
                             <h3 className="text-lg font-serif font-bold text-[#2A1C22] pb-3 border-b border-[#E6DACB] mb-3">
-                                Usage Categories
+                                Fragrance By Room
                             </h3>
                             <ul className="space-y-2 text-xs sm:text-sm text-gray-600 font-sans">
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Home Decoration</span>
+                                <span>Living Room</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Festival Use</span>
+                                <span>Bed Room</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Gift Items</span>
+                                <span>Dining & Kitchen</span>
                               </li>
                               <li className="flex items-center gap-2 cursor-pointer hover:text-[#5C2333]">
                                 <input type="checkbox" className="rounded border-gray-300 text-[#5C2333] focus:ring-0" />
-                                <span>Commercial Use</span>
+                                <span>Meditation Room</span>
                               </li>
                             </ul>
                         </div>

@@ -27,7 +27,7 @@ import {
 } from 'react-icons/fa';
 import { uploadToCloudinary } from '../../utils/cloudinary';
 
-export interface productVariantItem {
+export interface CandleVariantItem {
   id: string;
   name: string;
   label: string;
@@ -39,24 +39,24 @@ export interface productVariantItem {
   pack?: string;
 }
 
-const product_PRESETS = [
+const CANDLE_PRESETS = [
   {
     category: 'Packs & Sets',
     icon: '📦',
     items: [
-      { name: 'Single product', label: 'Single', mrp: 299, salePrice: 249, stock: 50 },
-      { name: 'Set of 2 products', label: 'Pack of 2', mrp: 550, salePrice: 450, stock: 30 },
+      { name: 'Single Candle', label: 'Single', mrp: 299, salePrice: 249, stock: 50 },
+      { name: 'Set of 2 Candles', label: 'Pack of 2', mrp: 550, salePrice: 450, stock: 30 },
       { name: 'Gift Box (Set of 4)', label: 'Pack of 4', mrp: 1100, salePrice: 850, stock: 20 },
       { name: 'Festive Hamper (Set of 12)', label: 'Pack of 12', mrp: 3000, salePrice: 2200, stock: 10 },
     ]
   },
   {
-    category: 'premium & Bowl Sizes',
+    category: 'Urli & Bowl Sizes',
     icon: '🏺',
     items: [
-      { name: 'Small premium (Single / 150g)', label: 'Small (150g)', mrp: 249, salePrice: 199, stock: 40 },
-      { name: 'Medium premium (Dual / 300g)', label: 'Medium (300g)', mrp: 399, salePrice: 299, stock: 25 },
-      { name: 'Grand premium (Quad / 600g)', label: 'Large (600g)', mrp: 749, salePrice: 549, stock: 15 },
+      { name: 'Small Urli (1 Wick / 150g)', label: 'Small (150g)', mrp: 249, salePrice: 199, stock: 40 },
+      { name: 'Medium Urli (2 Wicks / 300g)', label: 'Medium (300g)', mrp: 399, salePrice: 299, stock: 25 },
+      { name: 'Grand Urli (4 Wicks / 600g)', label: 'Large (600g)', mrp: 749, salePrice: 549, stock: 15 },
     ]
   },
   {
@@ -65,7 +65,7 @@ const product_PRESETS = [
     items: [
       { name: 'Travel Tin (100g)', label: '100g Tin', mrp: 199, salePrice: 149, stock: 50 },
       { name: 'Standard Frosted Jar (200g)', label: '200g Jar', mrp: 349, salePrice: 249, stock: 35 },
-      { name: 'Luxury Premium Jar (450g)', label: '450g Luxury', mrp: 699, salePrice: 499, stock: 20 },
+      { name: 'Luxury 3-Wick Jar (450g)', label: '450g Luxury', mrp: 699, salePrice: 499, stock: 20 },
     ]
   }
 ];
@@ -88,7 +88,7 @@ const AdminManageProduct: React.FC = () => {
   const [descriptionUpdate, setDescriptionUpdate] = useState<string>('');
   const [photoUpdate, setPhotoUpdate] = useState<string>('');
   const [isFeatured, setIsFeatured] = useState<boolean>(false);
-  const [variantsState, setVariantsState] = useState<productVariantItem[]>([]);
+  const [variantsState, setVariantsState] = useState<CandleVariantItem[]>([]);
 
   const [photoFileUpdate, setPhotoFileUpdate] = useState<File | null>(null);
   const [uploadingImage, setUploadingImage] = useState<boolean>(false);
@@ -102,7 +102,7 @@ const AdminManageProduct: React.FC = () => {
     if (data && data.product) {
       const p = data.product;
       setNameUpdate(p.name || '');
-      setCategoryUpdate(p.category || 'Festive premium products');
+      setCategoryUpdate(p.category || 'Festive Urli Candles');
       setPriceUpdate(p.price || 0);
       setStockUpdate(p.stock ?? 0);
       setDescriptionUpdate(p.description || '');
@@ -110,7 +110,7 @@ const AdminManageProduct: React.FC = () => {
       setIsFeatured(p.featured || false);
 
       if (p.variants && Array.isArray(p.variants) && p.variants.length > 0) {
-        const normalized: productVariantItem[] = p.variants.map((v: any, index: number) => ({
+        const normalized: CandleVariantItem[] = p.variants.map((v: any, index: number) => ({
           id: v.id || `var_${index}_${Date.now()}`,
           name: v.name || v.label || `Option ${index + 1}`,
           label: v.label || v.name || `Option ${index + 1}`,
@@ -144,7 +144,7 @@ const AdminManageProduct: React.FC = () => {
 
   // Variant operations
   const addCustomVariant = () => {
-    const newVar: productVariantItem = {
+    const newVar: CandleVariantItem = {
       id: Date.now().toString(),
       name: `Size ${variantsState.length + 1}`,
       label: `Size ${variantsState.length + 1}`,
@@ -158,7 +158,7 @@ const AdminManageProduct: React.FC = () => {
   };
 
   const loadPresetGroup = (presetItems: any[]) => {
-    const newItems: productVariantItem[] = presetItems.map(p => ({
+    const newItems: CandleVariantItem[] = presetItems.map(p => ({
       id: Date.now().toString() + Math.random().toString(36).slice(2, 6),
       name: p.name,
       label: p.label || p.name,
@@ -175,7 +175,7 @@ const AdminManageProduct: React.FC = () => {
 
   const duplicateVariant = (index: number) => {
     const target = variantsState[index];
-    const duplicated: productVariantItem = {
+    const duplicated: CandleVariantItem = {
       ...target,
       id: Date.now().toString(),
       name: `${target.name} (Copy)`,
@@ -185,7 +185,7 @@ const AdminManageProduct: React.FC = () => {
     notify('Variant duplicated', 'success');
   };
 
-  const updateVariant = (index: number, field: keyof productVariantItem, value: any) => {
+  const updateVariant = (index: number, field: keyof CandleVariantItem, value: any) => {
     setVariantsState(prev => {
       const updated = [...prev];
       const current = { ...updated[index] };
@@ -331,7 +331,7 @@ const AdminManageProduct: React.FC = () => {
                 alt={nameUpdate} 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product';
+                  (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389845/julina_candles/products/handicraf_lotus_pond.png';
                 }}
               />
               <div className="absolute top-3 right-3">
@@ -386,7 +386,7 @@ const AdminManageProduct: React.FC = () => {
                 <FaBoxOpen /> Edit Product & Multi-Sizes
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                Update product title, category, description, and manage all size options & pricing.
+                Update candle title, category, description, and manage all size options & pricing.
               </p>
             </div>
 
@@ -413,12 +413,12 @@ const AdminManageProduct: React.FC = () => {
                     className="w-full px-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
                     required
                   >
-                    <option value="Festive premium products">Festive premium products</option>
-                    <option value="Floral products">Floral products</option>
-                    <option value="Glass Jar products">Glass Jar products</option>
-                    <option value="Mithai products">Mithai products</option>
-                    <option value="Wooden Dough Bowl products">Wooden Dough Bowl products</option>
-                    <option value="Fragrances">Premium Collections</option>
+                    <option value="Festive Urli Candles">Festive Urli Candles</option>
+                    <option value="Floral Candles">Floral Candles</option>
+                    <option value="Glass Jar Candles">Glass Jar Candles</option>
+                    <option value="Mithai Candles">Mithai Candles</option>
+                    <option value="Wooden Dough Bowl Candles">Wooden Dough Bowl Candles</option>
+                    <option value="Fragrances">Fragrances</option>
                   </select>
                 </div>
 
@@ -451,7 +451,7 @@ const AdminManageProduct: React.FC = () => {
               </div>
 
               {/* ═══════════════════════════════════════════════════════════════ */}
-              {/* product SIZE & MULTI-VARIANTS MANAGER */}
+              {/* CANDLE SIZE & MULTI-VARIANTS MANAGER */}
               {/* ═══════════════════════════════════════════════════════════════ */}
               <div className="border border-[#C79A56]/40 bg-[#FAF7F2] p-5 rounded-3xl space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#C79A56]/20 pb-3">
@@ -460,7 +460,7 @@ const AdminManageProduct: React.FC = () => {
                       <FaLayerGroup className="text-[#C79A56]" /> Size & Pack Variants ({variantsState.length})
                     </h3>
                     <p className="text-[11px] text-gray-500 mt-0.5">
-                      Configure multi-sizes, durability options, or packaging variants with distinct prices.
+                      Configure multi-sizes, burn times, or packaging options with distinct prices.
                     </p>
                   </div>
 
@@ -479,7 +479,7 @@ const AdminManageProduct: React.FC = () => {
                     <FaMagic className="text-[#C79A56]" /> 1-Click Quick Size Templates:
                   </span>
                   <div className="flex flex-wrap gap-2">
-                    {product_PRESETS.map((preset) => (
+                    {CANDLE_PRESETS.map((preset) => (
                       <button
                         key={preset.category}
                         type="button"

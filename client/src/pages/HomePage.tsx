@@ -1,84 +1,138 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import FeaturedSection from '../components/FeaturedSection';
+import PopularProducts from '../components/PopularProduct';
+import FeaturedVariants from '../components/FeaturedVariants';
+import ProductCategories from '../components/ProductCategories';
+import { useLatestProductsQuery } from '../redux/api/product.api';
+import CustomerReviews from '../components/common/CustomerReviews';
 import { usePageSEO } from '../hooks/usePageSEO';
+import { webPageSchema } from '../seo/schemas';
+import { FaHeadset, FaTruckFast, FaGift, FaAward } from 'react-icons/fa6';
 
 const HomePage: React.FC = () => {
-  const navigate = useNavigate();
+  const { data: productData, isError: productError } = useLatestProductsQuery('');
+  const products = productData?.products || [];
+
   usePageSEO({
-    title: 'ALCA Platform | Premium Services & Bespoke Creations',
-    description: 'Elevate your experience with ALCA. We specialize in luxury catering, magical event planning, artisan crafts, designer studio services, and bespoke beauty.',
+    title: 'Julina Candles & Melts | Luxury Decorative & Scented Candle Exporter India',
+    description:
+      'Exporter & supplier of luxury handcrafted decorative candles, soy wax urli candles, flower candles, coffee collection candles, and festive gift sets from Maharashtra, India.',
     canonical: '/',
+    keywords:
+      'decorative candle exporter india, scented candle supplier, soy wax candles manufacturer, urli candle exporter, luxury candles india, Julina Candles & Melts',
+    schema: [
+      webPageSchema({
+        url: '/',
+        name: 'Julina Candles & Melts | Luxury Decorative Candle Exporter',
+        description:
+          'Handcrafted decorative, scented, and soy wax candle exporter and supplier from Maharashtra, India.',
+        breadcrumb: [{ name: 'Home', url: '/' }],
+      }),
+    ],
   });
 
-  const services = [
-    { title: 'Catering Excellence', desc: 'Curated culinary experiences.', icon: '🍽️', color: 'bg-red-50 text-red-600', route: '/catering', image: 'https://picsum.photos/seed/catering/800/600' },
-    { title: 'Magical Events', desc: 'Crafting unforgettable moments.', icon: '✨', color: 'bg-purple-50 text-purple-600', route: '/celebrations', image: 'https://picsum.photos/seed/events/800/600' },
-    { title: 'Artisan Crafts', desc: 'Unique, handmade treasures.', icon: '🎁', color: 'bg-green-50 text-green-600', route: '/crafts-gifts', image: 'https://picsum.photos/seed/crafts/800/600' },
-    { title: 'Designer Studio', desc: 'Bespoke design, tailored fit.', icon: '👗', color: 'bg-pink-50 text-pink-600', route: '/designer-studio', image: 'https://picsum.photos/seed/designer/800/600' },
-    { title: 'Luxury Beauty', desc: 'Expert makeup & styling.', icon: '💄', color: 'bg-orange-50 text-orange-600', route: '/makeup-beauty', image: 'https://picsum.photos/seed/beauty/800/600' },
-    { title: 'Supply Solutions', desc: 'Manufacturing excellence.', icon: '🌿', color: 'bg-emerald-50 text-emerald-600', route: '/supply-manufacturing', image: 'https://picsum.photos/seed/supply/800/600' },
-  ];
+  if (productError) {
+    return (
+      <div className="flex items-center justify-center min-h-[80vh] bg-[#FBF6ED]">
+        <div className="text-center max-w-md px-6">
+          <p className="text-5xl mb-4">🕯️</p>
+          <h2 className="text-xl font-serif font-bold text-[#2A1C22] mb-2">Unable to load products</h2>
+          <p className="text-sm text-gray-500">Please check your connection and try again.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <main className="min-h-screen bg-[#FDFCF8] text-[#1a1a1a]">
-      {/* Immersive Hero */}
-      <section className="relative h-[85vh] flex flex-col justify-center items-center text-center px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[#E8E4DA] opacity-30"></div>
-        <div className="relative z-10 max-w-3xl">
-          <span className="text-sm tracking-[0.3em] uppercase text-[#8B7355] font-medium mb-4 block">
-            Crafting Extraordinary Experiences
-          </span>
-          <h1 className="text-6xl md:text-8xl font-serif font-medium text-[#1a1a1a] mb-8 leading-[0.9]">
-            ALCA Platform
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-12 font-light leading-relaxed">
-            Where craftsmanship meets elegance. Discover our premium services, tailored to your unique requirements.
-          </p>
-          <button 
-            onClick={() => navigate('/products')}
-            className="group relative px-10 py-4 bg-[#1a1a1a] text-white rounded-none hover:bg-[#333] transition-all duration-300 uppercase tracking-widest text-sm"
-          >
-            Explore Collection
-          </button>
+    <div className="min-h-screen w-full bg-[#FBF6ED]">
+      {/* ─── Hero Section ─── */}
+      <FeaturedSection />
+
+      {/* ─── Shop by Category ─── */}
+      <ProductCategories />
+
+      {/* ─── Design Spotlight (multi-variant & featured) ─── */}
+      <FeaturedVariants products={products} />
+
+      {/* ─── Products Collection ─── */}
+      <PopularProducts products={products} />
+
+      {/* ─── Customer Reviews ─── */}
+      <CustomerReviews />
+
+      {/* ─── Reach Out To Us Callout Banner ─── */}
+      <section className="px-6 my-10 max-w-7xl mx-auto">
+        <div className="relative rounded-[28px] overflow-hidden shadow-xl bg-[#2A1C22] text-center py-14 px-6 border border-[#C79A56]/30">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-25 pointer-events-none"
+            style={{ backgroundImage: "url('/images/reach_out_bg.jpeg')" }}
+          />
+          <div className="relative z-10 max-w-xl mx-auto space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
+              Reach Out to Us
+            </h2>
+            <p className="text-xs sm:text-sm text-[#F4EADA]/80 font-sans font-light">
+              If you have any inquiries or concerns, please don't hesitate to reach out to us.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://wa.me/917304888197"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#5C2333] hover:bg-[#3E1622] text-white font-bold text-xs sm:text-sm px-7 py-2.5 rounded-full transition-all shadow-md border border-[#C79A56]/40"
+              >
+                Contact
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-medium text-[#1a1a1a]">Our Expertise</h2>
-          <p className="text-gray-500 max-w-sm mt-4 md:mt-0">
-            A boutique platform offering curated solutions across diverse disciplines, united by a commitment to perfection.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[300px] gap-6">
-          {services.map((s, i) => (
-            <div 
-              key={i} 
-              onClick={() => navigate(s.route)}
-              className={`group relative overflow-hidden cursor-pointer flex flex-col justify-end ${i === 0 || i === 5 ? 'md:col-span-2' : 'md:col-span-1'}`}
+      {/* ─── 4 Trust Pillars Bar ─── */}
+      <section className="pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {[
+            {
+              icon: <FaHeadset />,
+              title: 'Post-sale Support',
+              subtitle: 'Reach out to us for queries',
+            },
+            {
+              icon: <FaTruckFast />,
+              title: 'Pan India Shipping',
+              subtitle: 'In 3 to 5 business days',
+            },
+            {
+              icon: <FaGift />,
+              title: 'Product Offers',
+              subtitle: 'Offers on selective products',
+            },
+            {
+              icon: <FaAward />,
+              title: 'Finest Quality Assured',
+              subtitle: 'For a premium experience',
+            },
+          ].map((pillar, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-full border border-[#5C2333]/30 px-5 py-3.5 flex items-center gap-3.5 shadow-2xs hover:shadow-md transition-all hover:border-[#5C2333]"
             >
-              <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/90 z-10"></div>
-              
-              <div className="relative z-20 text-white p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <div className={`w-10 h-10 ${s.color.replace('bg-', 'bg-white/90')} rounded-none flex items-center justify-center text-lg mb-4`}>
-                  {s.icon}
-                </div>
-                <h3 className="text-xl md:text-2xl font-serif mb-2">{s.title}</h3>
-                <p className="text-gray-200 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-sm leading-relaxed max-w-xs">{s.desc}</p>
-                <span className="text-white font-medium text-xs tracking-widest uppercase border-b border-white pb-1 group-hover:border-[#C79A56] group-hover:text-[#C79A56] transition-colors">
-                  Discover
-                </span>
+              <div className="text-[#5C2333] text-2xl flex-shrink-0">
+                {pillar.icon}
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-serif font-bold text-xs sm:text-sm text-[#2A1C22] leading-tight">
+                  {pillar.title}
+                </h4>
+                <p className="text-[11px] text-gray-500 font-sans font-light truncate mt-0.5">
+                  {pillar.subtitle}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

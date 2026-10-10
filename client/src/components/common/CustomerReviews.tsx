@@ -4,79 +4,79 @@ const customerReviews = [
   {
     name: 'Amulya Kulkarni',
     location: 'Mumbai, Maharashtra',
-    metric: '⭐ Verified Customer',
-    review: 'ALCA platform provides excellent service with fast delivery and top-quality products. Highly recommended!',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Lotus Pond Urli Candle elevated our festive decor completely! The fragrance is soothing and lasts for hours without any smoke.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389816/julina_candles/avatars/Amulaya.webp',
   },
   {
     name: 'Ajay Deshmukh',
     location: 'Ulhasnagar, Maharashtra',
     metric: '⭐ Wholesale Buyer',
-    review: 'Ordered products in bulk for corporate needs. Professional service and excellent quality!',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    review: 'Ordered Caramel Coffee Cream & Coffee Beans candles in bulk for corporate gifting. Everyone loved the realistic coffee aroma!',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389815/julina_candles/avatars/Ajay_Reddy.webp',
   },
   {
     name: 'Shridhar Sawant',
     location: 'Solapur, Maharashtra',
-    metric: '⭐ Business Partner',
-    review: 'ALCA delivered our bulk order on time with exquisite packaging. Premium Indian quality!',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Exporter Partner',
+    review: 'Julina Candles & Melts delivered our bulk export order on time with exquisite custom packaging. Premium Indian soy wax quality!',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389829/julina_candles/avatars/Shridhar_Reddy.webp',
   },
   {
     name: 'Bhargavi Joshi',
     location: 'Nagpur, Maharashtra',
-    metric: '⭐ Verified Customer',
-    review: 'The premium products from ALCA are exceptional. Great quality and professional service.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Peacock Pink Wax Urli Candle is a masterpiece. The floral fragrance fills the living room beautifully.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389821/julina_candles/avatars/Bhargavi.webp',
   },
   {
     name: 'Avinash Patil',
     location: 'Pune, Maharashtra',
-    metric: '⭐ Event Organizer',
-    review: 'We used ALCA products for our event. The guests were impressed by the quality and craftsmanship.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Event Decorator',
+    review: 'We used Julina Modak and Shankh candles for a luxury wedding event. The guests were enchanted by the fragrance and craftsmanship.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389818/julina_candles/avatars/Avinash.webp',
   },
   {
     name: 'Harshini Katta',
     location: 'Nashik, Maharashtra',
-    metric: '⭐ Verified Customer',
-    review: 'Love the exclusive products! High quality with excellent service. Will definitely order again.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Verified Homeowner',
+    review: 'Love the Daisy Scented Soy Wax Jars! Clean burn with zero soot. Will definitely order again.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389823/julina_candles/avatars/Harshini_katta.webp',
   },
   {
     name: 'Sai Kiran Wagh',
     location: 'Ulhasnagar, Maharashtra',
     metric: '⭐ Bulk Customer',
-    review: 'Hand-crafted products with amazing finish. Very fast delivery and top quality packaging.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    review: 'Hand-poured candles with amazing finish and scent throw. Very fast delivery and top quality packaging.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389828/julina_candles/avatars/Sai_Kiran.webp',
   },
   {
     name: 'Suma Mahajan',
     location: 'Thane, Maharashtra',
-    metric: '⭐ Verified Customer',
-    review: 'The premium products are exceptional. Creates a wonderful experience with professional service.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Rose Heart Candle smells heavenly. It creates such a serene and pleasant vibe in our home.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389831/julina_candles/avatars/Suma.webp',
   },
   {
     name: 'Prafful More',
     location: 'Kolhapur, Maharashtra',
     metric: '⭐ Event Decorator',
-    review: 'Outstanding traditional design products for special occasions. Highly recommended for wholesale buyers.',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    review: 'Outstanding traditional urli design candles for Diwali. Highly recommended for wholesale buyers.',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389827/julina_candles/avatars/Prafful.webp',
   },
   {
     name: 'Pavani Gawde',
     location: 'Chhatrapati Sambhajinagar, Maharashtra',
-    metric: '⭐ Verified Customer',
-    review: '100% natural high-quality products with excellent service. Professional and reliable!',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Verified Homeowner',
+    review: '100% natural soy wax candles with zero smoke pollution. Safe for kids and pets!',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389826/julina_candles/avatars/Pavani.webp',
   },
   {
     name: 'Jalender Shinde',
     location: 'Navi Mumbai, Maharashtra',
-    metric: '⭐ Corporate Customer',
-    review: 'Extremely polite customer support and exceptional quality products. Very satisfied!',
-    avatar: 'https://placehold.co/600x600/185e33/FFF?text=ALCA+Product',
+    metric: '⭐ Corporate Gifter',
+    review: 'Extremely polite customer support and exceptional quality decorative candles. Very satisfied!',
+    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389824/julina_candles/avatars/Jalender.webp',
   },
 ];
 
@@ -91,7 +91,7 @@ const CustomerReviews: React.FC = () => {
           CLIENT TESTIMONIALS
         </p>
         <h2 className="text-2xl font-serif font-bold text-[#2A1C22] mt-1">
-          What Customers & Exporters Say About ALCA
+          What Customers & Exporters Say About Julina Candles & Melts
         </h2>
       </div>
 

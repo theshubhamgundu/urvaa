@@ -17,13 +17,13 @@ const PopularProducts: React.FC<PopularProductsProps> = ({ products }) => {
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-bold text-[#C79A56] uppercase tracking-[0.2em] block mb-2">
-            ARTISANAL hand-crafted CREATIONS
+            ARTISANAL HAND-POURED CREATIONS
           </span>
           <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
-            Popular product & premium Collections
+            Popular Candle & Urli Collections
           </h2>
           <p className="text-xs md:text-sm text-gray-600 mt-3 font-light leading-relaxed">
-            Discover our bestselling 100% high-quality products, premium collections, and exclusive gift boxes.
+            Discover our bestselling 100% soy wax candles, coffee aromatics, lotus pond urlis, and festive gift boxes.
           </p>
         </div>
 

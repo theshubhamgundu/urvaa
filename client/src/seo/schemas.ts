@@ -1,9 +1,9 @@
 /**
- * Centralised JSON-LD schema builders for ALCA.
+ * Centralised JSON-LD schema builders for Julina Candles & Melts.
  * Every function returns a plain object ready for JSON.stringify.
  */
 
-const BASE = 'https://alca.in';
+const BASE = 'https://julinacandlesandmelts.in';
 const ORG_ID = `${BASE}/#organization`;
 
 // BREADCRUMB
@@ -78,13 +78,13 @@ export function productSchema({
     sku: sku || `JCM-${Math.random().toString(36).substr(2, 6)}`,
     brand: {
       '@type': 'Brand',
-      name: 'ALCA',
+      name: 'Julina Candles & Melts',
     },
     manufacturer: {
       '@id': ORG_ID,
     },
-    category: 'Home Decor > exclusive products > premium products',
-    keywords: 'decorative products, exclusive high-quality, premium products, flower products, coffee collection products',
+    category: 'Home Decor > Scented Candles > Urli Candles',
+    keywords: 'decorative candles, scented soy wax, urli candles, flower candles, coffee collection candles',
     offers: {
       '@type': 'Offer',
       url: `${BASE}${url}`,
@@ -96,9 +96,9 @@ export function productSchema({
       seller: { '@id': ORG_ID },
     },
     additionalProperty: [
-      { '@type': 'PropertyValue', name: 'Material', value: '100% Natural high-quality' },
+      { '@type': 'PropertyValue', name: 'Material', value: '100% Natural Soy Wax' },
       { '@type': 'PropertyValue', name: 'Origin', value: 'Ulhasnagar, Maharashtra, India' },
-      { '@type': 'PropertyValue', name: 'Quality', value: 'Premium Handcrafted' },
+      { '@type': 'PropertyValue', name: 'Wick', value: 'Lead-Free Cotton Wick' },
     ],
   };
 }
@@ -127,7 +127,7 @@ export function itemListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'ALCA Products',
+    name: 'Julina Candles & Melts Products',
     url: `${BASE}/products`,
     itemListElement: items.map((item) => ({
       '@type': 'ListItem',
