@@ -18,13 +18,13 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold text-[#C79A56] uppercase tracking-[0.2em] block mb-2">
-            DESIGN SPOTLIGHT
+            SELECTED FINDS
           </span>
           <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
-            Featured Designs & Multi-Variant Collections
+            Featured products
           </h2>
           <p className="text-xs md:text-sm text-gray-600 mt-3 font-light leading-relaxed">
-            Handpicked pieces with multiple size/pack options and standout designs.
+            Explore selected products and available options from the URVAA collection.
           </p>
         </div>
 

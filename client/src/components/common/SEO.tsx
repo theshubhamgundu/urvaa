@@ -14,12 +14,12 @@ interface SEOProps {
 
 const DOMAIN = 'https://julinacandlesandmelts.in';
 
-const DEFAULT_TITLE = 'Julina Candles & Melts | Luxury Decorative, Scented & Urli Candle Exporter & Supplier from India';
+const DEFAULT_TITLE = 'URVAA | Delivering the Authentic Rural Aura';
 const DEFAULT_DESCRIPTION =
-  'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented candles, soy wax candles, flower candles, urli candles, coffee candles and luxury gift candles from Maharashtra, India.';
+  'Discover regional products, traditional foods, indigenous craftsmanship, handlooms, plants, and thoughtful everyday goods with URVAA.';
 const DEFAULT_KEYWORDS =
-  'decorative candle exporter india, scented candle supplier india, soy wax candle exporter, urli candle manufacturer india, flower candle supplier, coffee candle exporter, luxury candle exporter, gift candle supplier, handmade candle exporter india, premium candles manufacturer, candle exporter maharashtra, candle supplier india';
-const DEFAULT_OG_IMAGE = `${DOMAIN}https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png`;
+  'URVAA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, nursery plants';
+const DEFAULT_OG_IMAGE = `${DOMAIN}/logo.png`;
 
 export const SEO: React.FC<SEOProps> = ({
   title = DEFAULT_TITLE,
@@ -58,7 +58,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="Julina Candles & Melts" />
+      <meta property="og:site_name" content="URVAA" />
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -77,4 +77,3 @@ export const SEO: React.FC<SEOProps> = ({
 };
 
 export default SEO;
-

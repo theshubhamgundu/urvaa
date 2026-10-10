@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const RefundPolicy: React.FC = () => {
   usePageSEO({
-    title: 'Refund & Returns Policy | Julina Candles & Melts',
-    description: 'Julina Candles & Melts Refund & Returns Policy — 7-day return window, hassle-free refund process for all Artisanal Candles orders placed on julinacandles.in.',
+    title: 'Refund & Returns Policy | URVAA',
+    description: 'Review URVAA order cancellation, return, replacement, and refund guidance. Conditions may differ by product type.',
     canonical: '/refund-policy',
   });
   return (
@@ -14,35 +14,35 @@ const RefundPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">RETURNS & GUARANTEE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Refund & Return Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Return Eligibility</h2>
             <p>
-              Returns are accepted if the product arrives with damaged packaging, the candle/melt is defective, or an incorrect item was delivered. Products must be unused and in original condition to be eligible for return.
+              Return, replacement, and refund eligibility depends on the product type and the condition in which it arrives. Food, live plants, textiles, and other goods may have different conditions. Review the product listing and contact support if an item is damaged, incorrect, or not as described.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Reporting Issues with Deliveries</h2>
             <p>
-              Please notify our customer support team within <strong>48 hours</strong> of delivery by emailing photos/videos of any issues with your package to <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> or messaging us on WhatsApp at <strong>+91 73048 88197</strong>.
+              Please contact customer support as soon as possible after delivery and include your order details and clear photos or videos of the issue. You can email <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> or message us on WhatsApp at <strong>+91 73048 88197</strong>.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">3. Refund Process & Timelines</h2>
             <p>
-              Once approved, replacements are dispatched immediately or refunds are issued to your original payment method (bank account, UPI, credit card) within <strong>5 to 7 business days</strong>.
+              If a refund or replacement is approved, support will confirm the next steps and applicable timeframe for your order. Refunds, when applicable, are returned through the original payment method.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">4. Order Cancellations</h2>
             <p>
-              Orders can be cancelled free of charge prior to dispatch. Once a shipment has been handed over to our courier partner, cancellations are no longer accepted.
+              Contact support promptly to request an order cancellation. Whether an order can be cancelled depends on its preparation and dispatch status.
             </p>
           </section>
         </div>
@@ -57,4 +57,3 @@ const RefundPolicy: React.FC = () => {
 };
 
 export default RefundPolicy;
-

@@ -1,4 +1,4 @@
-// Dynamic Sitemap Generator for Julina Candles & Melts
+// Dynamic Sitemap Generator for URVAA
 // Run this script to generate sitemap.xml with all products and blogs
 // Usage: node api/generate-sitemap.js
 
@@ -152,4 +152,3 @@ generateSitemap()
     console.error('❌ Error generating sitemap:', error);
     process.exit(1);
   });
-

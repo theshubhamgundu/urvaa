@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
 const promoOffers = [
-  "✨ 100% Hand-Poured Natural Soy Wax Candles • Pure Aromatherapy Fragrances",
-  "🪔 Exquisite Decorative Urli & Festival Candles • Handcrafted Artisanal Designs",
-  "🌸 Flower Embed Jars & Modak Mithai Candles • Perfect for Gifting & Home Decor",
-  "📦 Express Shipping Across India • Secure & Careful Packaging Guaranteed",
+  '🌾 URVAA — Delivering the Authentic Rural Aura',
+  '🌱 Discover regional products, makers, and traditions',
+  '🧵 Explore foods, handlooms, plants, and thoughtful everyday goods',
+  '🛍️ One Village – One Product',
 ];
 
 const Header: React.FC = () => {
@@ -38,8 +38,11 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover border border-[#E6DACB]" />
-              <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#5C2333]">Julina Candles & Melts</span>
+              <img src="/logo.png" alt="URVAA — Delivering the Authentic Rural Aura" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
+              <span className="flex flex-col text-[#234331]">
+                <span className="text-lg font-serif font-bold tracking-wide md:text-2xl">URVAA</span>
+                <span className="hidden text-[9px] font-medium uppercase tracking-[0.12em] md:block">Delivering the Authentic Rural Aura</span>
+              </span>
             </Link>
           </div>
 
@@ -59,7 +62,7 @@ const Header: React.FC = () => {
 
             <Link to="/cart" className={`${linkClass} relative`}>
               <FaShoppingCart />
-              <span className="text-xs">Cart</span>
+              <span className="text-xs">Basket</span>
               {cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-2.5 font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center bg-[#c4633c] text-white">
                   {cartCount}
@@ -72,7 +75,7 @@ const Header: React.FC = () => {
           <div className="md:hidden flex items-center gap-4">
 
 
-            <Link to="/cart" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1 relative" aria-label="Cart">
+            <Link to="/cart" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1 relative" aria-label="Basket">
               <FaShoppingCart className="text-lg" />
               {cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-2 font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-xs bg-[#c4633c] text-white">
@@ -88,4 +91,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-

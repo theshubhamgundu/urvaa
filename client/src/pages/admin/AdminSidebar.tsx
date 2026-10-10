@@ -71,7 +71,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
                 </div>
                 <div>
                   <h1 className="text-base font-serif font-bold text-white tracking-wide group-hover:text-[#e4b97a] transition-colors leading-tight">
-                    Julina Candles
+                    URVAA
                   </h1>
                   <span className="text-[10px] text-[#C79A56] tracking-[0.18em] uppercase font-semibold block mt-0.5">
                     Admin Console
@@ -149,5 +149,4 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
 };
 
 export default AdminSidebar;
-
 

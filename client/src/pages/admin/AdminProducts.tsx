@@ -174,7 +174,7 @@ const AdminProducts: React.FC = () => {
         <div>
           <h1 className="text-2xl font-serif font-bold text-[#185e33]">Product Catalog</h1>
           <p className="text-xs text-gray-500 mt-0.5">
-            Manage your store inventory, candle variants, pricing and real-time stock levels.
+            Manage your product catalog, options, pricing, and stock levels.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -226,7 +226,7 @@ const AdminProducts: React.FC = () => {
           <p className="text-2xl font-bold text-emerald-700 font-serif mt-2">
             {products.filter(p => Number(p.stock || 0) >= 10 && p.isActive !== false).length}
           </p>
-          <p className="text-[11px] text-emerald-600 font-medium mt-0.5">Ready for instant shipping</p>
+          <p className="text-[11px] text-emerald-600 font-medium mt-0.5">Available products in stock</p>
         </div>
 
         <div 
@@ -258,7 +258,7 @@ const AdminProducts: React.FC = () => {
             </div>
           </div>
           <p className="text-2xl font-bold text-rose-700 font-serif mt-2">{stats.outOfStock}</p>
-          <p className="text-[11px] text-rose-600 font-medium mt-0.5">Needs candle batch restock</p>
+          <p className="text-[11px] text-rose-600 font-medium mt-0.5">Restock required</p>
         </div>
       </div>
 
@@ -272,7 +272,7 @@ const AdminProducts: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search candles by name, category or details..."
+              placeholder="Search products by name, category, or details..."
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee]/50 placeholder-gray-400 transition"
             />
             {searchQuery && (
@@ -377,11 +377,11 @@ const AdminProducts: React.FC = () => {
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-3.5">
                           <img
-                            src={p.photo || '/images/mainImage.png'}
+                            src={p.photo || '/logo.png'}
                             alt={p.name}
                             className="w-12 h-12 object-cover rounded-xl border border-[#efe9db] shadow-xs shrink-0 group-hover:scale-105 transition-transform"
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389845/julina_candles/products/handicraf_lotus_pond.png';
+                              (e.target as HTMLImageElement).src = '/logo.png';
                             }}
                           />
                           <div className="min-w-0">
@@ -480,7 +480,7 @@ const AdminProducts: React.FC = () => {
                           <button
                             onClick={() => handleDelete(p._id, p.name)}
                             className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition text-xs"
-                            title="Delete candle"
+                            title="Delete product"
                           >
                             <FaTrash />
                           </button>
@@ -499,5 +499,3 @@ const AdminProducts: React.FC = () => {
 };
 
 export default AdminProducts;
-
-

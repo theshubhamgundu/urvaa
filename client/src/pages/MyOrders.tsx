@@ -7,8 +7,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const MyOrders: React.FC = () => {
     usePageSEO({
-        title: 'My Orders | Julina Candles & Melts',
-        description: 'Track and view your past orders with Julina Candles & Melts.',
+        title: 'My Orders | URVAA',
+        description: 'Track and view your URVAA orders.',
         canonical: '/my-orders',
         noIndex: true,
     });
@@ -99,4 +99,3 @@ const MyOrders: React.FC = () => {
 };
 
 export default MyOrders;
-

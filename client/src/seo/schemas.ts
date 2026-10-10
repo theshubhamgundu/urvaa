@@ -1,5 +1,5 @@
 /**
- * Centralised JSON-LD schema builders for Julina Candles & Melts.
+ * Centralised JSON-LD schema builders for URVAA.
  * Every function returns a plain object ready for JSON.stringify.
  */
 
@@ -78,13 +78,13 @@ export function productSchema({
     sku: sku || `JCM-${Math.random().toString(36).substr(2, 6)}`,
     brand: {
       '@type': 'Brand',
-      name: 'Julina Candles & Melts',
+      name: 'URVAA',
     },
     manufacturer: {
       '@id': ORG_ID,
     },
-    category: 'Home Decor > Scented Candles > Urli Candles',
-    keywords: 'decorative candles, scented soy wax, urli candles, flower candles, coffee collection candles',
+    category: 'Regional Products',
+    keywords: 'regional products, rural products, India, URVAA',
     offers: {
       '@type': 'Offer',
       url: `${BASE}${url}`,
@@ -95,11 +95,6 @@ export function productSchema({
       availability,
       seller: { '@id': ORG_ID },
     },
-    additionalProperty: [
-      { '@type': 'PropertyValue', name: 'Material', value: '100% Natural Soy Wax' },
-      { '@type': 'PropertyValue', name: 'Origin', value: 'Ulhasnagar, Maharashtra, India' },
-      { '@type': 'PropertyValue', name: 'Wick', value: 'Lead-Free Cotton Wick' },
-    ],
   };
 }
 
@@ -127,7 +122,7 @@ export function itemListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Julina Candles & Melts Products',
+    name: 'URVAA Products',
     url: `${BASE}/products`,
     itemListElement: items.map((item) => ({
       '@type': 'ListItem',

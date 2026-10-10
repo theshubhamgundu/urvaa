@@ -17,7 +17,6 @@ import {
   FaBoxOpen, 
   FaPlus, 
   FaCopy, 
-  FaMagic, 
   FaCheckCircle, 
   FaTimesCircle, 
   FaLayerGroup,
@@ -38,37 +37,6 @@ export interface CandleVariantItem {
   inStock: boolean;
   pack?: string;
 }
-
-const CANDLE_PRESETS = [
-  {
-    category: 'Packs & Sets',
-    icon: '📦',
-    items: [
-      { name: 'Single Candle', label: 'Single', mrp: 299, salePrice: 249, stock: 50 },
-      { name: 'Set of 2 Candles', label: 'Pack of 2', mrp: 550, salePrice: 450, stock: 30 },
-      { name: 'Gift Box (Set of 4)', label: 'Pack of 4', mrp: 1100, salePrice: 850, stock: 20 },
-      { name: 'Festive Hamper (Set of 12)', label: 'Pack of 12', mrp: 3000, salePrice: 2200, stock: 10 },
-    ]
-  },
-  {
-    category: 'Urli & Bowl Sizes',
-    icon: '🏺',
-    items: [
-      { name: 'Small Urli (1 Wick / 150g)', label: 'Small (150g)', mrp: 249, salePrice: 199, stock: 40 },
-      { name: 'Medium Urli (2 Wicks / 300g)', label: 'Medium (300g)', mrp: 399, salePrice: 299, stock: 25 },
-      { name: 'Grand Urli (4 Wicks / 600g)', label: 'Large (600g)', mrp: 749, salePrice: 549, stock: 15 },
-    ]
-  },
-  {
-    category: 'Glass Jar Sizes',
-    icon: '🫙',
-    items: [
-      { name: 'Travel Tin (100g)', label: '100g Tin', mrp: 199, salePrice: 149, stock: 50 },
-      { name: 'Standard Frosted Jar (200g)', label: '200g Jar', mrp: 349, salePrice: 249, stock: 35 },
-      { name: 'Luxury 3-Wick Jar (450g)', label: '450g Luxury', mrp: 699, salePrice: 499, stock: 20 },
-    ]
-  }
-];
 
 const AdminManageProduct: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -102,11 +70,11 @@ const AdminManageProduct: React.FC = () => {
     if (data && data.product) {
       const p = data.product;
       setNameUpdate(p.name || '');
-      setCategoryUpdate(p.category || 'Festive Urli Candles');
+      setCategoryUpdate(p.category || 'Tribal Araku Products');
       setPriceUpdate(p.price || 0);
       setStockUpdate(p.stock ?? 0);
       setDescriptionUpdate(p.description || '');
-      setPhotoUpdate(p.photo || '/images/mainImage.png');
+      setPhotoUpdate(p.photo || '/logo.png');
       setIsFeatured(p.featured || false);
 
       if (p.variants && Array.isArray(p.variants) && p.variants.length > 0) {
@@ -155,22 +123,6 @@ const AdminManageProduct: React.FC = () => {
       inStock: true
     };
     setVariantsState(prev => [...prev, newVar]);
-  };
-
-  const loadPresetGroup = (presetItems: any[]) => {
-    const newItems: CandleVariantItem[] = presetItems.map(p => ({
-      id: Date.now().toString() + Math.random().toString(36).slice(2, 6),
-      name: p.name,
-      label: p.label || p.name,
-      salePrice: p.salePrice,
-      price: p.salePrice,
-      mrp: p.mrp || Math.round(p.salePrice * 1.25),
-      stock: p.stock || 30,
-      inStock: true,
-      pack: p.label
-    }));
-    setVariantsState(prev => [...prev, ...newItems]);
-    notify(`Added ${presetItems.length} variant sizes!`, 'success');
   };
 
   const duplicateVariant = (index: number) => {
@@ -331,7 +283,7 @@ const AdminManageProduct: React.FC = () => {
                 alt={nameUpdate} 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389845/julina_candles/products/handicraf_lotus_pond.png';
+                  (e.target as HTMLImageElement).src = '/logo.png';
                 }}
               />
               <div className="absolute top-3 right-3">
@@ -386,7 +338,7 @@ const AdminManageProduct: React.FC = () => {
                 <FaBoxOpen /> Edit Product & Multi-Sizes
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                Update candle title, category, description, and manage all size options & pricing.
+                Update product details, category, options, and pricing.
               </p>
             </div>
 
@@ -413,12 +365,11 @@ const AdminManageProduct: React.FC = () => {
                     className="w-full px-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
                     required
                   >
-                    <option value="Festive Urli Candles">Festive Urli Candles</option>
-                    <option value="Floral Candles">Floral Candles</option>
-                    <option value="Glass Jar Candles">Glass Jar Candles</option>
-                    <option value="Mithai Candles">Mithai Candles</option>
-                    <option value="Wooden Dough Bowl Candles">Wooden Dough Bowl Candles</option>
-                    <option value="Fragrances">Fragrances</option>
+                    <option value="Tribal Araku Products">Tribal Araku Products</option>
+                    <option value="Mana Godavari Foods">Mana Godavari Foods</option>
+                    <option value="Eco-Friendly Products">Eco-Friendly Products</option>
+                    <option value="Swadesi Handlooms">Swadesi Handlooms</option>
+                    <option value="Kadiyam Plants">Kadiyam Plants</option>
                   </select>
                 </div>
 
@@ -471,26 +422,6 @@ const AdminManageProduct: React.FC = () => {
                   >
                     <FaPlus className="text-[10px]" /> Add Size
                   </button>
-                </div>
-
-                {/* Preset Suggestions */}
-                <div className="space-y-1.5">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                    <FaMagic className="text-[#C79A56]" /> 1-Click Quick Size Templates:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {CANDLE_PRESETS.map((preset) => (
-                      <button
-                        key={preset.category}
-                        type="button"
-                        onClick={() => loadPresetGroup(preset.items)}
-                        className="bg-white hover:bg-[#185E33] hover:text-white text-gray-800 border border-[#EDE3CF] px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 shadow-2xs group"
-                      >
-                        <span>{preset.icon}</span>
-                        <span>{preset.category}</span>
-                      </button>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Variants List */}

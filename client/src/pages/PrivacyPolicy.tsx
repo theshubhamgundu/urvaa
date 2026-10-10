@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const PrivacyPolicy: React.FC = () => {
   usePageSEO({
-    title: 'Privacy Policy | Julina Candles & Melts',
-    description: 'Julina Candles & Melts Privacy Policy — how we collect, use, and protect your personal data when you shop on julinacandles.in.',
+    title: 'Privacy Policy | URVAA',
+    description: 'Learn how URVAA handles personal information when you browse the website, place orders, or contact support.',
     canonical: '/privacy',
     noIndex: false,
   });
@@ -15,14 +15,14 @@ const PrivacyPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">DATA PRIVACY & SAFETY</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Privacy Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Introduction</h2>
             <p>
-              At <strong>Julina Candles & Melts</strong>, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make purchases.
+              At <strong>URVAA</strong>, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how information is collected, used, and shared when you visit the website, place an order, or contact support.
             </p>
           </section>
 
@@ -65,8 +65,7 @@ const PrivacyPolicy: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">6. Contact Our Data Officer</h2>
             <p className="text-xs text-muted">
               If you have any questions or requests regarding your data privacy, please contact:<br />
-              <strong>Entity:</strong> Julina Candles & Melts<br />
-              <strong>Address:</strong> Hyderabad, Telangana, India<br />
+              <strong>Brand:</strong> URVAA<br />
               <strong>Email:</strong> <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a><br />
               <strong>Phone/WhatsApp:</strong> +91 73048 88197
             </p>
@@ -83,4 +82,3 @@ const PrivacyPolicy: React.FC = () => {
 };
 
 export default PrivacyPolicy;
-

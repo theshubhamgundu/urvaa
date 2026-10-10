@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const TermsAndConditions: React.FC = () => {
   usePageSEO({
-    title: 'Terms & Conditions | Julina Candles & Melts',
-    description: 'Read the Terms & Conditions for using Julina Candles & Melts (julinacandles.in) — governing purchases, payments, returns, and usage of our website and products.',
+    title: 'Terms & Conditions | URVAA',
+    description: 'Read the terms for using URVAA and placing orders for regional products through our website.',
     canonical: '/terms',
     noIndex: false,
   });
@@ -15,28 +15,28 @@ const TermsAndConditions: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">LEGAL & COMPLIANCE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Terms & Conditions</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Overview & Agreement</h2>
             <p>
-              Welcome to <strong>Julina Candles & Melts</strong>. By accessing our website, purchasing our handcrafted decorative candles & melts, or utilizing our services, you agree to be bound by these Terms and Conditions. Please read them carefully before making a purchase.
+              Welcome to <strong>URVAA</strong>. By accessing this website or placing an order, you agree to these Terms and Conditions. Please review the details before completing a purchase.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Product Disclaimer</h2>
             <p>
-              Julina Candles & Melts handcrafted artisanal candles are premium home décor and ambiance products. Always ensure proper ventilation when burning candles and keep away from flammable items, children, and pets. Never leave a burning candle unattended.
+              Product details, ingredients, materials, origin, and handling guidance vary by item. Please review the product listing before ordering and follow any product-specific instructions. Regional origin or sourcing claims apply only when stated and supported on the relevant listing.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">3. Product & Pricing Information</h2>
             <p>
-              All prices listed on our website are in Indian Rupees (INR) and inclusive of applicable GST taxes. We reserve the right to update product prices, wholesale bulk discounts, and availability without prior notice.
+              Prices and availability are shown on the relevant product listing and at checkout. Applicable taxes, delivery charges, and any other order costs will be presented before payment. Product details and availability may change.
             </p>
           </section>
 
@@ -50,14 +50,14 @@ const TermsAndConditions: React.FC = () => {
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">5. Intellectual Property</h2>
             <p>
-              All trademarks, product designs, logos, images, and content on this website are the exclusive property of Julina Candles & Melts. Unauthorized reproduction or commercial distribution is strictly prohibited.
+              URVAA and its respective owners retain rights to their brand assets and original website content. Product names, marks, images, and other third-party materials remain the property of their respective owners. Unauthorized reproduction or commercial distribution is prohibited.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">6. Governing Law & Jurisdiction</h2>
             <p>
-              These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the courts in Maharashtra, India.
+              These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes shall be handled by a court with jurisdiction under applicable law.
             </p>
           </section>
 
@@ -65,8 +65,7 @@ const TermsAndConditions: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">7. Contact Information</h2>
             <p className="text-xs text-muted">
               For any legal inquiries regarding these Terms & Conditions, please contact us:<br />
-              <strong>Entity:</strong> Julina Candles & Melts<br />
-              <strong>Address:</strong> Hyderabad, Telangana, India<br />
+              <strong>Brand:</strong> URVAA<br />
               <strong>Email:</strong> <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> | <strong>Phone/WhatsApp:</strong> +91 73048 88197
             </p>
           </section>
@@ -82,4 +81,3 @@ const TermsAndConditions: React.FC = () => {
 };
 
 export default TermsAndConditions;
-

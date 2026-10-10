@@ -30,8 +30,8 @@ const loadRazorpayScript = (): Promise<boolean> => {
 
 const CheckoutForm: React.FC = () => {
   usePageSEO({
-    title: 'Checkout | Julina Candles & Melts',
-    description: 'Complete your checkout securely with Razorpay on Julina Candles & Melts.',
+    title: 'Checkout | URVAA',
+    description: 'Review your URVAA order and complete checkout securely.',
     canonical: '/checkout',
     noIndex: true,
   });
@@ -72,7 +72,7 @@ const CheckoutForm: React.FC = () => {
         body: JSON.stringify({
           amount: Math.round(total * 100),
           currency: 'INR',
-          description: 'Julina Candles & Melts Luxury Order',
+          description: 'URVAA order',
           customer_name: shippingInfo.name || 'Customer',
           customer_email: shippingInfo.email || '',
           customer_phone: shippingInfo.phone || '',
@@ -92,9 +92,9 @@ const CheckoutForm: React.FC = () => {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_TO2LV3iKTZwDBr',
         amount: rzpData.amount,
         currency: rzpData.currency || 'INR',
-        name: 'Julina Candles & Melts',
-        description: 'Handcrafted Luxury Candles & Melts',
-        image: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
+        name: 'URVAA',
+        description: 'Regional products from URVAA',
+        image: 'https://julinacandlesandmelts.in/logo.png',
         order_id: rzpData.order_id,
         handler: async function (response: any) {
           notify('Payment verified! Saving order...', 'success');
@@ -179,8 +179,8 @@ const CheckoutForm: React.FC = () => {
       <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-[#E6DACB] max-w-xl w-full">
         {/* Merchant Branding Header */}
         <div className="flex flex-col items-center mb-6 text-center border-b border-[#E6DACB] pb-5">
-          <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts" className="h-16 w-auto mb-2" />
-          <h1 className="text-2xl font-serif font-bold text-[#2A1C22]">Julina Candles & Melts</h1>
+          <img src="/logo.png" alt="URVAA — Delivering the Authentic Rural Aura" className="h-16 w-16 object-contain mb-2" />
+          <h1 className="text-2xl font-serif font-bold text-[#2A1C22]">URVAA</h1>
           <p className="text-xs text-gray-500 mt-1">Secure Razorpay Payment Gateway</p>
         </div>
 

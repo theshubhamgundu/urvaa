@@ -44,22 +44,22 @@ const SingleProduct: React.FC = () => {
     // ─── Dynamic per-page SEO ───
     usePageSEO({
         title: product
-            ? `${product.name} | Julina Candles & Melts`
-            : 'Luxury Decorative Candle | Julina Candles & Melts',
+            ? `${product.name} | URVAA`
+            : 'Product details | URVAA',
         description: product
-            ? `Buy ${product.name} online. Handcrafted 100% natural soy wax candle from Julina Candles & Melts. Fast delivery across India.`
-            : 'Buy Julina Candles & Melts handcrafted decorative, scented, and soy wax candles online.',
+            ? `Explore ${product.name} from URVAA. Check the product listing for available details about its origin, materials, ingredients, and delivery.`
+            : 'Explore regional products, foods, craft, handlooms, and plants from URVAA.',
         canonical: `/product/${productId}`,
-        ogImage: product?.photo || 'https://julinacandlesandmelts.inhttps://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
+        ogImage: product?.photo || 'https://julinacandlesandmelts.in/logo.png',
         keywords: product
-            ? `${product.name}, buy ${product.name} online, scented candle, soy wax candle, Julina Candles & Melts`
-            : 'decorative candles, scented soy wax candles, urli candles',
+            ? `${product.name}, buy ${product.name} online, URVAA, regional products India`
+            : 'URVAA, rural products, regional goods, India',
         schema: product
             ? [
                 webPageSchema({
                     url: `/product/${productId}`,
-                    name: `${product.name} | Julina Candles & Melts`,
-                    description: `Buy ${product.name} online — handcrafted soy wax candle.`,
+                    name: `${product.name} | URVAA`,
+                    description: `Explore ${product.name} online with URVAA.`,
                     breadcrumb: [
                         { name: 'Home', url: '/' },
                         { name: 'Products', url: '/products' },
@@ -68,10 +68,10 @@ const SingleProduct: React.FC = () => {
                 }),
                 productSchema({
                     name: product.name,
-                    description: product.description || 'Handcrafted 100% natural soy wax candle.',
-                    image: product.photo || 'https://julinacandlesandmelts.inhttps://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
+                    description: product.description || 'Product details and availability are provided by URVAA.',
+                    image: product.photo || 'https://julinacandlesandmelts.in/logo.png',
                     url: `/product/${productId}`,
-                    sku: `JCM-${productId}`,
+                    sku: `URVAA-${productId}`,
                     price: selectedVariant?.salePrice ?? product.price ?? 0,
                     mrp: selectedVariant?.mrp,
                     availability: product.stock > 0
@@ -164,7 +164,7 @@ const SingleProduct: React.FC = () => {
     };
 
     const getPhotoUrl = (photoUrl?: string) => {
-        if (!photoUrl) return 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
+        if (!photoUrl) return '/logo.png';
         let cleaned = photoUrl.replace('/images/products/', '/images/');
         if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
             cleaned = '/' + cleaned;
@@ -281,7 +281,7 @@ const SingleProduct: React.FC = () => {
                         {/* Bulk WhatsApp Inquiry & Add to Cart Controls */}
                         <div className="space-y-3 pt-4 border-t border-gray-100">
                             <a
-                                href={`https://wa.me/917304888197?text=${encodeURIComponent(`Hi Julina Candles, I am interested in bulk/custom order for "${resolvedProduct.name}"`)}`}
+                                href={`https://wa.me/917304888197?text=${encodeURIComponent(`Hi URVAA, I am interested in a business enquiry for "${resolvedProduct.name}"`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold py-2.5 px-4 rounded-full text-xs transition-all flex items-center justify-center gap-2 shadow-xs"
@@ -297,7 +297,7 @@ const SingleProduct: React.FC = () => {
                                         >
                                             −
                                         </button>
-                                        <span className="text-sm font-bold text-gray-800">{cartItem.quantity} in Cart</span>
+                                        <span className="text-sm font-bold text-gray-800">{cartItem.quantity} in Basket</span>
                                         <button
                                             onClick={handleIncrement}
                                             disabled={isCurrentlyOutOfStock}
@@ -359,4 +359,3 @@ const SingleProduct: React.FC = () => {
 };
 
 export default SingleProduct;
-

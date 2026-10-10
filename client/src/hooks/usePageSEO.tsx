@@ -12,7 +12,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://julinacandlesandmelts.in';
-const DEFAULT_IMAGE = `${BASE_URL}https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/logo.png`;
 
 /**
  * usePageSEO – sets <title>, all meta tags, canonical, and injects
@@ -69,7 +69,7 @@ export function usePageSEO({
     setMeta('og:type', ogType, true);
     setMeta('og:image', ogImage, true);
     setMeta('og:image:alt', title, true);
-    setMeta('og:site_name', 'Julina Candles & Melts', true);
+    setMeta('og:site_name', 'URVAA', true);
     setMeta('og:locale', 'en_IN', true);
 
     // ─── Twitter / X ───
@@ -95,9 +95,8 @@ export function usePageSEO({
 
     // Cleanup on unmount — restore defaults
     return () => {
-      document.title = 'Julina Candles & Melts | Luxury Decorative, Scented & Urli Candle Exporter';
+      document.title = 'URVAA | Delivering the Authentic Rural Aura';
       document.querySelectorAll('script[data-page-schema]').forEach((el) => el.remove());
     };
   }, [title, description, canonical, ogType, ogImage, keywords, noIndex, schema]);
 }
-

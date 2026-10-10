@@ -8,28 +8,28 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: 'What makes Julina Candles & Melts special?',
-    answer: 'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented soy wax candles, and traditional urli candles from Maharashtra, India. We use 100% natural soy wax, therapeutic essential oils, lead-free cotton wicks, and hand-poured floral embeds.'
+    question: 'What is URVAA?',
+    answer: 'URVAA is a rural-products commerce brand built around One Village – One Product and the regional stories behind Indian goods.'
   },
   {
-    question: 'Are your candles safe and non-toxic?',
-    answer: 'Yes, 100%. Our candles are made with pure, eco-friendly soy wax which burns soot-free and non-toxic. They are completely safe for indoor air quality around children and pets.'
+    question: 'What kinds of products can I discover?',
+    answer: 'URVAA is organized around regional foods and Araku products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. Availability depends on the current catalog.'
   },
   {
-    question: 'Do you accept bulk, wholesale, and global export orders?',
-    answer: 'Yes! We supply wholesalers, retailers, event planners, and international buyers. We offer custom branding, bulk price tier discounts, and export-compliant sturdy packaging. Contact us at pranita311096@gmail.com or +91 7304888197 for bulk quotes.'
+    question: 'How can I learn where a product comes from?',
+    answer: 'Check each product listing for its available origin, maker, ingredient, or material information. We aim to make these details clear and accurate.'
   },
   {
-    question: 'How long do your scented soy wax candles burn?',
-    answer: 'Our jar and urli candles offer extended burn times ranging from 25 to 50+ hours depending on the candle size. For maximum burn efficiency, trim the wick to 1/4 inch before each burn.'
+    question: 'Are all products locally sourced or certified?',
+    answer: 'Sourcing and certification vary by product. Please refer to the information on each listing and contact support if you need clarification.'
   },
   {
-    question: 'How long does shipping take across India and globally?',
-    answer: 'Orders within India are dispatched within 24–48 hours and delivered in 3 to 5 business days. International export shipments are coordinated via express air or sea freight with real-time tracking.'
+    question: 'Can I place a bulk or business enquiry?',
+    answer: 'For questions about a product or a potential business order, please contact URVAA support. Availability and terms can be confirmed for each request.'
   },
   {
-    question: 'How can I contact support regarding my order or custom request?',
-    answer: 'You can connect with our customer support team directly on WhatsApp or phone at +91 7304888197 or email us at pranita311096@gmail.com. We are available Monday to Saturday, 10 AM to 7 PM.'
+    question: 'How do I get help with an order?',
+    answer: 'Use the order tracking and account pages for order updates, or contact support using the details shown on this website.'
   }
 ];
 
@@ -52,7 +52,7 @@ const FAQSection: React.FC = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-sm text-gray-500 mt-2">
-            Have questions about our handcrafted candles, bulk orders, or global export?
+            Questions about regional products, orders, or potential partnerships?
           </p>
         </div>
 

@@ -10,8 +10,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const Cart: React.FC = () => {
   usePageSEO({
-    title: 'Shopping Cart | Julina Candles & Melts',
-    description: 'View your shopping cart and selected Artisanal Candles products.',
+    title: 'My Rural Basket | URVAA',
+    description: 'Review the products in your URVAA basket before checkout.',
     canonical: '/cart',
     noIndex: true,
   });
@@ -65,7 +65,7 @@ const Cart: React.FC = () => {
   };
 
   const getPhotoUrl = (photoUrl?: string) => {
-    if (!photoUrl) return 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
+    if (!photoUrl) return '/logo.png';
     let cleaned = photoUrl.replace('/images/products/', '/images/');
     if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
       cleaned = '/' + cleaned;
@@ -79,14 +79,14 @@ const Cart: React.FC = () => {
         <BackButton fallback="/products" />
 
         <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-[#E6DACB]">
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#5C2333] mb-6">Shopping Cart</h1>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#5C2333] mb-6">My Rural Basket</h1>
 
           {cartItems.length === 0 ? (
             <div className="py-12 text-center space-y-4">
-              <p className="text-5xl">🕯️</p>
-              <h2 className="text-xl font-serif font-bold text-[#2A1C22]">Your cart is currently empty</h2>
+              <p className="text-5xl">🧺</p>
+              <h2 className="text-xl font-serif font-bold text-[#2A1C22]">Your basket is currently empty</h2>
               <p className="text-xs sm:text-sm text-gray-500 max-w-sm mx-auto font-light">
-                Looks like you haven't added any handcrafted candles to your cart yet.
+                Your basket is waiting for something worth discovering.
               </p>
               <Link
                 to="/products"
@@ -111,7 +111,7 @@ const Cart: React.FC = () => {
                             alt={item.name}
                             className="h-16 w-16 object-contain rounded-xl bg-white p-1 border border-[#E6DACB]"
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
+                              (e.target as HTMLImageElement).src = '/logo.png';
                             }}
                           />
                         </Link>
@@ -175,7 +175,7 @@ const Cart: React.FC = () => {
                                 alt={item.name}
                                 className="h-14 w-14 object-contain rounded-xl bg-[#FBF6ED] p-1 border border-[#E6DACB]"
                                 onError={(e) => {
-                                  (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
+                                  (e.target as HTMLImageElement).src = '/logo.png';
                                 }}
                               />
                               <span className="font-bold text-sm text-[#5C2333] group-hover:underline">{item.name}</span>

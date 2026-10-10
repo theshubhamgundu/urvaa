@@ -33,8 +33,8 @@ const LoginPage: React.FC = () => {
                     _id: isAdmin ? 'admin_id_001' : 'user_' + Date.now(),
                     uid: isAdmin ? 'admin_uid_001' : 'user_uid_' + Date.now(),
                     email: email,
-                    name: isAdmin ? 'Julina Candles & Melts Admin' : email.split('@')[0],
-                    displayName: isAdmin ? 'Julina Candles & Melts Admin' : email.split('@')[0],
+                    name: isAdmin ? 'URVAA Admin' : email.split('@')[0],
+                    displayName: isAdmin ? 'URVAA Admin' : email.split('@')[0],
                     photoURL: '',
                     role: isAdmin ? 'admin' : 'user',
                     provider: 'email'
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
                     _id: 'user_google_' + Date.now(),
                     uid: 'user_google_uid_' + Date.now(),
                     email: 'customer@julinacandles.in',
-                    name: 'Julina Candles & Melts Customer',
+                    name: 'URVAA Customer',
                     role: 'user',
                     provider: 'google'
                 } as any));
@@ -179,4 +179,3 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-

@@ -1,21 +1,21 @@
-# Julina Candles & Melts 🕯️ — Artisanal Candles & Wax Products E-Commerce Platform
+# URVAA — Rural Products E-Commerce Platform
 
-**Julina Candles & Melts** is a full-stack luxury e-commerce platform built for handcrafted artisanal candles, premium wax products, and scented home accessories. Built with the **MERN Stack + TypeScript**, it features an elegant bohemian-inspired visual design, real-time cart management, role-based admin dashboard, and Stripe payment processing.
+**URVAA — Delivering the Authentic Rural Aura** is a rural-products commerce brand built around “One Village – One Product.” Its planned collection spans regional foods, tribal-origin products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. The platform provides product discovery, a shopping cart, checkout, order tracking, and an admin dashboard. Product sourcing, availability, and category content should be verified before publication.
 
 ---
 
 ## 🌟 Key Features
 
 ### 🛒 Customer Storefront
-- **Hero Image Carousel**: Smooth auto-rotating banner slider featuring lightweight compressed hero graphics with pause-on-hover and touch controls.
-- **Animated Marquee Ticker**: Continuous horizontal ticker showcasing key product features (100% Soy Wax, Hand-Poured, Eco-Friendly, Long-Burning, Natural Scents).
+- **Brand Introduction**: Homepage hero presents URVAA’s “One Village – One Product” concept and links to the story and shop.
+- **Regional Category Discovery**: Five category cards introduce the planned URVAA product areas.
 - **Product Showcase & Card Grid**:
   - Elegant beige image containers (`#f3e9d4`) with product hover zoom effects.
   - Premium discount badges (`20% OFF`, `30% OFF`).
   - Scent type & size variant selector dropdowns (Small, Medium, Large).
   - Single-click **Add to Cart** with quantity controls (`−`, `qty`, `+`).
-- **Candle Care & Scent Blog Section**: 3-column article grid sharing insights into candle care, scent selection, and home ambiance creation.
-- **Elegant Footer**: Premium gold & cream (`#d4a574`) footer with custom candlelight wave decoration, quick links, newsletter subscription, and responsive mobile grid layout.
+- **Regional Product Discovery**: Category-led browsing for regional specialties, foods, crafts, textiles, plants, and household goods.
+- **Responsive Footer**: Brand introduction, navigation, customer policies, and contact information.
 - **Typography & Theme**: Styled with modern Google Fonts (`Outfit` for headings, `Plus Jakarta Sans` for body) over a warm luxurious cream background (`#faf8f3`).
 
 ### 🔑 Authentication & Payments
@@ -24,7 +24,7 @@
 - **Stripe Payment Gateway**: Secure checkout experience with real-time payment processing.
 
 ### 📊 Admin Dashboard
-- **Product Management**: CRUD operations for managing candles, wax products, scent types, sizes, and inventory.
+- **Product Management**: CRUD operations for managing product details, categories, options, pricing, and inventory.
 - **Order Management**: Track customer orders, update delivery statuses (Pending, Shipped, Delivered).
 - **Coupon & Discount Engine**: Create and apply custom promo codes during checkout.
 - **Sales Analytics & Reports**: Real-time sales metrics, revenue overview, and customer demographics powered by Chart.js.
@@ -152,5 +152,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Julina Candles & Melts** — *Smarter Carbs for a Healthier Life.* 🌾
-
+**URVAA** — *Delivering the Authentic Rural Aura.* 🌾

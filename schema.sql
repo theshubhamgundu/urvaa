@@ -1,5 +1,5 @@
 -- ========================================================
--- Julina Candles & Melts E-Commerce Production Database Schema
+-- URVAA E-Commerce Production Database Schema
 -- Compatible with Supabase / PostgreSQL
 -- ========================================================
 
@@ -213,4 +213,3 @@ BEGIN
 EXCEPTION WHEN others THEN
   NULL;
 END $$;
-

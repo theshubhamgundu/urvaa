@@ -10,7 +10,6 @@ import {
   FaPlus, 
   FaTrash, 
   FaCopy, 
-  FaMagic, 
   FaCheckCircle, 
   FaTimesCircle, 
   FaRupeeSign, 
@@ -31,42 +30,11 @@ export interface CandleVariantItem {
   pack?: string;
 }
 
-const CANDLE_PRESETS = [
-  {
-    category: 'Packs & Sets',
-    icon: '📦',
-    items: [
-      { name: 'Single Candle', label: 'Single', mrp: 299, salePrice: 249, stock: 50 },
-      { name: 'Set of 2 Candles', label: 'Pack of 2', mrp: 550, salePrice: 450, stock: 30 },
-      { name: 'Gift Box (Set of 4)', label: 'Pack of 4', mrp: 1100, salePrice: 850, stock: 20 },
-      { name: 'Festive Hamper (Set of 12)', label: 'Pack of 12', mrp: 3000, salePrice: 2200, stock: 10 },
-    ]
-  },
-  {
-    category: 'Urli & Bowl Sizes',
-    icon: '🏺',
-    items: [
-      { name: 'Small Urli (1 Wick / 150g)', label: 'Small (150g)', mrp: 249, salePrice: 199, stock: 40 },
-      { name: 'Medium Urli (2 Wicks / 300g)', label: 'Medium (300g)', mrp: 399, salePrice: 299, stock: 25 },
-      { name: 'Grand Urli (4 Wicks / 600g)', label: 'Large (600g)', mrp: 749, salePrice: 549, stock: 15 },
-    ]
-  },
-  {
-    category: 'Glass Jar Sizes',
-    icon: '🫙',
-    items: [
-      { name: 'Travel Tin (100g)', label: '100g Tin', mrp: 199, salePrice: 149, stock: 50 },
-      { name: 'Standard Frosted Jar (200g)', label: '200g Jar', mrp: 349, salePrice: 249, stock: 35 },
-      { name: 'Luxury 3-Wick Jar (450g)', label: '450g Luxury', mrp: 699, salePrice: 499, stock: 20 },
-    ]
-  }
-];
-
 const AdminAddProduct: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
-    category: 'Festive Urli Candles',
+    category: 'Tribal Araku Products',
     stock: 50,
     price: 0,
     description: '',
@@ -113,24 +81,6 @@ const AdminAddProduct: React.FC = () => {
     };
     setVariants(prev => [...prev, newVar]);
     setHasVariants(true);
-  };
-
-  // Load preset group
-  const loadPresetGroup = (presetItems: any[]) => {
-    const newItems: CandleVariantItem[] = presetItems.map(p => ({
-      id: Date.now().toString() + Math.random().toString(36).slice(2, 6),
-      name: p.name,
-      label: p.label || p.name,
-      salePrice: p.salePrice,
-      price: p.salePrice,
-      mrp: p.mrp || Math.round(p.salePrice * 1.25),
-      stock: p.stock || 30,
-      inStock: true,
-      pack: p.label
-    }));
-    setVariants(prev => [...prev, ...newItems]);
-    setHasVariants(true);
-    notify(`Added ${presetItems.length} variant sizes!`, 'success');
   };
 
   // Duplicate a variant
@@ -295,12 +245,11 @@ const AdminAddProduct: React.FC = () => {
                 className="w-full px-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
                 required
               >
-                <option value="Festive Urli Candles">Festive Urli Candles</option>
-                <option value="Floral Candles">Floral Candles</option>
-                <option value="Glass Jar Candles">Glass Jar Candles</option>
-                <option value="Mithai Candles">Mithai Candles</option>
-                <option value="Wooden Dough Bowl Candles">Wooden Dough Bowl Candles</option>
-                <option value="Fragrances">Fragrances</option>
+                <option value="Tribal Araku Products">Tribal Araku Products</option>
+                <option value="Mana Godavari Foods">Mana Godavari Foods</option>
+                <option value="Eco-Friendly Products">Eco-Friendly Products</option>
+                <option value="Swadesi Handlooms">Swadesi Handlooms</option>
+                <option value="Kadiyam Plants">Kadiyam Plants</option>
               </select>
             </div>
 
@@ -336,7 +285,7 @@ const AdminAddProduct: React.FC = () => {
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              placeholder="Handcrafted 100% soy wax scented candle with lead-free cotton wicks..."
+              placeholder="Describe the product, including relevant materials, ingredients, and origin details..."
               className="w-full px-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] text-gray-800 resize-none"
               required
             />
@@ -396,29 +345,6 @@ const AdminAddProduct: React.FC = () => {
               </div>
             </div>
 
-            {/* Quick 1-Click Preset Templates */}
-            <div className="space-y-2">
-              <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
-                <FaMagic className="text-[#C79A56]" /> 1-Click Quick Preset Sizes:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {CANDLE_PRESETS.map((preset) => (
-                  <button
-                    key={preset.category}
-                    type="button"
-                    onClick={() => loadPresetGroup(preset.items)}
-                    className="bg-white hover:bg-[#185E33] hover:text-white text-gray-800 border border-[#EDE3CF] px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs group"
-                  >
-                    <span>{preset.icon}</span>
-                    <span>{preset.category}</span>
-                    <span className="text-[10px] text-gray-400 group-hover:text-white/80 font-mono">
-                      (+{preset.items.length})
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
             {/* Variant Cards List */}
             {variants.length === 0 ? (
               <div className="bg-white rounded-2xl border border-dashed border-[#EDE3CF] p-8 text-center space-y-2">
@@ -426,7 +352,7 @@ const AdminAddProduct: React.FC = () => {
                   No multi-sizes added yet — product will sell as a single standard item.
                 </p>
                 <p className="text-[11px] text-gray-400 max-w-sm mx-auto">
-                  Click <b>"Add Size / Variant"</b> above or pick a quick preset to offer multiple sizes or pack options with distinct pricing.
+                  Add a custom option above when a product is available in multiple sizes, packs, or formats.
                 </p>
               </div>
             ) : (
