@@ -56,7 +56,7 @@ const AdminLoginGate: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
           <div className="w-14 h-14 rounded-full bg-[#185e33] flex items-center justify-center mb-4 shadow-md">
             <FaLock className="text-white text-xl" />
           </div>
-          <img src="/logo.png" alt="URVAA" className="h-8 w-auto mb-3" />
+          <img src="/logo.png" alt="URVA" className="h-8 w-auto mb-3" />
           <h1 className="text-xl font-serif font-bold text-[#185e33]">Admin Access</h1>
           <p className="text-xs text-gray-500 mt-1 text-center">
             Enter the admin password to access the dashboard.
@@ -117,8 +117,8 @@ const AdminLoginGate: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
 // ─── Admin Layout ─────────────────────────────────────────────────────────────
 const AdminLayout: React.FC = () => {
   usePageSEO({
-    title: 'Admin Dashboard | URVAA',
-    description: 'URVAA product and order management',
+    title: 'Admin Dashboard | URVA',
+    description: 'URVA product and order management',
     canonical: '/admin',
     noIndex: true,
   });

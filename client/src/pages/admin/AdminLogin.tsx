@@ -66,7 +66,7 @@ const AdminLogin: React.FC = () => {
             <FaLock className="text-white text-3xl" />
           </div>
           <h1 className="text-3xl font-serif font-bold text-[#1f5133] mb-2">Admin Portal</h1>
-          <p className="text-sm text-gray-600">URVAA Management System</p>
+          <p className="text-sm text-gray-600">URVA Management System</p>
         </div>
 
         {/* Login Card */}

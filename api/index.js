@@ -72,7 +72,7 @@ function verifyRazorpaySignature(orderId, paymentId, signature) {
 // Resend Email API Configuration
 const RESEND_CONFIG = {
   get KEY() { return process.env.RESEND_API_KEY || 're_UZ29KUAH_PjdpPNsPbAWveZDj48Tv5woU'; },
-  get FROM() { return process.env.RESEND_FROM_EMAIL || 'URVAA <sales@julinacandles.in>'; }
+  get FROM() { return process.env.RESEND_FROM_EMAIL || 'URVA <sales@julinacandles.in>'; }
 };
 
 // Send email using Resend REST API
@@ -181,14 +181,14 @@ async function handleOrderSuccess(orderId) {
           
           <!-- Header Logo -->
           <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-            <h1 style="color: #5C2333; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVAA</h1>
+            <h1 style="color: #5C2333; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVA</h1>
             <span style="font-size: 10px; color: #C79A56; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Delivering the Authentic Rural Aura</span>
           </div>
 
           <!-- Greeting -->
           <h2 style="color: #5C2333; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Confirmed!</h2>
           <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-          <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with URVAA. Your payment was successful, and your order is being prepared. Below are your order details.</p>
+          <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with URVA. Your payment was successful, and your order is being prepared. Below are your order details.</p>
           
           <!-- Status Card -->
           <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
@@ -254,7 +254,7 @@ async function handleOrderSuccess(orderId) {
           <!-- Footer Notes -->
           <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
             <p style="margin: 0 0 5px 0;">If you have any questions, contact support at +91 7304888197 or pranita311096@gmail.com.</p>
-            <p style="margin: 0;">© ${new Date().getFullYear()} URVAA. All rights reserved.</p>
+            <p style="margin: 0;">© ${new Date().getFullYear()} URVA. All rights reserved.</p>
           </div>
 
         </div>
@@ -265,7 +265,7 @@ async function handleOrderSuccess(orderId) {
     if (recipientEmail && recipientEmail.includes('@')) {
       await sendEmail({
         to: recipientEmail,
-        subject: `URVAA — Order Confirmed #${order.id}`,
+        subject: `URVA — Order Confirmed #${order.id}`,
         html: emailHtml
       });
     }
@@ -454,7 +454,7 @@ export default async function handler(req, res) {
           currency: 'INR',
           receipt: orderId,
           notes: {
-            customer_name: req.body?.name || 'URVAA Customer',
+            customer_name: req.body?.name || 'URVA Customer',
             customer_email: req.body?.email || '',
             customer_phone: req.body?.phone || '',
           },
@@ -502,7 +502,7 @@ export default async function handler(req, res) {
             currency: currency || 'INR',
             receipt: orderReceipt,
             notes: {
-              customer_name: customer_name || 'URVAA Customer',
+              customer_name: customer_name || 'URVA Customer',
               customer_email: customer_email || 'support@julinacandles.in',
               customer_phone: customer_phone || '',
             },
@@ -983,13 +983,13 @@ export default async function handler(req, res) {
                 
                 <!-- Header Logo -->
                 <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVAA</h1>
+                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVA</h1>
                   <span style="font-size: 10px; color: #c4633c; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Pure & Organic</span>
                 </div>
 
                 <h2 style="color: #1f5133; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">📦 Your Order Has Been Shipped!</h2>
                 <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Your URVAA order has been dispatched and is on its way to you.</p>
+                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Your URVA order has been dispatched and is on its way to you.</p>
                 
                 <!-- Tracking Information Box -->
                 <div style="background: linear-gradient(135deg, #1f5133 0%, #2d7a4d 100%); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 6px 20px rgba(31, 81, 51, 0.15);">
@@ -1037,8 +1037,8 @@ export default async function handler(req, res) {
 
                 <!-- Footer Notes -->
                 <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
-                  <p style="margin: 0 0 5px 0;">Thank you for choosing URVAA!</p>
-                  <p style="margin: 0;">© ${new Date().getFullYear()} URVAA. All rights reserved.</p>
+                  <p style="margin: 0 0 5px 0;">Thank you for choosing URVA!</p>
+                  <p style="margin: 0;">© ${new Date().getFullYear()} URVA. All rights reserved.</p>
                 </div>
 
               </div>
@@ -1059,13 +1059,13 @@ export default async function handler(req, res) {
                 
                 <!-- Header Logo -->
                 <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVAA</h1>
+                  <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">URVA</h1>
                   <span style="font-size: 10px; color: #c4633c; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Pure & Organic</span>
                 </div>
 
                 <h2 style="color: #1f5133; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Status Updated! 📦</h2>
                 <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">The status of your URVAA order has been updated.</p>
+                <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">The status of your URVA order has been updated.</p>
                 
                 <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
                   <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
@@ -1089,7 +1089,7 @@ export default async function handler(req, res) {
                 <!-- Footer Notes -->
                 <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
                   <p style="margin: 0 0 5px 0;">If you have any questions, reply to this email or contact support.</p>
-                  <p style="margin: 0;">© ${new Date().getFullYear()} URVAA. All rights reserved.</p>
+                  <p style="margin: 0;">© ${new Date().getFullYear()} URVA. All rights reserved.</p>
                 </div>
 
               </div>
@@ -1098,7 +1098,7 @@ export default async function handler(req, res) {
 
           await sendEmail({
             to: recipientEmail,
-            subject: `URVAA — Order #${updated.id} Status: ${status}`,
+            subject: `URVA — Order #${updated.id} Status: ${status}`,
             html: emailHtml
           });
         }

@@ -7,8 +7,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const MyOrders: React.FC = () => {
     usePageSEO({
-        title: 'My Orders | URVAA',
-        description: 'Track and view your URVAA orders.',
+        title: 'My Orders | URVA',
+        description: 'Track and view your URVA orders.',
         canonical: '/my-orders',
         noIndex: true,
     });

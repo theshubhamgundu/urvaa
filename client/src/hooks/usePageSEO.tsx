@@ -69,7 +69,7 @@ export function usePageSEO({
     setMeta('og:type', ogType, true);
     setMeta('og:image', ogImage, true);
     setMeta('og:image:alt', title, true);
-    setMeta('og:site_name', 'URVAA', true);
+    setMeta('og:site_name', 'URVA', true);
     setMeta('og:locale', 'en_IN', true);
 
     // ─── Twitter / X ───
@@ -95,7 +95,7 @@ export function usePageSEO({
 
     // Cleanup on unmount — restore defaults
     return () => {
-      document.title = 'URVAA | Delivering the Authentic Rural Aura';
+      document.title = 'URVA | Delivering the Authentic Rural Aura';
       document.querySelectorAll('script[data-page-schema]').forEach((el) => el.remove());
     };
   }, [title, description, canonical, ogType, ogImage, keywords, noIndex, schema]);

@@ -44,22 +44,22 @@ const SingleProduct: React.FC = () => {
     // ─── Dynamic per-page SEO ───
     usePageSEO({
         title: product
-            ? `${product.name} | URVAA`
-            : 'Product details | URVAA',
+            ? `${product.name} | URVA`
+            : 'Product details | URVA',
         description: product
-            ? `Explore ${product.name} from URVAA. Check the product listing for available details about its origin, materials, ingredients, and delivery.`
-            : 'Explore regional products, foods, craft, handlooms, and plants from URVAA.',
+            ? `Explore ${product.name} from URVA. Check the product listing for available details about its origin, materials, ingredients, and delivery.`
+            : 'Explore regional products, foods, craft, handlooms, and plants from URVA.',
         canonical: `/product/${productId}`,
         ogImage: product?.photo || 'https://julinacandlesandmelts.in/logo.png',
         keywords: product
-            ? `${product.name}, buy ${product.name} online, URVAA, regional products India`
-            : 'URVAA, rural products, regional goods, India',
+            ? `${product.name}, buy ${product.name} online, URVA, regional products India`
+            : 'URVA, rural products, regional goods, India',
         schema: product
             ? [
                 webPageSchema({
                     url: `/product/${productId}`,
-                    name: `${product.name} | URVAA`,
-                    description: `Explore ${product.name} online with URVAA.`,
+                    name: `${product.name} | URVA`,
+                    description: `Explore ${product.name} online with URVA.`,
                     breadcrumb: [
                         { name: 'Home', url: '/' },
                         { name: 'Products', url: '/products' },
@@ -68,10 +68,10 @@ const SingleProduct: React.FC = () => {
                 }),
                 productSchema({
                     name: product.name,
-                    description: product.description || 'Product details and availability are provided by URVAA.',
+                    description: product.description || 'Product details and availability are provided by URVA.',
                     image: product.photo || 'https://julinacandlesandmelts.in/logo.png',
                     url: `/product/${productId}`,
-                    sku: `URVAA-${productId}`,
+                    sku: `URVA-${productId}`,
                     price: selectedVariant?.salePrice ?? product.price ?? 0,
                     mrp: selectedVariant?.mrp,
                     availability: product.stock > 0
@@ -281,7 +281,7 @@ const SingleProduct: React.FC = () => {
                         {/* Bulk WhatsApp Inquiry & Add to Cart Controls */}
                         <div className="space-y-3 pt-4 border-t border-gray-100">
                             <a
-                                href={`https://wa.me/917304888197?text=${encodeURIComponent(`Hi URVAA, I am interested in a business enquiry for "${resolvedProduct.name}"`)}`}
+                                href={`https://wa.me/917304888197?text=${encodeURIComponent(`Hi URVA, I am interested in a business enquiry for "${resolvedProduct.name}"`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold py-2.5 px-4 rounded-full text-xs transition-all flex items-center justify-center gap-2 shadow-xs"

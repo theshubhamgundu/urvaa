@@ -19,8 +19,8 @@ const INDIAN_STATES = [
 
 const Shipping: React.FC = () => {
     usePageSEO({
-        title: 'Shipping Address | URVAA',
-        description: 'Enter your delivery address for your URVAA order.',
+        title: 'Shipping Address | URVA',
+        description: 'Enter your delivery address for your URVA order.',
         canonical: '/shipping',
         noIndex: true,
     });

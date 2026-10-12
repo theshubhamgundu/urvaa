@@ -1,4 +1,4 @@
-# robots.txt – URVAA
+# robots.txt – URVA
 # Last Updated: 2026-08-10
 # Purpose: SEO optimization & crawler management
 

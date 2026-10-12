@@ -30,8 +30,8 @@ const loadRazorpayScript = (): Promise<boolean> => {
 
 const CheckoutForm: React.FC = () => {
   usePageSEO({
-    title: 'Checkout | URVAA',
-    description: 'Review your URVAA order and complete checkout securely.',
+    title: 'Checkout | URVA',
+    description: 'Review your URVA order and complete checkout securely.',
     canonical: '/checkout',
     noIndex: true,
   });
@@ -53,6 +53,10 @@ const CheckoutForm: React.FC = () => {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (cartItems.some((item) => item.productId.startsWith('demo-'))) {
+      notify('Sample products are for preview only. Remove them from your basket before checkout.', 'error');
+      return;
+    }
     setIsProcessing(true);
 
     const isLoaded = await loadRazorpayScript();
@@ -72,7 +76,7 @@ const CheckoutForm: React.FC = () => {
         body: JSON.stringify({
           amount: Math.round(total * 100),
           currency: 'INR',
-          description: 'URVAA order',
+          description: 'URVA order',
           customer_name: shippingInfo.name || 'Customer',
           customer_email: shippingInfo.email || '',
           customer_phone: shippingInfo.phone || '',
@@ -92,8 +96,8 @@ const CheckoutForm: React.FC = () => {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_TO2LV3iKTZwDBr',
         amount: rzpData.amount,
         currency: rzpData.currency || 'INR',
-        name: 'URVAA',
-        description: 'Regional products from URVAA',
+        name: 'URVA',
+        description: 'Regional products from URVA',
         image: 'https://julinacandlesandmelts.in/logo.png',
         order_id: rzpData.order_id,
         handler: async function (response: any) {
@@ -179,8 +183,8 @@ const CheckoutForm: React.FC = () => {
       <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-[#E6DACB] max-w-xl w-full">
         {/* Merchant Branding Header */}
         <div className="flex flex-col items-center mb-6 text-center border-b border-[#E6DACB] pb-5">
-          <img src="/logo.png" alt="URVAA — Delivering the Authentic Rural Aura" className="h-16 w-16 object-contain mb-2" />
-          <h1 className="text-2xl font-serif font-bold text-[#2A1C22]">URVAA</h1>
+          <img src="/logo.png" alt="URVA — Delivering the Authentic Rural Aura" className="h-16 w-16 object-contain mb-2" />
+          <h1 className="text-2xl font-serif font-bold text-[#2A1C22]">URVA</h1>
           <p className="text-xs text-gray-500 mt-1">Secure Razorpay Payment Gateway</p>
         </div>
 

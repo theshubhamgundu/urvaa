@@ -1,4 +1,4 @@
-// Dynamic Sitemap Generator for URVAA
+// Dynamic Sitemap Generator for URVA
 // Run this script to generate sitemap.xml with all products and blogs
 // Usage: node api/generate-sitemap.js
 

@@ -1,5 +1,5 @@
 -- ========================================================
--- URVAA E-Commerce Production Database Schema
+-- URVA E-Commerce Production Database Schema
 -- Compatible with Supabase / PostgreSQL
 -- ========================================================
 

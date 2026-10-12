@@ -37,16 +37,16 @@ const categories = [
 
 const AboutPage: React.FC = () => {
   usePageSEO({
-    title: 'Our Story | URVAA — Delivering the Authentic Rural Aura',
+    title: 'Our Story | URVA — Delivering the Authentic Rural Aura',
     description:
-      'Meet URVAA, a rural-products commerce brand built around One Village – One Product and the regional stories behind India’s goods.',
+      'Meet URVA, a rural-products commerce brand built around One Village – One Product and the regional stories behind India’s goods.',
     canonical: '/about',
-    keywords: 'URVAA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, plants',
+    keywords: 'URVA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, plants',
     schema: [
       webPageSchema({
         url: '/about',
-        name: 'Our Story | URVAA',
-        description: 'Learn about URVAA’s vision for regional discovery and rural commerce.',
+        name: 'Our Story | URVA',
+        description: 'Learn about URVA’s vision for regional discovery and rural commerce.',
         breadcrumb: [
           { name: 'Home', url: '/' },
           { name: 'Our Story', url: '/about' },
@@ -70,7 +70,7 @@ const AboutPage: React.FC = () => {
             Delivering the Authentic Rural Aura
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-            URVAA is a rural-products commerce brand built around a simple idea: every region has something distinctive worth discovering.
+            URVA is a rural-products commerce brand built around a simple idea: every region has something distinctive worth discovering.
           </p>
         </div>
       </section>
@@ -82,7 +82,7 @@ const AboutPage: React.FC = () => {
             A product is also a place, a skill, and a story.
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-gray-700">
-            URVAA aims to make regional products easier to discover while helping rural producers reach customers beyond their immediate communities. Our vision is to bring traditional foods, indigenous craftsmanship, handlooms, plants, and considered everyday goods into one thoughtful shopping experience.
+            URVA aims to make regional products easier to discover while helping rural producers reach customers beyond their immediate communities. Our vision is to bring traditional foods, indigenous craftsmanship, handlooms, plants, and considered everyday goods into one thoughtful shopping experience.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-gray-700">
             As the collection grows, we want product pages to make origin, materials, ingredients, and maker information clear—so customers can shop with context and confidence.
@@ -90,7 +90,7 @@ const AboutPage: React.FC = () => {
         </div>
         <img
           src="/logo.png"
-          alt="URVAA — Delivering the Authentic Rural Aura"
+          alt="URVA — Delivering the Authentic Rural Aura"
           className="mx-auto w-48 rounded-3xl bg-white p-3 shadow-lg sm:w-56"
         />
       </section>
@@ -98,7 +98,7 @@ const AboutPage: React.FC = () => {
       <section className="border-y border-[#D9DDCE] bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <h2 className="font-serif text-3xl font-bold text-[#234331]">What guides URVAA</h2>
+            <h2 className="font-serif text-3xl font-bold text-[#234331]">What guides URVA</h2>
             <p className="mt-3 text-sm text-gray-600">
               A marketplace shaped by authenticity, regional discovery, and convenience.
             </p>
@@ -131,7 +131,7 @@ const AboutPage: React.FC = () => {
           ))}
         </div>
         <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-gray-500">
-          Category examples describe the URVAA vision. Product availability, supplier relationships, and origin details should be confirmed before publication.
+          Category examples describe the URVA vision. Product availability, supplier relationships, and origin details should be confirmed before publication.
         </p>
       </section>
 

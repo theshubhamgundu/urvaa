@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const RefundPolicy: React.FC = () => {
   usePageSEO({
-    title: 'Refund & Returns Policy | URVAA',
-    description: 'Review URVAA order cancellation, return, replacement, and refund guidance. Conditions may differ by product type.',
+    title: 'Refund & Returns Policy | URVA',
+    description: 'Review URVA order cancellation, return, replacement, and refund guidance. Conditions may differ by product type.',
     canonical: '/refund-policy',
   });
   return (
@@ -14,7 +14,7 @@ const RefundPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">RETURNS & GUARANTEE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Refund & Return Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">

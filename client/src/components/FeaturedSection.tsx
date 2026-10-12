@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 const heroImages = [
   {
     src: '/images/hero/from-our-villages.jpg',
-    alt: 'URVAA: From our villages to your home, with rural landscapes and artisan-made goods.',
+    alt: 'URVA: From our villages to your home, with rural landscapes and artisan-made goods.',
   },
   {
     src: '/images/hero/rural-heritage.jpg',
-    alt: 'URVAA rural heritage collage featuring regional foods, plants, handlooms, and eco-friendly goods.',
+    alt: 'URVA rural heritage collage featuring regional foods, plants, handlooms, and eco-friendly goods.',
   },
   {
     src: '/images/hero/rooted-in-rural-life.jpg',
-    alt: 'URVAA rooted in rural life, celebrating village artisans and local traditions.',
+    alt: 'URVA rooted in rural life, celebrating village artisans and local traditions.',
   },
 ];
 
@@ -34,7 +34,7 @@ const FeaturedSection: React.FC = () => {
     <section
       className="relative h-[clamp(18rem,52vw,42rem)] w-full overflow-hidden bg-[#E8DDC8]"
       role="region"
-      aria-label="URVAA stories from rural India"
+      aria-label="URVA stories from rural India"
       aria-roledescription="carousel"
     >
       {heroImages.map((image, index) => (

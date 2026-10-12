@@ -8,12 +8,12 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: 'What is URVAA?',
-    answer: 'URVAA is a rural-products commerce brand built around One Village – One Product and the regional stories behind Indian goods.'
+    question: 'What is URVA?',
+    answer: 'URVA is a rural-products commerce brand built around One Village – One Product and the regional stories behind Indian goods.'
   },
   {
     question: 'What kinds of products can I discover?',
-    answer: 'URVAA is organized around regional foods and Araku products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. Availability depends on the current catalog.'
+    answer: 'URVA is organized around regional foods and Araku products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. Availability depends on the current catalog.'
   },
   {
     question: 'How can I learn where a product comes from?',
@@ -25,7 +25,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: 'Can I place a bulk or business enquiry?',
-    answer: 'For questions about a product or a potential business order, please contact URVAA support. Availability and terms can be confirmed for each request.'
+    answer: 'For questions about a product or a potential business order, please contact URVA support. Availability and terms can be confirmed for each request.'
   },
   {
     question: 'How do I get help with an order?',

@@ -10,8 +10,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const Cart: React.FC = () => {
   usePageSEO({
-    title: 'My Rural Basket | URVAA',
-    description: 'Review the products in your URVAA basket before checkout.',
+    title: 'My Rural Basket | URVA',
+    description: 'Review the products in your URVA basket before checkout.',
     canonical: '/cart',
     noIndex: true,
   });
@@ -19,6 +19,7 @@ const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartItems, subTotal, total, discount } = useSelector((state: RootState) => state.cart);
+  const hasDemoItems = cartItems.some((item) => item.productId.startsWith('demo-'));
 
   const [couponCode, setCouponCode] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState('');
@@ -105,7 +106,10 @@ const Cart: React.FC = () => {
                   {cartItems.map((item) => (
                     <div key={item.productId} className="bg-[#FBF6ED] p-4 rounded-2xl border border-[#E6DACB] flex flex-col gap-3">
                       <div className="flex items-center gap-3">
-                        <Link to={`/product/${item.productId}`} className="flex-shrink-0">
+                        <Link
+                          to={item.productId.startsWith('demo-') ? '/products' : `/product/${item.productId}`}
+                          className="flex-shrink-0"
+                        >
                           <img
                             src={getPhotoUrl(item.photo)}
                             alt={item.name}
@@ -116,7 +120,7 @@ const Cart: React.FC = () => {
                           />
                         </Link>
                         <div className="flex-1 min-w-0">
-                          <Link to={`/product/${item.productId}`}>
+                          <Link to={item.productId.startsWith('demo-') ? '/products' : `/product/${item.productId}`}>
                             <h3 className="font-bold text-sm text-[#5C2333] truncate">{item.name}</h3>
                           </Link>
                           <p className="text-xs text-gray-500">₹ {item.price.toFixed(2)} per unit</p>
@@ -169,7 +173,10 @@ const Cart: React.FC = () => {
                       {cartItems.map((item) => (
                         <tr className="hover:bg-[#FBF6ED]/50 transition-colors" key={item.productId}>
                           <td className="p-4">
-                            <Link to={`/product/${item.productId}`} className="flex items-center space-x-3 group">
+                            <Link
+                              to={item.productId.startsWith('demo-') ? '/products' : `/product/${item.productId}`}
+                              className="flex items-center space-x-3 group"
+                            >
                               <img
                                 src={getPhotoUrl(item.photo)}
                                 alt={item.name}
@@ -291,11 +298,17 @@ const Cart: React.FC = () => {
                 </div>
 
                 {/* Proceed Button */}
+                {hasDemoItems && (
+                  <p className="mt-4 rounded-xl border border-[#E6DACB] bg-[#FBF6ED] p-3 text-xs leading-relaxed text-[#806B5D]">
+                    Sample products are for preview only and are not available to order yet. Remove them from your basket to continue to checkout.
+                  </p>
+                )}
                 <button
                   onClick={() => navigate('/shipping')}
-                  className="w-full bg-[#5C2333] hover:bg-[#3E1622] text-[#FBF6ED] font-bold py-3.5 px-4 rounded-full text-sm transition-colors shadow-md text-center block mt-4"
+                  disabled={hasDemoItems}
+                  className="w-full bg-[#5C2333] hover:bg-[#3E1622] text-[#FBF6ED] font-bold py-3.5 px-4 rounded-full text-sm transition-colors shadow-md text-center block mt-4 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Proceed to Checkout ➔
+                  {hasDemoItems ? 'Remove Sample Items to Checkout' : 'Proceed to Checkout ➔'}
                 </button>
               </div>
             </div>

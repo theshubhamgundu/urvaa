@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const TermsAndConditions: React.FC = () => {
   usePageSEO({
-    title: 'Terms & Conditions | URVAA',
-    description: 'Read the terms for using URVAA and placing orders for regional products through our website.',
+    title: 'Terms & Conditions | URVA',
+    description: 'Read the terms for using URVA and placing orders for regional products through our website.',
     canonical: '/terms',
     noIndex: false,
   });
@@ -15,14 +15,14 @@ const TermsAndConditions: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">LEGAL & COMPLIANCE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Terms & Conditions</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Overview & Agreement</h2>
             <p>
-              Welcome to <strong>URVAA</strong>. By accessing this website or placing an order, you agree to these Terms and Conditions. Please review the details before completing a purchase.
+              Welcome to <strong>URVA</strong>. By accessing this website or placing an order, you agree to these Terms and Conditions. Please review the details before completing a purchase.
             </p>
           </section>
 
@@ -50,7 +50,7 @@ const TermsAndConditions: React.FC = () => {
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">5. Intellectual Property</h2>
             <p>
-              URVAA and its respective owners retain rights to their brand assets and original website content. Product names, marks, images, and other third-party materials remain the property of their respective owners. Unauthorized reproduction or commercial distribution is prohibited.
+              URVA and its respective owners retain rights to their brand assets and original website content. Product names, marks, images, and other third-party materials remain the property of their respective owners. Unauthorized reproduction or commercial distribution is prohibited.
             </p>
           </section>
 
@@ -65,7 +65,7 @@ const TermsAndConditions: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">7. Contact Information</h2>
             <p className="text-xs text-muted">
               For any legal inquiries regarding these Terms & Conditions, please contact us:<br />
-              <strong>Brand:</strong> URVAA<br />
+              <strong>Brand:</strong> URVA<br />
               <strong>Email:</strong> <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> | <strong>Phone/WhatsApp:</strong> +91 73048 88197
             </p>
           </section>

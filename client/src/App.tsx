@@ -13,6 +13,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const HomePage = lazy(() => import('./pages/HomePage'));
 const Layout = lazy(() => import('./components/layout/Layout'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const AboutPage = lazy(() => import('./pages/About'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const ProductDetails = lazy(() => import('./pages/ProductDetails'));
@@ -59,6 +60,7 @@ const App: React.FC = () => {
                                 <Route index element={<HomePage />} />
                                 <Route path="about" element={<AboutPage />} />
                                 <Route path="products" element={<ProductsPage />} />
+                                <Route path="category/:categorySlug" element={<CategoryPage />} />
                                 <Route path="product/:productId" element={<ProductDetails />} />
                                 <Route path="search" element={<Navigate to="/products" replace />} />
                                 <Route path="track-shipment" element={<TrackShipment />} />
@@ -103,4 +105,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

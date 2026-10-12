@@ -14,7 +14,7 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
   if (display.length === 0) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-[#FBF6ED]">
+    <section className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold text-[#C79A56] uppercase tracking-[0.2em] block mb-2">
@@ -24,7 +24,7 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
             Featured products
           </h2>
           <p className="text-xs md:text-sm text-gray-600 mt-3 font-light leading-relaxed">
-            Explore selected products and available options from the URVAA collection.
+            Explore selected products and available options from the URVA collection.
           </p>
         </div>
 

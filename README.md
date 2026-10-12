@@ -1,14 +1,14 @@
-# URVAA — Rural Products E-Commerce Platform
+# URVA — Rural Products E-Commerce Platform
 
-**URVAA — Delivering the Authentic Rural Aura** is a rural-products commerce brand built around “One Village – One Product.” Its planned collection spans regional foods, tribal-origin products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. The platform provides product discovery, a shopping cart, checkout, order tracking, and an admin dashboard. Product sourcing, availability, and category content should be verified before publication.
+**URVA — Delivering the Authentic Rural Aura** is a rural-products commerce brand built around “One Village – One Product.” Its planned collection spans regional foods, tribal-origin products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. The platform provides product discovery, a shopping cart, checkout, order tracking, and an admin dashboard. Product sourcing, availability, and category content should be verified before publication.
 
 ---
 
 ## 🌟 Key Features
 
 ### 🛒 Customer Storefront
-- **Brand Introduction**: Homepage hero presents URVAA’s “One Village – One Product” concept and links to the story and shop.
-- **Regional Category Discovery**: Five category cards introduce the planned URVAA product areas.
+- **Brand Introduction**: Homepage hero presents URVA’s “One Village – One Product” concept and links to the story and shop.
+- **Regional Category Discovery**: Five category cards introduce the planned URVA product areas.
 - **Product Showcase & Card Grid**:
   - Elegant beige image containers (`#f3e9d4`) with product hover zoom effects.
   - Premium discount badges (`20% OFF`, `30% OFF`).
@@ -152,4 +152,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**URVAA** — *Delivering the Authentic Rural Aura.* 🌾
+**URVA** — *Delivering the Authentic Rural Aura.* 🌾

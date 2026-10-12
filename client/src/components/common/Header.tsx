@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
 const promoOffers = [
-  '🌾 URVAA — Delivering the Authentic Rural Aura',
+  '🌾 URVA — Delivering the Authentic Rural Aura',
   '🌱 Discover regional products, makers, and traditions',
   '🧵 Explore foods, handlooms, plants, and thoughtful everyday goods',
   '🛍️ One Village – One Product',
@@ -36,11 +36,11 @@ const Header: React.FC = () => {
       <header className="bg-white/95 text-[#5C2333] border-b border-[#efe9db] shadow-sm p-3.5 px-4 md:px-12 relative z-40 transition-all duration-300">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="absolute left-1/2 flex -translate-x-1/2 items-center md:static md:translate-x-0">
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="/logo.png" alt="URVAA — Delivering the Authentic Rural Aura" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
-              <span className="flex flex-col text-[#234331]">
-                <span className="text-lg font-serif font-bold tracking-wide md:text-2xl">URVAA</span>
+              <img src="/logo.png" alt="URVA — Delivering the Authentic Rural Aura" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
+              <span className="hidden flex-col text-[#234331] md:flex">
+                <span className="text-lg font-serif font-bold tracking-wide md:text-2xl">URVA</span>
                 <span className="hidden text-[9px] font-medium uppercase tracking-[0.12em] md:block">Delivering the Authentic Rural Aura</span>
               </span>
             </Link>

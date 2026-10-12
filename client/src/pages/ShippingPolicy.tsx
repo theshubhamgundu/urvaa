@@ -4,8 +4,8 @@ import { usePageSEO } from '../hooks/usePageSEO';
 
 const ShippingPolicy: React.FC = () => {
   usePageSEO({
-    title: 'Shipping Policy | URVAA',
-    description: 'Learn how URVAA handles order processing, delivery availability, and shipment tracking.',
+    title: 'Shipping Policy | URVA',
+    description: 'Learn how URVA handles order processing, delivery availability, and shipment tracking.',
     canonical: '/shipping-policy',
   });
   return (
@@ -14,7 +14,7 @@ const ShippingPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">ORDER FULFILLMENT</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Shipping & Delivery Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVAA</p>
+          <p className="text-xs text-muted mt-2">Last Updated: October 11, 2026 • URVA</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">

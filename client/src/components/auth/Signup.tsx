@@ -87,7 +87,7 @@ const SignupPage: React.FC = () => {
           _id: 'user_google_' + Date.now(),
           uid: 'user_google_uid_' + Date.now(),
           email: 'customer@julinacandles.in',
-          name: 'URVAA Customer',
+          name: 'URVA Customer',
           role: 'user',
           provider: 'google'
         } as any));

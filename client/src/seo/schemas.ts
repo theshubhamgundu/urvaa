@@ -1,5 +1,5 @@
 /**
- * Centralised JSON-LD schema builders for URVAA.
+ * Centralised JSON-LD schema builders for URVA.
  * Every function returns a plain object ready for JSON.stringify.
  */
 
@@ -78,13 +78,13 @@ export function productSchema({
     sku: sku || `JCM-${Math.random().toString(36).substr(2, 6)}`,
     brand: {
       '@type': 'Brand',
-      name: 'URVAA',
+      name: 'URVA',
     },
     manufacturer: {
       '@id': ORG_ID,
     },
     category: 'Regional Products',
-    keywords: 'regional products, rural products, India, URVAA',
+    keywords: 'regional products, rural products, India, URVA',
     offers: {
       '@type': 'Offer',
       url: `${BASE}${url}`,
@@ -122,7 +122,7 @@ export function itemListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'URVAA Products',
+    name: 'URVA Products',
     url: `${BASE}/products`,
     itemListElement: items.map((item) => ({
       '@type': 'ListItem',

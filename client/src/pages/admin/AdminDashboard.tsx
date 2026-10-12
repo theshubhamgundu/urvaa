@@ -171,7 +171,7 @@ const AdminDashboard: React.FC = () => {
             <span>🕯️ Store Operations Overview</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-wide">
-            URVAA Marketplace
+            URVA Marketplace
           </h1>
           <p className="text-xs text-gray-300">
             Monitor sales, manage product availability, and fulfill customer orders.

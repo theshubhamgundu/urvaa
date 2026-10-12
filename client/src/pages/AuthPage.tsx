@@ -8,11 +8,11 @@ const AuthPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-[#f6f1e7] py-10 px-4">
       <div className="flex w-full max-w-4xl bg-white rounded-3xl shadow-xl border border-[#ede3cf] overflow-hidden">
-        {/* URVAA brand introduction */}
+        {/* URVA brand introduction */}
         <div className="hidden md:flex flex-col md:w-1/2 items-center justify-center p-8 bg-gradient-to-br from-[#185e33]/5 to-[#e5c158]/10 border-r border-[#ede3cf]">
-          <img src="/logo.png" alt="URVAA — Delivering the Authentic Rural Aura" className="h-36 w-36 mb-4 object-contain" />
+          <img src="/logo.png" alt="URVA — Delivering the Authentic Rural Aura" className="h-36 w-36 mb-4 object-contain" />
           <h1 className="text-3xl font-extrabold text-center mb-2 text-[#185e33] font-serif">
-            URVAA
+            URVA
           </h1>
           <p className="text-gray-600 text-center text-sm mb-6 max-w-xs leading-relaxed font-medium">
             Delivering the Authentic Rural Aura. Discover regional products and the stories behind them.

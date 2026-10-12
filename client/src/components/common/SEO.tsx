@@ -14,11 +14,11 @@ interface SEOProps {
 
 const DOMAIN = 'https://julinacandlesandmelts.in';
 
-const DEFAULT_TITLE = 'URVAA | Delivering the Authentic Rural Aura';
+const DEFAULT_TITLE = 'URVA | Delivering the Authentic Rural Aura';
 const DEFAULT_DESCRIPTION =
-  'Discover regional products, traditional foods, indigenous craftsmanship, handlooms, plants, and thoughtful everyday goods with URVAA.';
+  'Discover regional products, traditional foods, indigenous craftsmanship, handlooms, plants, and thoughtful everyday goods with URVA.';
 const DEFAULT_KEYWORDS =
-  'URVAA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, nursery plants';
+  'URVA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, nursery plants';
 const DEFAULT_OG_IMAGE = `${DOMAIN}/logo.png`;
 
 export const SEO: React.FC<SEOProps> = ({
@@ -58,7 +58,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="URVAA" />
+      <meta property="og:site_name" content="URVA" />
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />

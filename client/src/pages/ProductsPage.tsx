@@ -22,9 +22,9 @@ const ProductsPage: React.FC = () => {
   }, [location.search]);
 
   usePageSEO({
-    title: 'Explore Products | URVAA',
+    title: 'Explore Products | URVA',
     description:
-      'Browse products from URVAA, a growing collection inspired by regional foods, rural makers, handlooms, plants, and thoughtful everyday goods.',
+      'Browse products from URVA, a growing collection inspired by regional foods, rural makers, handlooms, plants, and thoughtful everyday goods.',
     canonical: '/products',
   });
 
@@ -56,7 +56,7 @@ const ProductsPage: React.FC = () => {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#E9C77A]">
             One Village – One Product
           </p>
-          <h1 className="mt-2 font-serif text-3xl font-bold sm:text-4xl">Explore the URVAA collection</h1>
+          <h1 className="mt-2 font-serif text-3xl font-bold sm:text-4xl">Explore the URVA collection</h1>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/85">
             Discover products and regional specialties, with clear details to help you choose.
           </p>
