@@ -4,6 +4,7 @@ import { productApi } from "./api/product.api";
 import { orderApi } from "./api/order.api";
 import userReducer from "./reducers/user.reducer";
 import cartReducer from "./reducers/cart.reducer";
+import adminBusinessReducer from "./reducers/adminBusiness.reducer";
 import { couponApi } from "./api/coupon.api";
 import { paymentApi } from "./api/payment.api";
 import { statsApi } from "./api/stats.api";
@@ -14,6 +15,7 @@ const store = configureStore({
     reducer: {
         user: userReducer,
         cart: cartReducer,
+        adminBusiness: adminBusinessReducer,
         [userApi.reducerPath]: userApi.reducer,
         [productApi.reducerPath]: productApi.reducer,
         [orderApi.reducerPath]: orderApi.reducer,
@@ -39,4 +41,3 @@ const store = configureStore({
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
