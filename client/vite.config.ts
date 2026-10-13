@@ -48,29 +48,40 @@ export default defineConfig(({ mode }) => {
                   }
                 }
 
-                // Read request body
-                const bodyChunks: any[] = []
-                req.on('data', (chunk) => bodyChunks.push(chunk))
-                req.on('end', async () => {
-                  const rawBody = Buffer.concat(bodyChunks).toString()
+                // Execute handler helper
+                const runHandler = async (rawBody: string) => {
                   if (rawBody) {
                     try {
-                      ; (req as any).body = JSON.parse(rawBody)
+                      ;(req as any).body = JSON.parse(rawBody)
                     } catch (e) {
-                      ; (req as any).body = rawBody
+                      ;(req as any).body = rawBody
                     }
                   } else {
-                    ; (req as any).body = ''
+                    ;(req as any).body = ''
                   }
                   try {
                     await apiHandler(req, res)
                   } catch (err: any) {
                     console.error('API Error in dev middleware:', err)
-                    res
-                      .status(500)
-                      .json({ success: false, message: err.message || 'Internal Server Error' })
+                    if (!res.headersSent) {
+                      res
+                        .status(500)
+                        .json({ success: false, message: err.message || 'Internal Server Error' })
+                    }
                   }
-                })
+                }
+
+                // If request has no body (GET/HEAD) or stream is already complete, run directly
+                if (req.method === 'GET' || req.method === 'HEAD' || (req as any).readableEnded || (req as any).complete) {
+                  await runHandler('')
+                } else {
+                  const bodyChunks: any[] = []
+                  req.on('data', (chunk) => bodyChunks.push(chunk))
+                  req.on('end', async () => {
+                    const rawBody = Buffer.concat(bodyChunks).toString()
+                    await runHandler(rawBody)
+                  })
+                }
               } catch (err) {
                 console.error('Failed to load API module:', err)
                 next()

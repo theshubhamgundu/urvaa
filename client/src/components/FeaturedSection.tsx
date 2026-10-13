@@ -74,6 +74,18 @@ const FeaturedSection: React.FC = () => {
         const imgSrc = banner.imageUrl || defaultHeroBanners[0].imageUrl;
         const mobileSrc = banner.mobileImageUrl || imgSrc;
 
+        const slideContent = (
+          <picture className="block h-full w-full">
+            <source media="(max-width: 640px)" srcSet={mobileSrc} />
+            <img
+              src={imgSrc}
+              alt={banner.title || 'URVA rural products banner'}
+              className="h-full w-full object-cover object-center"
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+            />
+          </picture>
+        );
+
         return (
           <div
             key={banner.id || index}
@@ -81,56 +93,13 @@ const FeaturedSection: React.FC = () => {
               }`}
             aria-hidden={!isCurrent}
           >
-            {/* Responsive Picture */}
-            <picture>
-              <source media="(max-width: 640px)" srcSet={mobileSrc} />
-              <img
-                src={imgSrc}
-                alt={banner.title || 'URVA rural products'}
-                className="h-full w-full object-cover object-center"
-                fetchPriority={index === 0 ? 'high' : 'auto'}
-              />
-            </picture>
-
-            {/* Subtle Gradient Overlays for High-Contrast Text Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-
-            {/* Overlay Content */}
-            <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 md:p-16 max-w-4xl z-20">
-              {banner.badge && (
-                <div className="mb-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-neutral-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E57A22]" />
-                    {banner.badge}
-                  </span>
-                </div>
-              )}
-
-              {banner.title && (
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight sm:leading-tight mb-2 drop-shadow-md">
-                  {banner.title}
-                </h2>
-              )}
-
-              {banner.subtitle && (
-                <p className="text-xs sm:text-sm md:text-base text-neutral-200 line-clamp-2 sm:line-clamp-3 max-w-2xl mb-6 font-normal drop-shadow-sm">
-                  {banner.subtitle}
-                </p>
-              )}
-
-              {banner.linkUrl && (
-                <div>
-                  <Link
-                    to={banner.linkUrl}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white hover:bg-neutral-100 text-[#111111] text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-                  >
-                    <span>{banner.buttonText || 'Explore Now'}</span>
-                    <span>&rarr;</span>
-                  </Link>
-                </div>
-              )}
-            </div>
+            {banner.linkUrl ? (
+              <Link to={banner.linkUrl} className="block h-full w-full cursor-pointer" tabIndex={isCurrent ? 0 : -1}>
+                {slideContent}
+              </Link>
+            ) : (
+              slideContent
+            )}
           </div>
         );
       })}

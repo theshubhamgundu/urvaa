@@ -1,8 +1,12 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://nyydjisfdavwokfawrhr.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_T5w5cXt7kZ1ExWgnaF69Lg_zI-MJEMG';
@@ -474,9 +478,11 @@ function mapBanner(row) {
   };
 }
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 // Convert camelCase banner data to Supabase snake_case format
 function formatBannerForDB(banner) {
-  return {
+  const row = {
     type: banner.type || 'hero',
     title: banner.title || '',
     subtitle: banner.subtitle || '',
@@ -493,18 +499,26 @@ function formatBannerForDB(banner) {
     is_active: banner.isActive !== false && banner.is_active !== false,
     updated_at: new Date().toISOString(),
   };
+  if (banner.id && UUID_REGEX.test(banner.id)) {
+    row.id = banner.id;
+  }
+  return row;
 }
 
 // Read fallback banners from JSON file or memory
 function getLocalFallbackBanners() {
   try {
-    const paths = [
+    const candidatePaths = [
+      path.resolve(__dirname, 'data/store_banners.json'),
       path.resolve(process.cwd(), 'api/data/store_banners.json'),
+      path.resolve(process.cwd(), '../api/data/store_banners.json'),
+      path.resolve(process.cwd(), 'client/src/data/store_banners.json'),
       path.resolve(process.cwd(), 'scratch/store_banners.json'),
     ];
-    for (const bannerPath of paths) {
+    for (const bannerPath of candidatePaths) {
       if (fs.existsSync(bannerPath)) {
-        const data = JSON.parse(fs.readFileSync(bannerPath, 'utf8'));
+        const raw = fs.readFileSync(bannerPath, 'utf8');
+        const data = JSON.parse(raw);
         if (Array.isArray(data) && data.length > 0) return data;
       }
     }
@@ -517,10 +531,18 @@ function getLocalFallbackBanners() {
 // Save fallback banners to JSON file
 function saveLocalFallbackBanners(banners) {
   try {
-    const bannerPath = path.resolve(process.cwd(), 'api/data/store_banners.json');
-    const dir = path.dirname(bannerPath);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(bannerPath, JSON.stringify(banners, null, 2), 'utf8');
+    const candidateDirs = [
+      path.resolve(__dirname, 'data'),
+      path.resolve(process.cwd(), 'api/data'),
+      path.resolve(process.cwd(), '../api/data'),
+    ];
+    for (const dir of candidateDirs) {
+      try {
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        const filePath = path.join(dir, 'store_banners.json');
+        fs.writeFileSync(filePath, JSON.stringify(banners, null, 2), 'utf8');
+      } catch (inner) {}
+    }
   } catch (e) {
     console.warn('Fallback banner file write error:', e.message);
   }
@@ -551,8 +573,8 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Serve cached GET response if less than 30 seconds old
-  if (req.method === 'GET' && global.fastApiCache.has(url)) {
+  // Serve cached GET response if less than 30 seconds old (never cache admin routes)
+  if (req.method === 'GET' && !url.includes('/admin/') && global.fastApiCache.has(url)) {
     const cached = global.fastApiCache.get(url);
     if (Date.now() - cached.timestamp < 30000) {
       return res.status(200).json(cached.body);
@@ -2215,15 +2237,25 @@ export default async function handler(req, res) {
     // ─── ADMIN: Seed / Reset Default Banners ───
     if (url.includes('/api/v1/admin/banners/seed-defaults') && req.method === 'POST') {
       const defaultBanners = getLocalFallbackBanners();
+      const seeded = [];
       try {
+        // Clear all banners from DB
+        await supabase.from('store_banners').delete().neq('id', '00000000-0000-0000-0000-000000000000');
         for (const b of defaultBanners) {
           const dbRow = formatBannerForDB(b);
-          await supabase.from('store_banners').upsert(dbRow, { onConflict: 'id' });
+          delete dbRow.id; // allow clean auto-generated UUID
+          const { data, error } = await supabase.from('store_banners').insert(dbRow).select();
+          if (!error && data && data[0]) {
+            seeded.push(mapBanner(data[0]));
+          }
         }
       } catch (e) {
         console.warn('DB seed warning:', e.message);
       }
-      return res.status(200).json({ success: true, message: 'Default campaigns seeded successfully', banners: defaultBanners });
+      const finalBanners = seeded.length > 0 ? seeded : defaultBanners;
+      saveLocalFallbackBanners(finalBanners);
+      if (global.fastApiCache) global.fastApiCache.clear();
+      return res.status(200).json({ success: true, message: 'Default campaigns seeded successfully', banners: finalBanners });
     }
 
     // ─── ADMIN: Toggle Banner Status (Active/Inactive) ───
@@ -2240,7 +2272,9 @@ export default async function handler(req, res) {
           const { data } = await supabase.from('store_banners').update({ is_active: newStatus, updated_at: new Date().toISOString() }).eq('id', bannerId).select().single();
           if (data) updatedBanner = mapBanner(data);
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn('DB toggle warning:', e.message);
+      }
 
       // 2. Fallback local file update
       const localList = getLocalFallbackBanners();
@@ -2259,9 +2293,7 @@ export default async function handler(req, res) {
     // ─── ADMIN: Create Store Banner ───
     if (url.match(/\/api\/v1\/admin\/banners(\?.*)?$/) && req.method === 'POST') {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
-      const bannerId = body.id || `banner_${Date.now()}`;
       const newBanner = {
-        id: bannerId,
         type: body.type || 'hero',
         title: body.title || 'Untitled Banner',
         subtitle: body.subtitle || '',
@@ -2283,12 +2315,16 @@ export default async function handler(req, res) {
       // 1. Try Supabase
       try {
         const dbPayload = formatBannerForDB(newBanner);
+        delete dbPayload.id; // let Supabase auto-generate UUID
         const { data, error } = await supabase.from('store_banners').insert(dbPayload).select().single();
         if (!error && data) {
           newBanner.id = data.id;
+        } else {
+          newBanner.id = crypto.randomUUID();
         }
       } catch (dbErr) {
         console.warn('DB insert banner warning:', dbErr.message);
+        newBanner.id = crypto.randomUUID();
       }
 
       // 2. Persist to local fallback cache
@@ -2309,6 +2345,7 @@ export default async function handler(req, res) {
       // 1. Try Supabase
       try {
         const dbPayload = formatBannerForDB(body);
+        delete dbPayload.id;
         const { data, error } = await supabase.from('store_banners').update(dbPayload).eq('id', bannerId).select().single();
         if (!error && data) {
           updatedBanner = mapBanner(data);
@@ -2342,7 +2379,9 @@ export default async function handler(req, res) {
       // 1. Try Supabase
       try {
         await supabase.from('store_banners').delete().eq('id', bannerId);
-      } catch (e) {}
+      } catch (e) {
+        console.warn('DB delete banner warning:', e.message);
+      }
 
       // 2. Local fallback update
       let localList = getLocalFallbackBanners();
