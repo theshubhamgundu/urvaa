@@ -269,7 +269,7 @@ async function handleOrderSuccess(orderId) {
 
           <!-- Footer Notes -->
           <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
-            <p style="margin: 0 0 5px 0;">If you have any questions, contact support at +91 7304888197 or pranita311096@gmail.com.</p>
+            <p style="margin: 0 0 5px 0;">If you have any questions, contact support at +91 9494957576 or urvaaofficial@gmail.com.</p>
             <p style="margin: 0;">© ${new Date().getFullYear()} URVA. All rights reserved.</p>
           </div>
 

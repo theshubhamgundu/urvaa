@@ -731,7 +731,7 @@ const ProductDetails: React.FC = () => {
 
               {/* Direct WhatsApp Support */}
               <a
-                href={`https://wa.me/917304888197?text=${encodeURIComponent(
+                href={`https://wa.me/919494957576?text=${encodeURIComponent(
                   `Hi URVA, I am interested in ordering "${resolvedProduct.name}" (${selectedVariety?.label || 'Pack'}). Can you assist?`
                 )}`}
                 target="_blank"
