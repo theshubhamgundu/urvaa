@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FeaturedSection from '../components/FeaturedSection';
-import FestivalCampaignSection from '../components/home/FestivalCampaignSection';
 import ShopByCategory from '../components/ShopByCategory';
 import PopularProducts from '../components/PopularProduct';
 import CommunityGallery from '../components/CommunityGallery';
@@ -44,10 +43,7 @@ const HomePage: React.FC = () => {
       {/* ─── 1. Hero Carousel (Dynamic Admin Managed) ─── */}
       <FeaturedSection />
 
-      {/* ─── 2. Festival & Seasonal Campaign Banner (Dynamic Admin Managed) ─── */}
-      <FestivalCampaignSection />
-
-      {/* ─── 3. Shop by Category (Round E-Commerce Categories) ─── */}
+      {/* ─── 2. Shop by Category (Round E-Commerce Categories) ─── */}
       <ShopByCategory />
 
       {/* ─── 4. Best Sellers (Popular Products) ─── */}
