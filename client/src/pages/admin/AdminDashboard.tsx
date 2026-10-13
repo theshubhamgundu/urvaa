@@ -13,7 +13,8 @@ import {
   FaPlus, 
   FaExclamationTriangle, 
   FaExternalLinkAlt, 
-  FaArrowRight 
+  FaArrowRight,
+  FaImage
 } from 'react-icons/fa';
 
 const AdminDashboard: React.FC = () => {
@@ -52,11 +53,11 @@ const AdminDashboard: React.FC = () => {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#1a2e1d',
-        titleFont: { family: 'Plus Jakarta Sans', size: 13, weight: 'bold' as const },
-        bodyFont: { family: 'Plus Jakarta Sans', size: 12 },
+        backgroundColor: '#111111',
+        titleFont: { family: 'Plus Jakarta Sans', size: 12, weight: 'bold' as const },
+        bodyFont: { family: 'Plus Jakarta Sans', size: 11 },
         padding: 12,
-        cornerRadius: 10,
+        cornerRadius: 8,
         displayColors: false,
         callbacks: {
           label: (context: any) => ` ₹${Number(context.raw || 0).toLocaleString('en-IN')}`,
@@ -66,13 +67,13 @@ const AdminDashboard: React.FC = () => {
     scales: {
       x: {
         grid: { display: false },
-        ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#888' }
+        ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#9CA3AF' }
       },
       y: {
-        grid: { color: '#efe9db' },
+        grid: { color: '#F3F4F6' },
         ticks: {
           font: { family: 'Plus Jakarta Sans', size: 11 },
-          color: '#888',
+          color: '#9CA3AF',
           callback: (value: any) => `₹${value}`
         }
       }
@@ -91,15 +92,15 @@ const AdminDashboard: React.FC = () => {
           label: 'Revenue',
           data: Object.values(rawData),
           fill: true,
-          backgroundColor: 'rgba(199, 154, 86, 0.12)',
-          borderColor: '#C79A56',
-          borderWidth: 3,
-          pointBackgroundColor: '#185e33',
+          backgroundColor: 'rgba(17, 17, 17, 0.04)',
+          borderColor: '#111111',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#111111',
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
-          pointRadius: 5,
-          pointHoverRadius: 7,
-          tension: 0.35,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.3,
         },
       ],
     };
@@ -116,7 +117,7 @@ const AdminDashboard: React.FC = () => {
       datasets: [
         {
           data,
-          backgroundColor: ['#185e33', '#C79A56', '#e07a5f', '#3d5a80'],
+          backgroundColor: ['#111111', '#525252', '#A3A3A3', '#E57A22'],
           borderWidth: 2,
           borderColor: '#ffffff',
         },
@@ -132,7 +133,7 @@ const AdminDashboard: React.FC = () => {
         position: 'bottom' as const,
         labels: {
           font: { family: 'Plus Jakarta Sans', size: 11 },
-          color: '#333',
+          color: '#4B5563',
           padding: 14,
           usePointStyle: true,
         }
@@ -143,18 +144,18 @@ const AdminDashboard: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="loader"></div>
+        <div className="w-8 h-8 border-2 border-neutral-900 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="bg-white p-8 rounded-3xl border border-[#efe9db] text-center shadow-sm max-w-md mx-auto my-12">
-        <p className="text-red-500 font-semibold mb-2">Error loading dashboard statistics.</p>
+      <div className="bg-white p-8 rounded-3xl border border-neutral-200 text-center shadow-xs max-w-md mx-auto my-12 font-sans">
+        <p className="text-red-600 font-semibold mb-2 text-sm">Error loading dashboard statistics.</p>
         <button
           onClick={() => refetch()}
-          className="bg-[#185e33] text-white px-5 py-2 rounded-xl text-xs font-bold shadow-md hover:bg-[#134b28] transition mt-2"
+          className="bg-neutral-900 text-white px-5 py-2 rounded-xl text-xs font-semibold shadow-xs hover:bg-neutral-800 transition mt-2"
         >
           Retry
         </button>
@@ -163,32 +164,38 @@ const AdminDashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-sans">
       {/* Top Banner & Quick Actions Bar */}
-      <div className="bg-gradient-to-r from-[#1a2e1d] to-[#25422a] text-white p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="relative z-10 space-y-1 max-w-xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C79A56]/20 border border-[#C79A56]/30 text-[#e4b97a] text-[11px] font-bold uppercase tracking-wider mb-2">
-            <span>🕯️ Store Operations Overview</span>
+      <div className="bg-[#111111] text-white p-6 md:p-8 rounded-3xl shadow-md border border-neutral-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="relative z-10 space-y-1.5 max-w-xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300 text-[10px] font-bold uppercase tracking-widest mb-1">
+            <span>Store Operations Console</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-serif font-bold text-white tracking-wide">
+          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
             URVA Marketplace
           </h1>
-          <p className="text-xs text-gray-300">
-            Monitor sales, manage product availability, and fulfill customer orders.
+          <p className="text-xs text-neutral-400">
+            Monitor real-time sales, manage catalog availability, and fulfill customer orders.
           </p>
         </div>
 
         {/* Quick Action Buttons */}
         <div className="relative z-10 flex flex-wrap items-center gap-2.5">
           <button
+            onClick={() => navigate('/admin/banners')}
+            className="flex items-center gap-2 bg-[#E57A22] hover:bg-[#d46d1a] text-white font-bold px-4 py-2.5 rounded-xl text-xs transition shadow-xs"
+          >
+            <FaImage /> Campaigns & Banners
+          </button>
+          <button
             onClick={() => navigate('/admin/products/new')}
-            className="flex items-center gap-2 bg-[#C79A56] hover:bg-[#b38543] text-gray-950 font-bold px-4 py-2.5 rounded-xl text-xs transition shadow-md"
+            className="flex items-center gap-2 bg-white hover:bg-neutral-150 text-neutral-950 font-bold px-4 py-2.5 rounded-xl text-xs transition shadow-xs"
           >
             <FaPlus /> Add Product
           </button>
           <button
             onClick={() => navigate('/admin/coupons')}
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition border border-white/15"
+            className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition border border-neutral-700"
           >
             <FaTicketAlt /> New Coupon
           </button>
@@ -196,14 +203,14 @@ const AdminDashboard: React.FC = () => {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition border border-white/15"
+            className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition border border-neutral-700"
           >
             <FaExternalLinkAlt /> Live Store
           </a>
         </div>
 
-        {/* Decorative background glow */}
-        <div className="absolute right-0 top-0 w-80 h-80 bg-[#C79A56]/10 rounded-full blur-3xl pointer-events-none"></div>
+        {/* Subtle decorative glow */}
+        <div className="absolute right-0 top-0 w-80 h-80 bg-neutral-800/40 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
       {/* Widgets section */}
@@ -212,52 +219,52 @@ const AdminDashboard: React.FC = () => {
           heading="Total Revenue" 
           value={`₹${(stats?.totalRevenue || 0).toLocaleString('en-IN')}`} 
           description="Gross lifetime revenue" 
-          icon={<FaRupeeSign className="text-lg" />}
-          accentClass="bg-[#C79A56]/15 text-[#C79A56]"
+          icon={<FaRupeeSign className="text-base" />}
+          accentClass="bg-neutral-100 text-neutral-900 border border-neutral-200"
         />
         <Widget 
           heading="Total Orders" 
           value={(stats?.totalOrders || 0).toLocaleString('en-IN')} 
           description="Customer orders placed" 
-          icon={<FaShoppingBag className="text-lg" />}
-          accentClass="bg-[#185e33]/15 text-[#185e33]"
+          icon={<FaShoppingBag className="text-base" />}
+          accentClass="bg-neutral-100 text-neutral-900 border border-neutral-200"
         />
         <Widget 
           heading="Active Coupons" 
           value={(stats?.totalCoupons || 0).toLocaleString('en-IN')} 
           description="Available promo codes" 
-          icon={<FaTicketAlt className="text-lg" />}
-          accentClass="bg-purple-50 text-purple-700"
+          icon={<FaTicketAlt className="text-base" />}
+          accentClass="bg-neutral-100 text-neutral-900 border border-neutral-200"
         />
         <Widget 
           heading="Total Products" 
           value={(productsData?.products?.length || stats?.totalProducts || 0).toLocaleString('en-IN')} 
-          description="Products in catalog"
-          icon={<FaBoxes className="text-lg" />}
-          accentClass="bg-emerald-50 text-emerald-700"
+          description="Catalog inventory"
+          icon={<FaBoxes className="text-base" />}
+          accentClass="bg-neutral-100 text-neutral-900 border border-neutral-200"
         />
       </section>
 
       {/* Low Stock Alert Notification Banner if any */}
       {lowStockProducts.length > 0 && (
-        <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-5 shadow-sm">
+        <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-5 shadow-2xs">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg shrink-0">
                 <FaExclamationTriangle />
               </div>
               <div>
-                <h3 className="font-bold text-amber-900 text-sm">
+                <h3 className="font-bold text-amber-900 text-xs">
                   Low Stock Alert ({lowStockProducts.length} items need restock)
                 </h3>
-                <p className="text-xs text-amber-700 mt-0.5">
-                  Some products are running low (&lt; 10 units).
+                <p className="text-[11px] text-amber-700 mt-0.5">
+                  Some products are running low (&lt; 10 units in catalog).
                 </p>
               </div>
             </div>
             <button
               onClick={() => navigate('/admin/products')}
-              className="text-xs font-bold bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl transition shadow-sm"
+              className="text-xs font-semibold bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl transition shadow-2xs"
             >
               Manage Inventory
             </button>
@@ -266,10 +273,10 @@ const AdminDashboard: React.FC = () => {
             {lowStockProducts.slice(0, 5).map((p) => (
               <span
                 key={p._id}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-amber-200 text-gray-800 font-medium shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-amber-200 text-neutral-800 font-medium shrink-0 text-[11px]"
               >
                 <span>{p.name}:</span>
-                <span className="font-bold text-amber-600">{p.stock} left</span>
+                <span className="font-bold text-amber-700">{p.stock} left</span>
               </span>
             ))}
             {lowStockProducts.length > 5 && (
@@ -283,13 +290,13 @@ const AdminDashboard: React.FC = () => {
 
       {/* Charts section */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-3xl border border-[#efe9db] shadow-sm lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#efe9db] pb-4">
+        <div className="bg-white p-6 rounded-3xl border border-neutral-200 shadow-2xs lg:col-span-2 space-y-4">
+          <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
             <div>
-              <h3 className="text-base font-serif font-bold text-[#185e33]">Revenue Performance</h3>
-              <p className="text-xs text-gray-400">Monthly gross earnings overview</p>
+              <h3 className="text-sm font-bold text-neutral-900">Revenue Performance</h3>
+              <p className="text-xs text-neutral-500">Monthly gross sales overview</p>
             </div>
-            <span className="text-xs font-bold text-[#C79A56] bg-[#C79A56]/10 px-2.5 py-1 rounded-full">
+            <span className="text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-1 rounded-full border border-neutral-200">
               Annual Overview
             </span>
           </div>
@@ -298,10 +305,10 @@ const AdminDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-[#efe9db] shadow-sm space-y-4">
-          <div className="border-b border-[#efe9db] pb-4">
-            <h3 className="text-base font-serif font-bold text-[#185e33]">Order Status Demographic</h3>
-            <p className="text-xs text-gray-400">Distribution by fulfillment status</p>
+        <div className="bg-white p-6 rounded-3xl border border-neutral-200 shadow-2xs space-y-4">
+          <div className="border-b border-neutral-100 pb-4">
+            <h3 className="text-sm font-bold text-neutral-900">Order Status Demographic</h3>
+            <p className="text-xs text-neutral-500">Distribution by fulfillment status</p>
           </div>
           <div className="h-[240px] flex items-center justify-center relative">
             <Doughnut data={doughnutData} options={doughnutOptions} />
@@ -310,28 +317,28 @@ const AdminDashboard: React.FC = () => {
       </section>
 
       {/* Latest Orders section */}
-      <section className="bg-white p-6 rounded-3xl border border-[#efe9db] shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-[#efe9db] pb-4">
+      <section className="bg-white p-6 rounded-3xl border border-neutral-200 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
           <div>
-            <h2 className="text-lg font-serif font-bold text-[#185e33]">Latest Customer Orders</h2>
-            <p className="text-xs text-gray-400">Recent purchases needing processing or dispatch</p>
+            <h2 className="text-base font-bold text-neutral-900">Latest Customer Orders</h2>
+            <p className="text-xs text-neutral-500">Recent purchases needing processing or dispatch</p>
           </div>
           <Link 
             to="/admin/orders" 
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#185e33] hover:text-[#C79A56] transition"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 hover:text-neutral-600 transition"
           >
             View All Orders <FaArrowRight className="text-[10px]" />
           </Link>
         </div>
 
         {(!stats?.latestOrders || stats.latestOrders.length === 0) ? (
-          <div className="text-center py-10 text-gray-400 text-xs">
+          <div className="text-center py-10 text-neutral-400 text-xs">
             No recent orders placed yet.
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[#efe9db] text-left text-xs">
-              <thead className="bg-[#faf6ee] text-gray-500 uppercase tracking-wider text-[10px]">
+            <table className="min-w-full divide-y divide-neutral-100 text-left text-xs">
+              <thead className="bg-neutral-50 text-neutral-500 uppercase tracking-wider text-[10px] font-semibold">
                 <tr>
                   <th className="px-5 py-3">Order ID</th>
                   <th className="px-5 py-3">Date</th>
@@ -341,30 +348,30 @@ const AdminDashboard: React.FC = () => {
                   <th className="px-5 py-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#efe9db] bg-white">
+              <tbody className="divide-y divide-neutral-100 bg-white">
                 {stats.latestOrders.slice(0, 5).map((order) => (
-                  <tr key={order._id} className="hover:bg-[#faf6ee]/40 transition-colors">
-                    <td className="px-5 py-3.5 font-mono font-bold text-gray-800">
+                  <tr key={order._id} className="hover:bg-neutral-50/70 transition-colors">
+                    <td className="px-5 py-3.5 font-mono font-semibold text-neutral-900 text-xs">
                       #{order._id ? order._id.slice(0, 8) : 'N/A'}
                     </td>
-                    <td className="px-5 py-3.5 text-gray-500">
+                    <td className="px-5 py-3.5 text-neutral-500">
                       {order.createdAt ? dayjs(order.createdAt).format('DD MMM YYYY') : 'Recent'}
                     </td>
                     <td className="px-5 py-3.5">
-                      <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${getStatusBadge(order.status)}`}>
+                      <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${getStatusBadge(order.status)}`}>
                         {order.status}
                       </span>
                     </td>
-                    <td className="px-5 py-3.5 text-gray-700 font-medium">
+                    <td className="px-5 py-3.5 text-neutral-700 font-medium">
                       {order.orderItems?.length || 1} items
                     </td>
-                    <td className="px-5 py-3.5 font-bold text-[#185e33]">
+                    <td className="px-5 py-3.5 font-bold text-neutral-900">
                       ₹{Number(order.total || 0).toFixed(2)}
                     </td>
                     <td className="px-5 py-3.5 text-right">
                       <button
                         onClick={() => navigate(`/admin/orders/${order._id}`)}
-                        className="px-3 py-1 rounded-lg bg-[#faf6ee] hover:bg-[#ede3cf] text-[#185e33] font-bold text-xs border border-[#ede3cf] transition"
+                        className="px-3 py-1 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-semibold text-xs border border-neutral-200 transition"
                       >
                         Details
                       </button>
@@ -390,13 +397,13 @@ interface WidgetProps {
 }
 
 const Widget: React.FC<WidgetProps> = ({ heading, value, description, icon, accentClass }) => (
-  <div className="bg-white p-5 rounded-2xl border border-[#efe9db] shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group">
+  <div className="bg-white p-5 rounded-2xl border border-neutral-200 shadow-2xs hover:shadow-xs transition-all duration-200 flex items-center justify-between group">
     <div className="space-y-1">
-      <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{heading}</h3>
-      <p className="text-2xl font-bold font-serif text-gray-900 tracking-tight">{value}</p>
-      <p className="text-[11px] text-gray-500">{description}</p>
+      <h3 className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">{heading}</h3>
+      <p className="text-2xl font-bold text-neutral-900 tracking-tight">{value}</p>
+      <p className="text-[11px] text-neutral-500">{description}</p>
     </div>
-    <div className={`p-3.5 rounded-2xl ${accentClass} transition-transform duration-200 group-hover:scale-110 shadow-xs`}>
+    <div className={`p-3 rounded-xl ${accentClass} transition-transform duration-200 group-hover:scale-105`}>
       {icon}
     </div>
   </div>

@@ -38,36 +38,36 @@ const ProfilePage: React.FC = () => {
                 <img
                   src={user.photoURL}
                   alt={user.name || 'User Profile'}
-                  className="h-24 w-24 rounded-full object-cover shadow-md border-2 border-[#185e33]"
+                  className="h-20 w-20 rounded-full object-cover shadow-xs border border-neutral-200"
                   onError={(e) => {
                     (e.target as HTMLElement).style.display = 'none';
                   }}
                 />
               ) : (
-                <div className="h-24 w-24 rounded-full bg-[#185e33] text-white text-3xl font-bold flex items-center justify-center shadow-md">
+                <div className="h-20 w-20 rounded-full bg-black text-white text-2xl font-bold flex items-center justify-center shadow-xs">
                   {getInitial(user.name)}
                 </div>
               )}
             </div>
 
             {/* User Info */}
-            <h1 className="text-2xl font-bold text-[#185e33] mb-1 font-serif">
+            <h1 className="text-xl font-sans font-semibold text-[#111111] mb-1">
               {user.name || 'URVA Customer'}
             </h1>
-            <p className="text-gray-500 text-sm mb-6 font-medium">{user.email}</p>
+            <p className="text-neutral-500 text-xs mb-6 font-normal">{user.email}</p>
 
             {/* Quick Action Buttons */}
-            <div className="space-y-3 pt-2 border-t border-gray-100">
+            <div className="space-y-2.5 pt-2 border-t border-neutral-100">
               <Link
                 to="/my-orders"
-                className="w-full bg-[#faf6ee] hover:bg-[#ede3cf] text-[#185e33] font-bold py-3 px-4 rounded-xl text-sm transition-colors border border-[#ede3cf] flex items-center justify-center gap-2"
+                className="w-full bg-black hover:bg-neutral-800 text-white font-medium py-3 px-4 rounded-lg text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
               >
                 📦 View My Orders
               </Link>
 
               <button
                 onClick={handleLogout}
-                className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-3 px-4 rounded-xl text-sm transition-colors border border-red-200"
+                className="w-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-medium py-2.5 px-4 rounded-lg text-xs uppercase tracking-wider transition-colors"
               >
                 Sign Out
               </button>
@@ -75,10 +75,10 @@ const ProfilePage: React.FC = () => {
           </div>
         ) : (
           <div className="py-6">
-            <p className="text-gray-600 text-sm mb-4">You are not logged in.</p>
+            <p className="text-neutral-500 text-xs mb-4">You are not logged in.</p>
             <Link
               to="/auth"
-              className="inline-block bg-[#185e33] text-white font-bold py-2.5 px-6 rounded-full text-sm hover:bg-[#134b28] transition-colors shadow-md"
+              className="inline-block bg-black text-white font-medium py-2.5 px-6 rounded-lg text-xs uppercase tracking-wider hover:bg-neutral-800 transition-colors shadow-xs"
             >
               Sign In to Your Account
             </Link>

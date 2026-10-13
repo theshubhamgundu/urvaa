@@ -2,89 +2,104 @@ import React from 'react';
 
 const customerReviews = [
   {
-    name: 'Lakshmi Devi',
+    name: 'Amulya Devi',
     location: 'Rajahmundry, Andhra Pradesh',
     metric: 'Regional Foods',
-    review: 'Loved exploring Andhra foods. The groundnut oil details were helpful.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389816/julina_candles/avatars/Amulaya.webp',
+    review: 'Loved exploring Andhra foods. The wood-pressed groundnut oil details were truly authentic.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914048/urvaa/avatars/Amulya.webp',
   },
   {
-    name: 'Sai Charan',
+    name: 'Ajay Reddy',
     location: 'Vijayawada, Andhra Pradesh',
     metric: 'Eco-Friendly Finds',
-    review: 'The areca leaf plates are perfect for family get-togethers.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389815/julina_candles/avatars/Ajay_Reddy.webp',
+    review: 'The areca leaf plates are perfect for family get-togethers. Very sturdy and eco-friendly.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914049/urvaa/avatars/Ajay_Reddy.webp',
   },
   {
-    name: 'Venkata Rao',
+    name: 'Shridhar Reddy',
     location: 'Kadiyam, Andhra Pradesh',
     metric: 'Garden & Nursery',
-    review: 'Happy to find Kadiyam plants alongside other local specialties.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389829/julina_candles/avatars/Shridhar_Reddy.webp',
+    review: 'Happy to find Kadiyam plants alongside other local specialties delivered safely.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914050/urvaa/avatars/Shridhar_Reddy.webp',
   },
   {
-    name: 'Harika Reddy',
+    name: 'Bhargavi Reddy',
     location: 'Visakhapatnam, Andhra Pradesh',
     metric: 'Everyday Essentials',
-    review: 'The wooden spoons are useful for everyday cooking and gifting.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389821/julina_candles/avatars/Bhargavi.webp',
+    review: 'The neem wooden spoons are useful for everyday cooking and gifting. Lovely finish.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914051/urvaa/avatars/Bhargavi.webp',
   },
   {
-    name: 'Naga Jyothi',
+    name: 'Avinash Varma',
     location: 'Araku Valley, Andhra Pradesh',
     metric: 'Regional Discoveries',
-    review: 'I love discovering products and stories from Andhra Pradesh.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389818/julina_candles/avatars/Avinash.webp',
+    review: 'I love discovering authentic rural products and stories from tribal communities.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914053/urvaa/avatars/Avinash.webp',
   },
   {
-    name: 'Srinivas Kumar',
+    name: 'Harshini Katta',
     location: 'Kakinada, Andhra Pradesh',
     metric: 'Regional Foods',
-    review: 'The regional foods are easy to browse, with clear product details.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389823/julina_candles/avatars/Harshini_katta.webp',
+    review: 'The regional foods are easy to browse, with authentic taste and clear farm details.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914054/urvaa/avatars/Harshini_Katta.webp',
   },
   {
-    name: 'P. Sravani',
+    name: 'Sai Kiran',
     location: 'Tirupati, Andhra Pradesh',
     metric: 'Thoughtful Gifting',
-    review: 'A lovely place to find regional goods and thoughtful gifts.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389828/julina_candles/avatars/Sai_Kiran.webp',
+    review: 'A wonderful place to find regional handloom goods and meaningful festive gifts.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914055/urvaa/avatars/Sai_Kiran.webp',
   },
   {
-    name: 'Ravi Teja',
+    name: 'Suma Latha',
     location: 'Guntur, Andhra Pradesh',
     metric: 'Eco-Friendly Finds',
-    review: 'Found great reusable kitchenware, and the product layout is simple.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389831/julina_candles/avatars/Suma.webp',
+    review: 'Found great reusable kitchenware, and the clay and wood products are superb.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914056/urvaa/avatars/Suma.webp',
   },
   {
-    name: 'Anusha',
+    name: 'Prafful Kumar',
     location: 'Eluru, Andhra Pradesh',
     metric: 'Local Products',
-    review: 'I enjoy discovering products from communities across our region.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389827/julina_candles/avatars/Prafful.webp',
+    review: 'I enjoy discovering genuine village products directly supporting our local artisans.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914056/urvaa/avatars/Prafful.webp',
   },
   {
-    name: 'Bhavani',
+    name: 'Pavani S.',
     location: 'Srikakulam, Andhra Pradesh',
     metric: 'Regional Discoveries',
-    review: 'Regional specialties and eco-friendly everyday products in one place.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389826/julina_candles/avatars/Pavani.webp',
+    review: 'Regional specialties and eco-friendly everyday products delivered right to our doorstep.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914057/urvaa/avatars/Pavani.webp',
   },
   {
-    name: 'Madhavi',
+    name: 'Jalender Rao',
     location: 'Ongole, Andhra Pradesh',
     metric: 'Everyday Essentials',
-    review: 'Loved finding groundnut oil and eco-friendly kitchen essentials together.',
-    avatar: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389824/julina_candles/avatars/Jalender.webp',
+    review: 'Loved finding pure wood pressed oils and rural kitchen essentials in one trusted store.',
+    avatar: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791914058/urvaa/avatars/Jalender.webp',
   },
 ];
 
 const CustomerTestimonials: React.FC = () => (
   <section
     aria-labelledby="customer-testimonials-heading"
-    className="w-full overflow-hidden border-y border-[#E6DACB] bg-[#FBF6ED] py-8 sm:py-10 md:py-12"
+    className="w-full overflow-hidden border-t border-neutral-200 bg-white py-12 md:py-16"
   >
+    <div className="mx-auto mb-8 max-w-7xl px-4 text-center sm:mb-10 sm:px-6">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400 block mb-1.5">
+        VOICES OF URVA
+      </span>
+      <h2
+        id="customer-testimonials-heading"
+        className="font-sans text-2xl font-semibold tracking-tight text-[#111111] sm:text-3xl"
+      >
+        Loved by Customers Across India
+      </h2>
+      <p className="mt-2 text-xs md:text-sm text-neutral-500 max-w-lg mx-auto">
+        Real experiences from patrons cherishing genuine rural craftsmanship and regional flavors.
+      </p>
+    </div>
+
     <div className="overflow-hidden">
       <div className="animate-marquee">
         {[0, 1].map((copy) => (
@@ -96,30 +111,30 @@ const CustomerTestimonials: React.FC = () => (
             {customerReviews.map((customer) => (
               <article
                 key={`${copy}-${customer.name}`}
-                className="flex w-[min(270px,calc(100vw-2rem))] shrink-0 flex-col justify-between rounded-2xl border border-[#E6DACB] bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:w-[300px] sm:p-5 md:w-[340px]"
+                className="flex w-[min(270px,calc(100vw-2rem))] shrink-0 flex-col justify-between rounded-xl border border-neutral-200 bg-[#FAFAFA] p-5 shadow-xs transition-shadow hover:shadow-sm sm:w-[300px] md:w-[340px]"
               >
                 <div className="min-w-0">
-                  <span className="mb-3 inline-block rounded-md bg-[#178A4B]/10 px-2.5 py-1 text-[10px] font-semibold text-[#17643B] sm:text-[11px]">
+                  <span className="mb-3 inline-block rounded-xs bg-black text-white px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider">
                     {customer.metric}
                   </span>
-                  <p className="line-clamp-3 w-full whitespace-normal break-words text-xs italic leading-relaxed text-gray-700 sm:text-sm">
+                  <p className="line-clamp-3 w-full whitespace-normal break-words text-xs italic leading-relaxed text-neutral-600 sm:text-sm">
                     “{customer.review}”
                   </p>
                 </div>
 
-                <div className="mt-3 flex min-w-0 items-center gap-3 border-t border-gray-100 pt-3">
+                <div className="mt-4 flex min-w-0 items-center gap-3 border-t border-neutral-200 pt-3">
                   <img
                     src={customer.avatar}
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    className="h-10 w-10 shrink-0 rounded-full border-2 border-[#C79A56] object-cover shadow-sm"
+                    className="h-10 w-10 shrink-0 rounded-full border border-neutral-200 object-cover"
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-xs font-bold leading-snug text-[#2A1C22]">
+                    <p className="truncate text-xs font-semibold leading-snug text-[#111111]">
                       {customer.name}
                     </p>
-                    <p className="truncate text-[10px] text-gray-500">
+                    <p className="truncate text-[10px] text-neutral-400">
                       {customer.location}
                     </p>
                   </div>

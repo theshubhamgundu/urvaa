@@ -1,155 +1,149 @@
 # URVA — Rural Products E-Commerce Platform
 
-**URVA — Delivering the Authentic Rural Aura** is a rural-products commerce brand built around “One Village – One Product.” Its planned collection spans regional foods, tribal-origin products, eco-friendly goods, Swadesi handlooms, and Kadiyam nursery plants. The platform provides product discovery, a shopping cart, checkout, order tracking, and an admin dashboard. Product sourcing, availability, and category content should be verified before publication.
+> **URVA — Delivering the Authentic Rural Aura**  
+> A high-performance rural commerce platform built around the *“One Village – One Product”* initiative. Showcases authentic regional foods, tribal-origin products, eco-friendly goods, Swadesi handlooms, and nursery plants directly to consumers across India.
 
 ---
 
-## 🌟 Key Features
+## 🏛️ System Architecture
+
+The project is structured as a streamlined full-stack application optimized for serverless edge deployment on **Vercel**:
+
+```
+├── api/                       # Vercel Serverless Function Endpoints
+│   ├── data/                  # Local fallback data persistence
+│   │   └── store_banners.json # Fallback banner configuration store
+│   └── index.js               # Unified Serverless REST API router
+│
+├── client/                    # Frontend React 18 + TypeScript Application
+│   ├── public/                # Static public assets (icons, manifests)
+│   ├── src/
+│   │   ├── assets/            # Local images, logos, and vector assets
+│   │   ├── components/        # Reusable UI components (Navbar, Footer, Cart, Checkout)
+│   │   ├── constants/         # Category definitions, navigation links
+│   │   ├── pages/             # Page views & Admin CMS Dashboard
+│   │   ├── redux/             # Redux Toolkit state slices & RTK Query APIs
+│   │   ├── types/             # TypeScript interfaces & domain models
+│   │   ├── utils/             # Cloudinary helpers, analytics, service worker utils
+│   │   ├── App.tsx            # Main application router & route boundaries
+│   │   └── main.tsx           # Application entry point
+│   ├── index.html             # HTML5 template with SEO meta tags & preconnects
+│   ├── vite.config.ts         # Vite build configuration with chunk splitting
+│   └── tsconfig.json          # TypeScript strict configuration
+│
+├── .env.example               # Root environment variable template
+├── package.json               # Monorepo root scripts & backend dependencies
+├── schema.sql                 # Canonical PostgreSQL schema & RLS policies
+└── vercel.json                # Vercel routing, rewrites & deployment spec
+```
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend** | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | Type-safe, component-driven user interface |
+| **Bundler** | [Vite](https://vitejs.dev/) | Lightning-fast HMR and optimized production bundling |
+| **State Management** | [Redux Toolkit](https://redux-toolkit.js.org/) | Global cart, user session, and modal state management |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first responsive design tokens |
+| **Backend API** | Node.js Serverless Functions | Serverless Express-compatible handler (`/api/*`) |
+| **Database** | [Supabase](https://supabase.com/) (PostgreSQL) | Managed relational database with Row Level Security |
+| **Media CDN** | [Cloudinary](https://cloudinary.com/) | Auto-formatting, image optimization & unsigned uploads |
+| **Payments** | [Razorpay](https://razorpay.com/) | UPI, Cards, NetBanking, and Wallets gateway integration |
+| **Hosting** | [Vercel](https://vercel.com/) | Edge network CDN hosting with zero-config serverless support |
+
+---
+
+## 🚀 Key Features
 
 ### 🛒 Customer Storefront
-- **Brand Introduction**: Homepage hero presents URVA’s “One Village – One Product” concept and links to the story and shop.
-- **Regional Category Discovery**: Five category cards introduce the planned URVA product areas.
-- **Product Showcase & Card Grid**:
-  - Elegant beige image containers (`#f3e9d4`) with product hover zoom effects.
-  - Premium discount badges (`20% OFF`, `30% OFF`).
-  - Scent type & size variant selector dropdowns (Small, Medium, Large).
-  - Single-click **Add to Cart** with quantity controls (`−`, `qty`, `+`).
-- **Regional Product Discovery**: Category-led browsing for regional specialties, foods, crafts, textiles, plants, and household goods.
-- **Responsive Footer**: Brand introduction, navigation, customer policies, and contact information.
-- **Typography & Theme**: Styled with modern Google Fonts (`Outfit` for headings, `Plus Jakarta Sans` for body) over a warm luxurious cream background (`#faf8f3`).
+- **High-Performance Architecture**: Native WebP/AVIF format auto-negotiation via Cloudinary, responsive image sets, script deferral, and aggressive bundle chunking.
+- **Dynamic Banners**: CMS-managed Hero carousel and mid-page promotional banners with automatic fallback resilience.
+- **Regional Discovery**: Category-based exploration for foods, textiles, tribal crafts, and plants.
+- **Variant Selector**: Dynamic size, scent, and pack variant selection with live inventory adjustments.
+- **Cart & Order Flow**: Instant quantity updates, coupon code engine, delivery tracking, and clean checkout modal.
 
-### 🔑 Authentication & Payments
-- **Firebase Authentication**: Google Sign-In & Email/Password authentication.
-- **Role-Based Access Control**: Dedicated Customer & Administrator privileges.
-- **Stripe Payment Gateway**: Secure checkout experience with real-time payment processing.
-
-### 📊 Admin Dashboard
-- **Product Management**: CRUD operations for managing product details, categories, options, pricing, and inventory.
-- **Order Management**: Track customer orders, update delivery statuses (Pending, Shipped, Delivered).
-- **Coupon & Discount Engine**: Create and apply custom promo codes during checkout.
-- **Sales Analytics & Reports**: Real-time sales metrics, revenue overview, and customer demographics powered by Chart.js.
+### ⚙️ Admin CMS Dashboard
+- **Collapsible Sidebar**: Clean, space-efficient administration layout with toggleable navigation.
+- **Banner & Media Manager**: Real-time management of storefront carousel slides, video spotlights, and promotional placements.
+- **Product Inventory**: Full CRUD capabilities for adding, updating, and categorizing catalog items.
+- **Order Processing**: Live order stream with status updates (`Pending`, `Processing`, `Shipped`, `Delivered`).
+- **Analytics & Demographics**: Sales overviews, top revenue categories, and monthly velocity charts.
 
 ---
 
-## 🔑 Demo Credentials
-
-For quick local testing and evaluation, you can use the following pre-configured credentials:
-
-| Role | Email | Password | Access Level |
-| :--- | :--- | :--- | :--- |
-| **Admin** | `admin@julinacandles.in` | `admin123` | Full Admin Dashboard (`/admin/dashboard`), Product Management, Orders, Coupons |
-| **Customer** | `customer@julinacandles.in` | `user123` | Customer Storefront, Cart, Checkout, Order History (`/orders`) |
-
-> 💡 **Tip**: The Sign-In page contains 1-click **Quick Demo Login** buttons that automatically populate and authenticate these credentials!
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Framework**: React 18 with TypeScript & Vite
-- **State Management**: Redux Toolkit & RTK Query
-- **Styling**: Tailwind CSS & Vanilla CSS Design Tokens
-- **Typography**: Google Fonts (`Outfit`, `Plus Jakarta Sans`)
-- **Icons**: React Icons (`FaFacebookF`, `FaInstagram`, `FaShoppingCart`, etc.)
-- **Router**: React Router v6
-
-### Backend
-- **Runtime**: Node.js & Express with TypeScript
-- **Database**: MongoDB with Mongoose ORM
-- **Auth**: Firebase Admin SDK & JWT Tokens
-- **File Storage**: Cloudinary API for high-resolution product media
-- **Payments**: Stripe API SDK
-
----
-
-## 🚀 Getting Started
+## 🏁 Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18+ recommended)
-- [MongoDB](https://www.mongodb.com/) (Local or MongoDB Atlas instance)
-- [Firebase Account](https://firebase.google.com/)
-- [Cloudinary Account](https://cloudinary.com/)
-- [Stripe Account](https://stripe.com/)
+- [Node.js](https://nodejs.org/) `>= 18.0.0`
+- [npm](https://www.npmjs.com/) `>= 9.0.0`
 
----
+### 1. Installation
 
-### Installation & Setup
+Clone the repository and install root dependencies:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/theshubhamgundu/vital_harvest.git
-   cd vital_harvest
-   ```
-
-2. **Install Backend Dependencies**:
-   ```bash
-   cd server
-   npm install
-   ```
-
-3. **Install Frontend Dependencies**:
-   ```bash
-   cd ../client
-   npm install
-   ```
-
----
-
-### Environment Configuration
-
-#### Server Environment (`server/.env`)
-Create a `.env` file in the `server` directory:
-
-```env
-PORT=4000
-MONGO_URI=mongodb://localhost:27017/vital_harvest
-JWT_SECRET=your_jwt_secret_key
-JWT_REFRESH_SECRET=your_jwt_refresh_secret_key
-ACCESS_TOKEN_EXPIRY=1d
-REFRESH_TOKEN_EXPIRY=7d
-
-# Cloudinary Configuration
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-
-# Stripe Configuration
-STRIPE_KEY=your_stripe_secret_key
+```bash
+git clone https://github.com/theshubhamgundu/urvaa.git
+cd urvaa
+npm install
+cd client && npm install && cd ..
 ```
 
-#### Client Environment (`client/.env`)
-Create a `.env` file in the `client` directory:
+### 2. Environment Variables
 
-```env
-VITE_SERVER=http://localhost:4000
-VITE_STRIPE_KEY=your_stripe_publishable_key
+Copy the provided `.env.example` templates to `.env`:
+
+```bash
+cp .env.example .env
+cp client/.env.example client/.env
 ```
 
----
+Configure your credentials in `.env`:
+- **Supabase**: Set `SUPABASE_URL` and `SUPABASE_ANON_KEY`
+- **Cloudinary**: Set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`
+- **Razorpay**: Set `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET`
 
-### Running Locally
+### 3. Database Initialization
 
-1. **Start Backend Server**:
-   ```bash
-   cd server
-   npm run dev
-   ```
+Execute the canonical schema script in your Supabase SQL Editor:
+1. Open your Supabase Dashboard -> **SQL Editor**.
+2. Copy and paste the contents of [`schema.sql`](./schema.sql).
+3. Run the query to create all tables (`products`, `orders`, `categories`, `coupons`, `store_banners`, etc.) and enable Row Level Security policies.
 
-2. **Start Frontend Client**:
-   ```bash
-   cd client
-   npm run dev
-   ```
+### 4. Running Locally
 
-3. Open your browser and navigate to **`http://localhost:5173`**.
+Start the development server:
 
----
+```bash
+npm run dev
+```
 
-## 📜 License
-
-This project is licensed under the MIT License.
+The application will be accessible at: **`http://localhost:5173`**
 
 ---
+
+## 📦 Scripts Reference
+
+| Command | Action |
+| :--- | :--- |
+| `npm run dev` | Starts the Vite development server with HMR |
+| `npm run build` | Runs TypeScript compiler checks (`tsc`) and compiles production assets |
+| `npm run lint` | Runs ESLint over the client source tree |
+
+---
+
+## 🔒 Security & Best Practices
+
+- **Zero Hardcoded Secrets**: All sensitive API keys and secrets are loaded via environment variables.
+- **Row Level Security (RLS)**: Enforced across all Supabase database tables to prevent unauthorized data manipulation.
+- **Defensive API Architecture**: Fallback persistence ensures storefront banners and critical content remain operable even during database network interruptions.
+- **Payment Verification**: Signature-based payment verification on the backend before marking orders as confirmed.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
 
 **URVA** — *Delivering the Authentic Rural Aura.* 🌾

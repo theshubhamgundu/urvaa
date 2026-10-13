@@ -8,7 +8,14 @@ interface Props {
 
 const FeaturedVariants: React.FC<Props> = ({ products }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const candidates = (products || []).filter(p => p.isActive !== false && ((Array.isArray(p.variants) && p.variants.length > 1) || p.featured));
+  const candidates = (products || []).filter(
+    (p) =>
+      p.isActive !== false &&
+      !(p.category || '').toLowerCase().includes('candle') &&
+      !(p.name || '').toLowerCase().includes('candle') &&
+      !(p.category || '').toLowerCase().includes('urli') &&
+      ((Array.isArray(p.variants) && p.variants.length > 1) || p.featured)
+  );
   const display = candidates.slice(0, 8);
 
   if (display.length === 0) return null;
@@ -17,13 +24,13 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
     <section className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold text-[#C79A56] uppercase tracking-[0.2em] block mb-2">
+          <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.2em] block mb-2">
             SELECTED FINDS
           </span>
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
-            Featured products
+          <h2 className="text-2xl sm:text-3xl font-sans font-semibold tracking-tight text-[#111111]">
+            Featured Products
           </h2>
-          <p className="text-xs md:text-sm text-gray-600 mt-3 font-light leading-relaxed">
+          <p className="text-xs md:text-sm text-neutral-500 mt-2 font-light leading-relaxed">
             Explore selected products and available options from the URVA collection.
           </p>
         </div>
@@ -31,7 +38,7 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
         <div className="relative">
           <div className="flex items-center justify-between mb-4">
             <div />
-            <div className="hidden sm:flex gap-3">
+            <div className="hidden sm:flex gap-2">
               <button
                 aria-label="Previous"
                 onClick={() => {
@@ -39,7 +46,7 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
                   if (!el) return;
                   el.scrollBy({ left: -Math.round(el.clientWidth * 0.8), behavior: 'smooth' });
                 }}
-                className="w-10 h-10 rounded-full bg-white border border-[#E6DACB] shadow-sm flex items-center justify-center text-[#5C2333] hover:bg-[#FBF6ED]"
+                className="w-9 h-9 rounded-full bg-white border border-neutral-200 shadow-xs flex items-center justify-center text-neutral-800 hover:bg-neutral-100 hover:border-black transition-colors"
               >
                 ‹
               </button>
@@ -50,7 +57,7 @@ const FeaturedVariants: React.FC<Props> = ({ products }) => {
                   if (!el) return;
                   el.scrollBy({ left: Math.round(el.clientWidth * 0.8), behavior: 'smooth' });
                 }}
-                className="w-10 h-10 rounded-full bg-white border border-[#E6DACB] shadow-sm flex items-center justify-center text-[#5C2333] hover:bg-[#FBF6ED]"
+                className="w-9 h-9 rounded-full bg-white border border-neutral-200 shadow-xs flex items-center justify-center text-neutral-800 hover:bg-neutral-100 hover:border-black transition-colors"
               >
                 ›
               </button>

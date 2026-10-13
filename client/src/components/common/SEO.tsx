@@ -12,14 +12,14 @@ interface SEOProps {
   jsonLd?: object | object[];
 }
 
-const DOMAIN = 'https://julinacandlesandmelts.in';
+const DOMAIN = 'https://urvaa.in';
 
 const DEFAULT_TITLE = 'URVA | Delivering the Authentic Rural Aura';
 const DEFAULT_DESCRIPTION =
   'Discover regional products, traditional foods, indigenous craftsmanship, handlooms, plants, and thoughtful everyday goods with URVA.';
 const DEFAULT_KEYWORDS =
   'URVA, rural products India, regional products, One Village One Product, Indian artisans, regional foods, handlooms, nursery plants';
-const DEFAULT_OG_IMAGE = `${DOMAIN}/logo.png`;
+const DEFAULT_OG_IMAGE = `${DOMAIN}https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png`;
 
 export const SEO: React.FC<SEOProps> = ({
   title = DEFAULT_TITLE,

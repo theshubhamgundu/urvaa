@@ -4,18 +4,17 @@ import { productApi } from "./api/product.api";
 import { orderApi } from "./api/order.api";
 import userReducer from "./reducers/user.reducer";
 import cartReducer from "./reducers/cart.reducer";
-import adminBusinessReducer from "./reducers/adminBusiness.reducer";
 import { couponApi } from "./api/coupon.api";
 import { paymentApi } from "./api/payment.api";
 import { statsApi } from "./api/stats.api";
 import { adminApi } from "./api/admin.api";
 import { razorpayApi } from "./api/razorpay.api";
+import { bannerApi } from "./api/banner.api";
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         cart: cartReducer,
-        adminBusiness: adminBusinessReducer,
         [userApi.reducerPath]: userApi.reducer,
         [productApi.reducerPath]: productApi.reducer,
         [orderApi.reducerPath]: orderApi.reducer,
@@ -24,6 +23,7 @@ const store = configureStore({
         [statsApi.reducerPath]: statsApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
         [razorpayApi.reducerPath]: razorpayApi.reducer,
+        [bannerApi.reducerPath]: bannerApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -34,7 +34,8 @@ const store = configureStore({
             paymentApi.middleware,
             statsApi.middleware,
             adminApi.middleware,
-            razorpayApi.middleware
+            razorpayApi.middleware,
+            bannerApi.middleware
         )
 });
 

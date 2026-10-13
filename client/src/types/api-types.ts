@@ -315,3 +315,38 @@ export type CustomError = {
         success: boolean;
     }
 }
+
+// Store Banners & Campaigns
+export type BannerType = 'hero' | 'festival_banner' | 'showcase_banner' | 'announcement' | 'spotlight' | 'story_video';
+
+export interface StoreBanner {
+    id: string;
+    type: BannerType;
+    title: string;
+    subtitle?: string;
+    tagline?: string;
+    imageUrl: string;
+    mobileImageUrl?: string;
+    linkUrl?: string;
+    buttonText?: string;
+    badge?: string;
+    theme?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    displayOrder: number;
+    isActive: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface BannersResponse {
+    success: boolean;
+    banners: StoreBanner[];
+}
+
+export interface BannerResponse {
+    success: boolean;
+    banner: StoreBanner;
+    message?: string;
+}
+

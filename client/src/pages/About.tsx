@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaGlobe, FaHeart, FaLeaf, FaPeopleGroup } from 'react-icons/fa6';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { breadcrumbSchema, webPageSchema } from '../seo/schemas';
+import { urvaaCategories } from '../data/categories';
 
 const pillars = [
   {
@@ -25,14 +26,6 @@ const pillars = [
     title: 'A marketplace with meaning',
     description: 'Bring products from diverse rural traditions together in one convenient place.',
   },
-];
-
-const categories = [
-  ['Tribal Araku Products', 'Regional coffee, honey, and other products whose sourcing can be verified.'],
-  ['Mana Godavari Foods', 'Traditional sweets, palm jaggery, pickles, and regional pantry favorites.'],
-  ['Eco-Friendly Products', 'Selected biodegradable, reusable, and natural-material household goods.'],
-  ['Swadesi Handlooms', 'Handloom textiles and regional weaving traditions.'],
-  ['Kadiyam Plants', 'Nursery plants, saplings, and greenery for homes and gardens.'],
 ];
 
 const AboutPage: React.FC = () => {
@@ -60,16 +53,16 @@ const AboutPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#FBF6ED] text-[#2A1C22]">
-      <section className="bg-gradient-to-br from-[#173C2B] via-[#28533A] to-[#704A28] px-4 py-16 text-white sm:px-6 sm:py-20">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#111111]">
+      <section className="bg-[#111111] px-4 py-16 text-white sm:px-6 sm:py-20 border-b border-neutral-800">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="mb-4 inline-block rounded-full border border-[#E9C77A]/50 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#E9C77A]">
+          <span className="mb-4 inline-block rounded-full border border-neutral-700 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-300">
             Our story
           </span>
-          <h1 className="font-serif text-4xl font-bold leading-tight sm:text-5xl">
+          <h1 className="font-sans text-3xl sm:text-5xl font-semibold tracking-tight leading-tight">
             Delivering the Authentic Rural Aura
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-xs sm:text-sm leading-relaxed text-neutral-400">
             URVA is a rural-products commerce brand built around a simple idea: every region has something distinctive worth discovering.
           </p>
         </div>
@@ -77,40 +70,40 @@ const AboutPage: React.FC = () => {
 
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1fr_auto] md:py-20">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B5D2E]">One Village – One Product</p>
-          <h2 className="mt-3 font-serif text-3xl font-bold text-[#234331]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400">One Village – One Product</p>
+          <h2 className="mt-2 font-sans text-2xl sm:text-3xl font-semibold text-[#111111]">
             A product is also a place, a skill, and a story.
           </h2>
-          <p className="mt-5 text-sm leading-relaxed text-gray-700">
+          <p className="mt-4 text-xs sm:text-sm leading-relaxed text-neutral-600">
             URVA aims to make regional products easier to discover while helping rural producers reach customers beyond their immediate communities. Our vision is to bring traditional foods, indigenous craftsmanship, handlooms, plants, and considered everyday goods into one thoughtful shopping experience.
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-gray-700">
+          <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-600">
             As the collection grows, we want product pages to make origin, materials, ingredients, and maker information clear—so customers can shop with context and confidence.
           </p>
         </div>
         <img
-          src="/logo.png"
+          src="https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png"
           alt="URVA — Delivering the Authentic Rural Aura"
-          className="mx-auto w-48 rounded-3xl bg-white p-3 shadow-lg sm:w-56"
+          className="mx-auto w-40 rounded-2xl bg-white p-3 shadow-xs border border-neutral-200 sm:w-48"
         />
       </section>
 
-      <section className="border-y border-[#D9DDCE] bg-white py-14 sm:py-16">
+      <section className="border-y border-neutral-200 bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <h2 className="font-serif text-3xl font-bold text-[#234331]">What guides URVA</h2>
-            <p className="mt-3 text-sm text-gray-600">
+            <h2 className="font-sans text-2xl sm:text-3xl font-semibold text-[#111111]">What guides URVA</h2>
+            <p className="mt-2 text-xs sm:text-sm text-neutral-500">
               A marketplace shaped by authenticity, regional discovery, and convenience.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((pillar) => (
-              <article key={pillar.title} className="rounded-2xl border border-[#D9DDCE] bg-[#FBF6ED] p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm">
+              <article key={pillar.title} className="rounded-xl border border-neutral-200 bg-[#FAFAFA] p-6 shadow-xs">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white border border-neutral-200 shadow-2xs">
                   {pillar.icon}
                 </div>
-                <h3 className="font-serif text-lg font-bold text-[#234331]">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{pillar.description}</p>
+                <h3 className="font-sans text-base font-semibold text-[#111111]">{pillar.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-neutral-600">{pillar.description}</p>
               </article>
             ))}
           </div>
@@ -119,31 +112,41 @@ const AboutPage: React.FC = () => {
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
         <div className="mb-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B5D2E]">A growing collection</p>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-[#234331]">Five ways to discover regional India</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400">A growing collection</p>
+          <h2 className="mt-1 font-sans text-2xl sm:text-3xl font-semibold text-[#111111]">Five ways to discover regional India</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map(([name, description]) => (
-            <article key={name} className="rounded-2xl border border-[#D9DDCE] bg-white p-5">
-              <h3 className="font-serif text-lg font-bold text-[#234331]">{name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600">{description}</p>
+          {Object.entries(urvaaCategories).map(([slug, category]) => (
+            <article key={slug} className="rounded-xl border border-neutral-200 bg-white p-5 shadow-xs">
+              <h3 className="font-sans text-base font-semibold text-[#111111]">{category.title}</h3>
+              <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-neutral-600">
+                {category.products.map((product) => (
+                  <li key={product} className="flex gap-2">
+                    <span aria-hidden="true" className="text-black">•</span>
+                    <span>{product}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 space-y-1 border-t border-neutral-200 pt-3 text-xs leading-relaxed text-neutral-500">
+                <p><span className="font-semibold text-[#111111]">Minimum order:</span> {category.minimumOrder}</p>
+                {'bulkPricing' in category && (
+                  <p><span className="font-semibold text-[#111111]">Bulk pricing:</span> {category.bulkPricing}</p>
+                )}
+              </div>
             </article>
           ))}
         </div>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-gray-500">
-          Category examples describe the URVA vision. Product availability, supplier relationships, and origin details should be confirmed before publication.
-        </p>
       </section>
 
-      <section className="bg-[#234331] px-4 py-12 text-center text-white">
+      <section className="bg-[#111111] px-4 py-12 text-center text-white border-t border-neutral-800">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-2xl font-bold sm:text-3xl">Let’s bring more regional stories into view.</h2>
-          <p className="mt-3 text-sm text-white/80">
+          <h2 className="font-sans text-2xl font-semibold sm:text-3xl">Let’s bring more regional stories into view.</h2>
+          <p className="mt-2 text-xs sm:text-sm text-neutral-400">
             Browse the collection or get in touch with questions about products and partnerships.
           </p>
           <Link
             to="/products"
-            className="mt-6 inline-block rounded-full bg-[#E9C77A] px-6 py-3 text-sm font-bold text-[#173C2B] transition hover:bg-white"
+            className="mt-6 inline-block rounded-full bg-white px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-black transition hover:bg-neutral-200"
           >
             Explore products
           </Link>

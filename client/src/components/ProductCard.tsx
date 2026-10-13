@@ -1,10 +1,9 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementCartItem, decrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
 import { Product } from '../types/api-types';
-import { FaShoppingBag } from 'react-icons/fa';
 import { optimizeCloudinaryUrl } from '../utils/cloudinaryOptimize';
 
 interface ProductCardProps {
@@ -18,24 +17,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
 
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
-
   let displayPrice = product.price;
   let priceLabel = '';
 
   if (hasVariants) {
-    const prices = product.variants.map((v: any) => v.salePrice || v.price || 0).filter((p: number) => p > 0);
+    const prices = product.variants
+      .map((v: any) => v.salePrice || v.price || 0)
+      .filter((p: number) => p > 0);
     if (prices.length > 0) {
       const minPrice = Math.min(...prices);
       const maxPrice = Math.max(...prices);
       displayPrice = minPrice;
-      priceLabel = minPrice !== maxPrice ? `₹${minPrice} – ₹${maxPrice}` : `₹${minPrice}`;
+      priceLabel = minPrice !== maxPrice ? `₹ ${minPrice.toLocaleString()} – ₹ ${maxPrice.toLocaleString()}` : `₹ ${minPrice.toLocaleString()}`;
     }
   }
 
+  const formattedPrice = priceLabel || `₹ ${displayPrice.toLocaleString()}`;
   const isOutOfStock = product.stock <= 0;
-  const cartItem = cartItems.find(item => item.productId === product._id);
+  const cartItem = cartItems.find((item) => item.productId === product._id);
 
   const handleAddToCart = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -46,14 +45,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       return;
     }
 
-    dispatch(addToCart({
-      productId: product._id,
-      name: product.name,
-      price: displayPrice,
-      quantity: 1,
-      stock: product.stock,
-      photo: product.photo,
-    }));
+    dispatch(
+      addToCart({
+        productId: product._id,
+        name: product.name,
+        price: displayPrice,
+        quantity: 1,
+        stock: product.stock,
+        photo: product.photo,
+      })
+    );
   };
 
   const handleIncrement = (event: React.MouseEvent) => {
@@ -72,25 +73,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   const getPhotoUrl = (photoUrl?: string) => {
-    if (!photoUrl) return '/logo.png';
-    let cleaned = photoUrl.replace('/images/products/', '/images/');
-    if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
-      cleaned = '/' + cleaned;
-    }
-    return optimizeCloudinaryUrl(encodeURI(cleaned), 400);
+    if (!photoUrl) return 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png';
+    return optimizeCloudinaryUrl(photoUrl, 400);
   };
 
   return (
     <div
       onClick={() => navigate(`/product/${product._id}`)}
-      className="bg-white rounded-2xl p-2.5 sm:p-4 border border-[#E6DACB] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group relative cursor-pointer overflow-hidden"
+      className="bg-white rounded-2xl p-4 sm:p-5 border border-neutral-200 hover:border-black/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full group relative cursor-pointer font-sans"
     >
       {/* Top Image Container */}
-      <div className="relative bg-[#FBF6ED] rounded-xl flex items-center justify-center aspect-square mb-2.5 border border-[#E6DACB]/60 overflow-hidden group-hover:bg-[#F8EFE0] transition-colors">
+      <div className="relative bg-[#F9F9F9] rounded-xl flex items-center justify-center aspect-square mb-4 overflow-hidden group-hover:bg-[#F4F4F4] transition-colors border border-neutral-100">
         {/* Out of Stock Overlay */}
         {isOutOfStock && (
-          <div className="absolute inset-0 bg-white/75 backdrop-blur-xs z-20 flex items-center justify-center rounded-xl">
-            <span className="bg-red-100 text-red-700 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full border border-red-200 shadow-xs">
+          <div className="absolute inset-0 bg-white/80 z-20 flex items-center justify-center rounded-xl">
+            <span className="bg-neutral-100 text-neutral-800 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border border-neutral-200">
               Out of Stock
             </span>
           </div>
@@ -101,68 +98,69 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.name}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-contain p-1.5 group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
         />
       </div>
 
-      {/* Product Details */}
+      {/* Product Information Section (Matches Reference Screenshot) */}
       <div className="flex flex-col flex-1">
-        <h3 className="text-xs sm:text-base font-serif font-bold text-[#2A1C22] text-center mb-1 line-clamp-2 group-hover:text-[#5C2333] transition-colors leading-snug">
-          {product.name}
-        </h3>
+        {/* Title + Price Row */}
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <h3 className="text-sm sm:text-base font-semibold text-[#111111] leading-snug line-clamp-2 group-hover:text-neutral-700 transition-colors flex-1">
+            {product.name}
+          </h3>
+          <span className="text-sm sm:text-base font-semibold text-[#111111] whitespace-nowrap">
+            {formattedPrice}
+          </span>
+        </div>
 
-        {/* Price Row (hidden on homepage) */}
-        {!isHomePage && (
-          <div className="flex items-center justify-center gap-1.5 mb-2.5">
-            {hasVariants ? (
-              <span className="text-[10px] sm:text-xs font-bold text-[#5C2333] bg-[#5C2333]/10 px-2 py-0.5 rounded-full border border-[#5C2333]/20">
-                {priceLabel}
-              </span>
-            ) : (
-              <span className="text-sm sm:text-lg font-bold text-[#5C2333] font-serif">
-                ₹ {displayPrice}
-              </span>
-            )}
-          </div>
-        )}
+        {/* Short Subtitle / Description */}
+        <p className="text-xs text-neutral-500 font-normal leading-relaxed line-clamp-2 mb-4">
+          {product.description || 'Authentic single-origin harvest, hand-crafted with traditional methods.'}
+        </p>
 
-        {/* Action Button */}
-        <div className="mt-auto">
+        {/* Action Button & More Details */}
+        <div className="mt-auto pt-2">
           {!hasVariants && cartItem ? (
-            <div className="flex flex-col gap-1.5" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-between bg-[#FBF6ED] border border-[#E6DACB] rounded-full px-2 py-1">
+            <div className="flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between bg-neutral-50 border border-neutral-200 rounded-lg px-3 py-1.5">
                 <button
+                  type="button"
                   onClick={handleDecrement}
-                  className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-white text-[#5C2333] font-bold flex items-center justify-center hover:bg-[#5C2333] hover:text-white transition-colors shadow-xs text-xs"
+                  className="w-6 h-6 rounded-md bg-white border border-neutral-200 text-neutral-800 font-bold flex items-center justify-center hover:bg-neutral-100 transition-colors text-xs"
                 >
                   −
                 </button>
-                <span className="text-[10px] sm:text-xs font-bold text-[#2A1C22]">{cartItem.quantity}</span>
+                <span className="text-xs font-semibold text-[#111111]">
+                  {cartItem.quantity} in Cart
+                </span>
                 <button
+                  type="button"
                   onClick={handleIncrement}
-                  className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-white text-[#5C2333] font-bold flex items-center justify-center hover:bg-[#5C2333] hover:text-white transition-colors shadow-xs text-xs"
+                  className="w-6 h-6 rounded-md bg-white border border-neutral-200 text-neutral-800 font-bold flex items-center justify-center hover:bg-neutral-100 transition-colors text-xs"
                 >
                   +
                 </button>
               </div>
               <button
+                type="button"
                 onClick={handleGoToCart}
-                className="w-full bg-[#5C2333] hover:bg-[#3E1622] text-white font-bold text-[10px] sm:text-xs py-2 rounded-full transition-all shadow-md"
+                className="w-full bg-black hover:bg-neutral-800 text-white font-medium text-xs py-2.5 rounded-lg uppercase tracking-wider transition-colors"
               >
                 Go to Cart
               </button>
             </div>
           ) : (
             <button
+              type="button"
               onClick={handleAddToCart}
               disabled={isOutOfStock}
-              className={`w-full font-bold text-[10px] sm:text-xs py-2 sm:py-2.5 rounded-full transition-all shadow-md flex items-center justify-center gap-1.5 uppercase tracking-wider ${
+              className={`w-full font-medium text-xs py-3 rounded-lg transition-all flex items-center justify-center tracking-widest uppercase ${
                 isOutOfStock
-                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'
-                  : 'bg-[#5C2333] hover:bg-[#3E1622] text-[#FBF6ED] hover:shadow-lg'
+                  ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                  : 'bg-black hover:bg-neutral-800 text-white shadow-xs'
               }`}
             >
-              <FaShoppingBag className="text-xs text-[#C79A56]" />
               <span>
                 {isOutOfStock
                   ? 'Out of Stock'
@@ -172,6 +170,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </span>
             </button>
           )}
+
+          {/* Clean 'More details →' Link */}
+          <div className="mt-3 text-center">
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-neutral-800 group-hover:text-black group-hover:underline underline-offset-4 transition-colors">
+              More details &rarr;
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -6,18 +6,18 @@ const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-[#f6f1e7] py-10 px-4">
-      <div className="flex w-full max-w-4xl bg-white rounded-3xl shadow-xl border border-[#ede3cf] overflow-hidden">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-[#FAFAFA] py-10 px-4">
+      <div className="flex w-full max-w-4xl bg-white rounded-2xl shadow-xs border border-neutral-200 overflow-hidden">
         {/* URVA brand introduction */}
-        <div className="hidden md:flex flex-col md:w-1/2 items-center justify-center p-8 bg-gradient-to-br from-[#185e33]/5 to-[#e5c158]/10 border-r border-[#ede3cf]">
-          <img src="/logo.png" alt="URVA — Delivering the Authentic Rural Aura" className="h-36 w-36 mb-4 object-contain" />
-          <h1 className="text-3xl font-extrabold text-center mb-2 text-[#185e33] font-serif">
+        <div className="hidden md:flex flex-col md:w-1/2 items-center justify-center p-8 bg-neutral-50 border-r border-neutral-200">
+          <img src="https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png" alt="URVA — Delivering the Authentic Rural Aura" className="h-28 w-28 mb-4 object-contain" />
+          <h1 className="text-2xl font-sans font-semibold text-center mb-1 text-[#111111]">
             URVA
           </h1>
-          <p className="text-gray-600 text-center text-sm mb-6 max-w-xs leading-relaxed font-medium">
+          <p className="text-neutral-500 text-center text-xs mb-6 max-w-xs leading-relaxed font-normal">
             Delivering the Authentic Rural Aura. Discover regional products and the stories behind them.
           </p>
-          <div className="mt-2 rounded-full border border-amber-200 bg-white/80 px-4 py-2 text-xs font-semibold text-amber-900 shadow-sm backdrop-blur">
+          <div className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-xs font-medium text-neutral-700 shadow-2xs">
             One Village – One Product
           </div>
         </div>
@@ -27,7 +27,7 @@ const AuthPage: React.FC = () => {
           {isSignUp ? <Signup /> : <Login />}
           <div className="mt-6 text-center">
             <button
-              className="text-sm font-bold text-[#185e33] hover:text-[#134b28] transition duration-300 underline underline-offset-4"
+              className="text-xs font-semibold text-neutral-800 hover:text-black transition duration-300 underline underline-offset-4"
               onClick={() => setIsSignUp(!isSignUp)}
             >
               {isSignUp ? 'Already have an account? Login' : "Don't have an account? Sign Up"}

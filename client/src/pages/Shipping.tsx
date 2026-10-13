@@ -5,7 +5,7 @@ import { saveShippingInfo } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
 import { notify } from '../utils/util';
 import BackButton from '../components/common/BackBtn';
-import { FaCrosshairs, FaMapMarkerAlt, FaTruck, FaShieldAlt } from 'react-icons/fa';
+import { FaTruck, FaShieldAlt } from 'react-icons/fa';
 import { usePageSEO } from '../hooks/usePageSEO';
 
 const INDIAN_STATES = [
@@ -47,67 +47,8 @@ const Shipping: React.FC = () => {
     const [pinCode, setPinCode] = useState(shippingInfo.pinCode || '');
     const [phone, setPhone] = useState(shippingInfo.phone || '');
 
-    // Captured Coordinates state
-    const [latitude, setLatitude] = useState<number | undefined>(shippingInfo.latitude);
-    const [longitude, setLongitude] = useState<number | undefined>(shippingInfo.longitude);
-    const [locatingGPS, setLocatingGPS] = useState(false);
-
-    // Auto-fill address via GPS Reverse Geocoding
-    const handleDetectGPS = () => {
-        if (!navigator.geolocation) {
-            notify('Geolocation is not supported by your browser', 'error');
-            return;
-        }
-
-        setLocatingGPS(true);
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                const { latitude: lat, longitude: lng } = position.coords;
-                setLatitude(lat);
-                setLongitude(lng);
-
-                try {
-                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`);
-                    const data = await res.json();
-                    if (data && data.address) {
-                        const { address: addr } = data;
-                        
-                        const detectedCity = addr.city || addr.town || addr.village || addr.county || '';
-                        const detectedState = addr.state || '';
-                        const detectedPinCode = addr.postcode || '';
-
-                        const parts = [];
-                        if (addr.building || addr.house_number) parts.push(addr.building || addr.house_number);
-                        if (addr.road || addr.pedestrian || addr.street) parts.push(addr.road || addr.pedestrian || addr.street);
-                        if (addr.suburb || addr.neighbourhood || addr.residential) parts.push(addr.suburb || addr.neighbourhood || addr.residential);
-
-                        const formattedStreet = parts.join(', ') || data.display_name?.split(',').slice(0, 3).join(', ') || '';
-                        
-                        if (formattedStreet) setAddress(formattedStreet);
-                        if (detectedCity) setCity(detectedCity);
-                        if (detectedPinCode) setPinCode(detectedPinCode);
-
-                        if (detectedState) {
-                            const match = INDIAN_STATES.find(s => s.toLowerCase() === detectedState.toLowerCase());
-                            if (match) setState(match);
-                        }
-                        notify('Location details filled automatically!', 'success');
-                    }
-                } catch (e) {
-                    console.error("GPS Reverse geocode error:", e);
-                    notify('GPS location detected!', 'success');
-                } finally {
-                    setLocatingGPS(false);
-                }
-            },
-            (error) => {
-                console.error("GPS detection error:", error);
-                notify('Unable to detect location. Please type your address manually.', 'error');
-                setLocatingGPS(false);
-            },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-        );
-    };
+    const latitude = shippingInfo.latitude;
+    const longitude = shippingInfo.longitude;
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -148,52 +89,26 @@ const Shipping: React.FC = () => {
         navigate('/checkout');
     };
 
-    const inputClass = "w-full px-4 py-3 border-2 border-[#ede3cf] rounded-xl bg-white text-sm focus:border-[#5C2333] focus:ring-1 focus:ring-[#5C2333]/30 outline-none transition-all placeholder:text-gray-400";
-    const labelClass = "block text-xs font-bold text-[#5C2333] uppercase tracking-wider mb-1.5";
+    const inputClass = "w-full px-4 py-2.5 border border-neutral-200 rounded-lg bg-white text-xs focus:border-black focus:ring-1 focus:ring-black outline-none transition-all placeholder:text-neutral-400";
+    const labelClass = "block text-xs font-semibold text-[#111111] uppercase tracking-wider mb-1.5";
 
     return (
-        <div className="min-h-screen bg-[#faf6ee] py-8 px-4">
+        <div className="min-h-screen bg-[#FAFAFA] py-8 px-4">
             <div className="max-w-2xl mx-auto">
                 <BackButton />
 
                 {/* Page Header */}
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#5C2333]">
+                    <h2 className="text-2xl sm:text-3xl font-sans font-semibold tracking-tight text-[#111111]">
                         Delivery Address
                     </h2>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-neutral-500 mt-1">
                         Enter your shipping details for order delivery
                     </p>
                 </div>
 
                 {/* Main Form Box */}
-                <div className="bg-white rounded-2xl border-2 border-[#ede3cf] p-6 shadow-lg">
-
-                    {/* Auto-Fill via GPS Header */}
-                    <div className="mb-6 p-4 rounded-xl bg-[#f7f4ec] border border-[#ede3cf] flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-[#5C2333]/10 text-[#5C2333]">
-                                <FaMapMarkerAlt className="text-xl" />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-xs text-[#5C2333] uppercase tracking-wider mb-0.5">
-                                    Auto-Fill Location
-                                </h4>
-                                <p className="text-xs text-gray-500">
-                                    Use GPS to automatically fill your current city & address
-                                </p>
-                            </div>
-                        </div>
-                        <button
-                            type="button"
-                            onClick={handleDetectGPS}
-                            disabled={locatingGPS}
-                            className="w-full sm:w-auto bg-[#5C2333] hover:bg-[#134b28] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shrink-0 active:scale-95"
-                        >
-                            <FaCrosshairs className={locatingGPS ? "animate-spin" : ""} />
-                            <span>{locatingGPS ? "Detecting..." : "Use Current Location"}</span>
-                        </button>
-                    </div>
+                <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-xs">
 
                     {/* Standard E-Commerce Address Form */}
                     <form onSubmit={submitHandler} className="space-y-4">
@@ -305,8 +220,8 @@ const Shipping: React.FC = () => {
                         </div>
 
                         {/* Security / Delivery Trust Info */}
-                        <div className="pt-2 flex items-center justify-between text-xs text-gray-500 border-t border-[#ede3cf]/60">
-                            <span className="flex items-center gap-1.5 text-[#5C2333] font-medium">
+                        <div className="pt-2 flex items-center justify-between text-xs text-neutral-500 border-t border-neutral-200">
+                            <span className="flex items-center gap-1.5 text-neutral-800 font-medium">
                                 <FaTruck /> Fast & Secure Pan-India Shipping
                             </span>
                             <span className="flex items-center gap-1 text-emerald-700 font-medium">
@@ -317,7 +232,7 @@ const Shipping: React.FC = () => {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-[#5C2333] hover:bg-[#134b28] text-white font-bold py-3.5 px-4 rounded-full transition-colors shadow-md text-base mt-4 flex items-center justify-center gap-2"
+                            className="w-full bg-black hover:bg-neutral-800 text-white font-medium py-3.5 px-4 rounded-lg uppercase tracking-wider transition-colors shadow-xs text-xs mt-4 flex items-center justify-center gap-2"
                         >
                             <span>Proceed to Payment ➔</span>
                         </button>

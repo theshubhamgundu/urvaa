@@ -104,7 +104,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
         order_id: orderResponse.order_id,
         name: 'URVA',
         description: description,
-        image: 'https://julinacandlesandmelts.in/logo.png',
+        image: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png',
         customer_name: customer_name,
         customer_email: customer_email,
         customer_phone: customer_phone,
@@ -125,7 +125,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
           contact: customer_phone,
         },
         theme: {
-          color: '#185e33',
+          color: '#111111',
         },
       };
 

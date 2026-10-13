@@ -1,10 +1,19 @@
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://lzsjohnscesymlkuvmng.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2pvaG5zY2VzeW1sa3V2bW5nIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjgwMDQzNCwiZXhwIjoyMTAyMzc2NDM0fQ.ywgq8iG-UWSfeqBCqGgsX_aOt9ZiN5Dav2n4zN1aLlU';
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://nyydjisfdavwokfawrhr.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_T5w5cXt7kZ1ExWgnaF69Lg_zI-MJEMG';
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Cloudinary Configuration
+const CLOUDINARY_CONFIG = {
+  get CLOUD_NAME() { return process.env.CLOUDINARY_CLOUD_NAME || process.env.VITE_CLOUDINARY_CLOUD_NAME || 'idi6k3ue'; },
+  get API_KEY() { return process.env.CLOUDINARY_API_KEY || process.env.VITE_CLOUDINARY_API_KEY || '954494813469653'; },
+  get API_SECRET() { return process.env.CLOUDINARY_API_SECRET || 'jg0BD8eQYLH5knMr5E7NSb1LW7Q'; },
+};
 
 // Simple password hashing and comparison (use bcrypt in production)
 function hashPassword(password) {
@@ -46,12 +55,15 @@ function generateShipperToken() {
 
 // ─── Razorpay Payment Gateway Configuration ───
 const RAZORPAY_CONFIG = {
-  get KEY_ID() { return process.env.RAZORPAY_KEY_ID || 'rzp_live_TO2LV3iKTZwDBr'; },
-  get KEY_SECRET() { return process.env.RAZORPAY_KEY_SECRET || 'xOuCM6SrTk8osjd36VvRwHpE'; },
+  get KEY_ID() { return process.env.RAZORPAY_KEY_ID || ''; },
+  get KEY_SECRET() { return process.env.RAZORPAY_KEY_SECRET || ''; },
 };
 
 // Initialize Razorpay instance
 function getRazorpayInstance() {
+  if (!RAZORPAY_CONFIG.KEY_ID || !RAZORPAY_CONFIG.KEY_SECRET) {
+    throw new Error('Razorpay credentials not configured. Please set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in environment variables.');
+  }
   const RazorpayConstructor = Razorpay.default || Razorpay;
   return new RazorpayConstructor({
     key_id: RAZORPAY_CONFIG.KEY_ID,
@@ -72,7 +84,7 @@ function verifyRazorpaySignature(orderId, paymentId, signature) {
 // Resend Email API Configuration
 const RESEND_CONFIG = {
   get KEY() { return process.env.RESEND_API_KEY || 're_UZ29KUAH_PjdpPNsPbAWveZDj48Tv5woU'; },
-  get FROM() { return process.env.RESEND_FROM_EMAIL || 'URVA <sales@julinacandles.in>'; }
+  get FROM() { return process.env.RESEND_FROM_EMAIL || 'URVA <sales@urvaa.in>'; }
 };
 
 // Send email using Resend REST API
@@ -154,7 +166,7 @@ async function handleOrderSuccess(orderId) {
     const recipientEmail = userRow?.email || shippingInfo?.email;
     const customerName = userRow?.name || shippingInfo?.name || 'Customer';
 
-    const baseUrl = 'https://julinacandles.in';
+    const baseUrl = process.env.CLIENT_URL || 'https://urvaa.in';
 
     const orderItems = typeof order.order_items === 'string' ? JSON.parse(order.order_items) : order.order_items;
     const itemsListHtml = (orderItems || []).map(item => `
@@ -350,6 +362,40 @@ function mapProduct(row) {
 
   const cleanDescription = row.description ? row.description.split('__VARIANTS__=')[0].trim() : '';
 
+  let photo = row.photo || '';
+  if (!photo || photo.includes('v1791904263') || photo.includes('/urvaa/products/')) {
+    const raw = (photo + ' ' + (row.name || '')).toLowerCase();
+    if (raw.includes('araku') || raw.includes('coffee')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904994/urvaa/images/categories/tribal-araku.jpg';
+    } else if (raw.includes('putharekulu') || raw.includes('heritage') || raw.includes('bellam') || raw.includes('godavari')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791905012/urvaa/images/hero/rural-heritage.jpg';
+    } else if (raw.includes('honey') || raw.includes('villages')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791905009/urvaa/images/hero/from-our-villages.jpg';
+    } else if (raw.includes('leaf') || raw.includes('eco-friendly') || raw.includes('plates') || raw.includes('basket') || raw.includes('dhoop')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904990/urvaa/images/categories/eco-friendly.jpg';
+    } else if (raw.includes('handloom') || raw.includes('swadesi') || raw.includes('saree') || raw.includes('dhoti')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904993/urvaa/images/categories/swadesi-handlooms.jpg';
+    } else if (raw.includes('plant') || raw.includes('kadiyam') || raw.includes('jasmine') || raw.includes('mango')) {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904991/urvaa/images/categories/kadiyam-plants.jpg';
+    } else if (row.category === 'Tribal Araku Products') {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904994/urvaa/images/categories/tribal-araku.jpg';
+    } else if (row.category === 'Mana Godavari Foods') {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904992/urvaa/images/categories/mana-godavari.jpg';
+    } else if (row.category === 'Swadesi Handlooms') {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904993/urvaa/images/categories/swadesi-handlooms.jpg';
+    } else if (row.category === 'Eco-Friendly Products') {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904990/urvaa/images/categories/eco-friendly.jpg';
+    } else {
+      photo = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904991/urvaa/images/categories/kadiyam-plants.jpg';
+    }
+  }
+
+  const gallery = [
+    photo,
+    'https://res.cloudinary.com/idi6k3ue/image/upload/v1791905009/urvaa/images/hero/from-our-villages.jpg',
+    'https://res.cloudinary.com/idi6k3ue/image/upload/v1791905012/urvaa/images/hero/rural-heritage.jpg',
+  ].filter((v, i, a) => a.indexOf(v) === i);
+
   return {
     _id: row.id,
     id: row.id,
@@ -358,7 +404,8 @@ function mapProduct(row) {
     description: cleanDescription,
     price: Number(row.price),
     stock: Number(row.stock),
-    photo: row.photo,
+    photo: photo,
+    gallery: gallery,
     photoPublicId: row.photo_public_id,
     featured: Boolean(row.featured),
     isActive: row.is_active !== false,
@@ -403,6 +450,82 @@ function mapOrder(row) {
   };
 }
 
+// Map Supabase row → banner object
+function mapBanner(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    type: row.type || 'hero',
+    title: row.title || '',
+    subtitle: row.subtitle || '',
+    tagline: row.tagline || '',
+    imageUrl: row.image_url || row.imageUrl || '',
+    mobileImageUrl: row.mobile_image_url || row.mobileImageUrl || row.image_url || row.imageUrl || '',
+    linkUrl: row.link_url || row.linkUrl || '/products',
+    buttonText: row.button_text || row.buttonText || 'Explore Now',
+    badge: row.badge || '',
+    theme: row.theme || 'dark',
+    backgroundColor: row.background_color || row.backgroundColor || '#111111',
+    textColor: row.text_color || row.textColor || '#FFFFFF',
+    displayOrder: Number(row.display_order ?? row.displayOrder ?? 0),
+    isActive: row.is_active !== false && row.isActive !== false,
+    createdAt: row.created_at || row.createdAt,
+    updatedAt: row.updated_at || row.updatedAt,
+  };
+}
+
+// Convert camelCase banner data to Supabase snake_case format
+function formatBannerForDB(banner) {
+  return {
+    type: banner.type || 'hero',
+    title: banner.title || '',
+    subtitle: banner.subtitle || '',
+    tagline: banner.tagline || '',
+    image_url: banner.imageUrl || banner.image_url || '',
+    mobile_image_url: banner.mobileImageUrl || banner.mobile_image_url || banner.imageUrl || banner.image_url || '',
+    link_url: banner.linkUrl || banner.link_url || '/products',
+    button_text: banner.buttonText || banner.button_text || 'Explore Now',
+    badge: banner.badge || '',
+    theme: banner.theme || 'dark',
+    background_color: banner.backgroundColor || banner.background_color || '#111111',
+    text_color: banner.textColor || banner.text_color || '#FFFFFF',
+    display_order: Number(banner.displayOrder ?? banner.display_order ?? 0),
+    is_active: banner.isActive !== false && banner.is_active !== false,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+// Read fallback banners from JSON file or memory
+function getLocalFallbackBanners() {
+  try {
+    const paths = [
+      path.resolve(process.cwd(), 'api/data/store_banners.json'),
+      path.resolve(process.cwd(), 'scratch/store_banners.json'),
+    ];
+    for (const bannerPath of paths) {
+      if (fs.existsSync(bannerPath)) {
+        const data = JSON.parse(fs.readFileSync(bannerPath, 'utf8'));
+        if (Array.isArray(data) && data.length > 0) return data;
+      }
+    }
+  } catch (e) {
+    console.warn('Fallback banner file read error:', e.message);
+  }
+  return [];
+}
+
+// Save fallback banners to JSON file
+function saveLocalFallbackBanners(banners) {
+  try {
+    const bannerPath = path.resolve(process.cwd(), 'api/data/store_banners.json');
+    const dir = path.dirname(bannerPath);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(bannerPath, JSON.stringify(banners, null, 2), 'utf8');
+  } catch (e) {
+    console.warn('Fallback banner file write error:', e.message);
+  }
+}
+
 export default async function handler(req, res) {
   const url = req.url || '';
 
@@ -437,6 +560,23 @@ export default async function handler(req, res) {
   }
 
   try {
+    // ─── CLOUDINARY: Generate Signature for Uploads ───
+    if (url.includes('/api/v1/cloudinary/sign') || url.includes('/api/v1/upload/sign')) {
+      const timestamp = Math.round(new Date().getTime() / 1000);
+      const folder = req.body?.folder || 'urvaa/products';
+      const paramsToSign = `folder=${folder}&timestamp=${timestamp}${CLOUDINARY_CONFIG.API_SECRET}`;
+      const signature = crypto.createHash('sha1').update(paramsToSign).digest('hex');
+
+      return res.status(200).json({
+        success: true,
+        signature,
+        timestamp,
+        apiKey: CLOUDINARY_CONFIG.API_KEY,
+        cloudName: CLOUDINARY_CONFIG.CLOUD_NAME,
+        folder,
+      });
+    }
+
     // ─── PAYMENTS: Create Payment Intent / Order (Razorpay) ───
     if (url.includes('/api/v1/payments/create') || url.includes('/api/v1/payments/new')) {
       const rawAmount = req.body?.amount;
@@ -503,7 +643,7 @@ export default async function handler(req, res) {
             receipt: orderReceipt,
             notes: {
               customer_name: customer_name || 'URVA Customer',
-              customer_email: customer_email || 'support@julinacandles.in',
+              customer_email: customer_email || 'support@urvaa.in',
               customer_phone: customer_phone || '',
             },
           });
@@ -516,6 +656,7 @@ export default async function handler(req, res) {
             amount: order.amount,
             currency: order.currency,
             receipt: order.receipt,
+            key_id: RAZORPAY_CONFIG.KEY_ID,
           });
         } catch (sdkError) {
           console.error('❌ Razorpay SDK Order creation error:', sdkError?.description || sdkError?.message || sdkError);
@@ -599,7 +740,7 @@ export default async function handler(req, res) {
       }
 
       // Always redirect to production — payments only run on prod.
-      const origin = 'https://julinacandles.in';
+      const origin = process.env.CLIENT_URL || 'https://urvaa.in';
       const host = req.headers.host || '';
 
       // Verify SecureHash
@@ -755,7 +896,7 @@ export default async function handler(req, res) {
               .from('users')
               .insert({
                 uid: guestUid,
-                email: guestEmail || `${guestPhone}@guest.julinacandles.in`,
+                email: guestEmail || `${guestPhone}@guest.urvaa.in`,
                 name: guestName,
                 provider: 'guest',
                 role: 'user',
@@ -882,7 +1023,7 @@ export default async function handler(req, res) {
           user: 'guest',
           shippingInfo: {
             name: 'Valued Customer',
-            email: 'customer@julinacandles.in',
+            email: 'customer@urvaa.in',
             phone: '+91 7304888197',
             address: 'Room No. 28, Sai Shraddha Apartment, Sai Nagari',
             city: 'Ulhasnagar',
@@ -893,10 +1034,10 @@ export default async function handler(req, res) {
           orderItems: [
             {
               _id: '1',
-              name: 'Caramel Coffee Cream Candle',
+              name: 'Araku Valley Organic Forest Honey',
               price: 499,
               quantity: 1,
-              photo: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png'
+              photo: 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904994/urvaa/images/categories/tribal-araku.jpg'
             }
           ],
           subTotal: 499,
@@ -973,7 +1114,7 @@ export default async function handler(req, res) {
         const recipientEmail = userRow?.email || shippingInfo?.email || 'shubhamvasantgundu@gmail.com';
         const customerName = userRow?.name || shippingInfo?.name || 'Customer';
 
-        const baseUrl = 'https://julinacandles.in';
+        const baseUrl = process.env.CLIENT_URL || 'https://urvaa.in';
 
         // If status is "Shipped" and we have tracking data, send tracking email
         if (status === 'Shipped' && updated.awb_number) {
@@ -1396,11 +1537,10 @@ export default async function handler(req, res) {
       const to = from + limit - 1;
       query = query.range(from, to);
 
-      const { data, error, count } = await query;
-
-      let products = (data || []).map(mapProduct);
-      let totalCount = count || 0;
-      const totalPage = Math.ceil(totalCount / limit);
+      const { data, count } = await query;
+      const products = (data || []).map(mapProduct);
+      const totalCount = count || 0;
+      const totalPage = Math.ceil(totalCount / limit) || 1;
 
       return res.status(200).json({
         success: true,
@@ -1411,7 +1551,6 @@ export default async function handler(req, res) {
 
     // ─── PRODUCTS: Get Latest Products ───
     if (url.includes('/api/v1/products/latest')) {
-      let productsList = [];
       const { data, error } = await supabase
         .from('products')
         .select('*')
@@ -1419,9 +1558,7 @@ export default async function handler(req, res) {
         .order('created_at', { ascending: false })
         .limit(50);
 
-      if (!error && data) {
-        productsList = data.map(mapProduct);
-      }
+      const productsList = (!error && data) ? data.map(mapProduct) : [];
 
       const resBody = {
         success: true,
@@ -1438,17 +1575,11 @@ export default async function handler(req, res) {
       const page = parseInt(urlObj.searchParams.get('page') || '1', 10);
       const limit = parseInt(urlObj.searchParams.get('limit') || '50', 10);
 
-      let productsList = [];
-      let totalProducts = 0;
-
       const { data, error, count } = await supabase.from('products').select('*', { count: 'exact' }).order('created_at', { ascending: false });
 
-      if (!error && data) {
-        productsList = data.map(mapProduct);
-        totalProducts = count || data.length;
-      }
-
-      const totalPages = Math.ceil(totalProducts / limit);
+      const productsList = (!error && data) ? data.map(mapProduct) : [];
+      const totalProducts = count || productsList.length;
+      const totalPages = Math.ceil(totalProducts / limit) || 1;
 
       const resBody = {
         success: true,
@@ -1523,7 +1654,7 @@ export default async function handler(req, res) {
         price: Number(price),
         stock: Number(stock),
         description,
-        photo: photo || '/logo.png',
+        photo: photo || 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png',
         variants: variants || [],
         featured: false,
         is_active: true,
@@ -1769,8 +1900,9 @@ export default async function handler(req, res) {
       const cleanEmail = String(email).trim().toLowerCase();
 
       // Default built-in admin credentials
-      const ADMIN_EMAIL = 'admin@julinacandles.in';
-      const DEFAULT_ADMIN_HASH = hashAdminPassword('julinacandles@2026');
+      const ADMIN_EMAIL = 'admin@urvaa.in';
+      const DEFAULT_ADMIN_HASH = hashAdminPassword('urvaa@2026');
+      const LEGACY_ADMIN_HASH = hashAdminPassword('julinacandles@2026');
       const providedPasswordHash = hashAdminPassword(password);
 
       let isAdminValid = false;
@@ -1781,7 +1913,8 @@ export default async function handler(req, res) {
       };
 
       // 1. Check built-in admin account
-      if (cleanEmail === ADMIN_EMAIL.toLowerCase() && providedPasswordHash === DEFAULT_ADMIN_HASH) {
+      if ((cleanEmail === ADMIN_EMAIL.toLowerCase() || cleanEmail === 'admin@julinacandles.in') && 
+          (providedPasswordHash === DEFAULT_ADMIN_HASH || providedPasswordHash === LEGACY_ADMIN_HASH)) {
         isAdminValid = true;
       } else {
         // 2. Fallback: check Supabase users table for user with role='admin'
@@ -1838,7 +1971,7 @@ export default async function handler(req, res) {
           success: true,
           admin: {
             id: 'admin_001',
-            email: 'admin@julinacandles.in',
+            email: 'admin@urvaa.in',
             name: 'Admin',
           }
         });
@@ -2003,6 +2136,221 @@ export default async function handler(req, res) {
       }
 
       return res.status(200).json({ success: true, companyValues: data || [] });
+    }
+
+    // ============================================
+    // STORE BANNERS & CAMPAIGNS ENDPOINTS
+    // ============================================
+
+    // ─── BANNERS: Get Active Store Banners (Public) ───
+    if (url.match(/\/api\/v1\/banners(\?.*)?$/) && req.method === 'GET') {
+      const typeParam = new URL(url, 'http://localhost').searchParams.get('type');
+      let banners = [];
+
+      try {
+        let query = supabase
+          .from('store_banners')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true });
+
+        if (typeParam) {
+          query = query.eq('type', typeParam);
+        }
+
+        const { data, error } = await query;
+        if (!error && Array.isArray(data) && data.length > 0) {
+          banners = data.map(mapBanner);
+        }
+      } catch (dbErr) {
+        console.warn('DB store_banners fetch warning:', dbErr.message);
+      }
+
+      // Fallback to local persistent cache if DB returned no records
+      if (banners.length === 0) {
+        const fallbacks = getLocalFallbackBanners();
+        banners = fallbacks.filter(b => b.isActive !== false);
+        if (typeParam) {
+          banners = banners.filter(b => b.type === typeParam);
+        }
+      }
+
+      return res.status(200).json({ success: true, banners });
+    }
+
+    // ─── ADMIN: Get All Store Banners (Admin) ───
+    if (url.match(/\/api\/v1\/admin\/banners(\?.*)?$/) && req.method === 'GET') {
+      const typeParam = new URL(url, 'http://localhost').searchParams.get('type');
+      let banners = [];
+
+      try {
+        let query = supabase
+          .from('store_banners')
+          .select('*')
+          .order('display_order', { ascending: true });
+
+        if (typeParam) {
+          query = query.eq('type', typeParam);
+        }
+
+        const { data, error } = await query;
+        if (!error && Array.isArray(data) && data.length > 0) {
+          banners = data.map(mapBanner);
+        }
+      } catch (dbErr) {
+        console.warn('DB admin store_banners fetch warning:', dbErr.message);
+      }
+
+      // Fallback to local persistent cache if DB returned no records
+      if (banners.length === 0) {
+        banners = getLocalFallbackBanners();
+        if (typeParam) {
+          banners = banners.filter(b => b.type === typeParam);
+        }
+      }
+
+      return res.status(200).json({ success: true, banners });
+    }
+
+    // ─── ADMIN: Seed / Reset Default Banners ───
+    if (url.includes('/api/v1/admin/banners/seed-defaults') && req.method === 'POST') {
+      const defaultBanners = getLocalFallbackBanners();
+      try {
+        for (const b of defaultBanners) {
+          const dbRow = formatBannerForDB(b);
+          await supabase.from('store_banners').upsert(dbRow, { onConflict: 'id' });
+        }
+      } catch (e) {
+        console.warn('DB seed warning:', e.message);
+      }
+      return res.status(200).json({ success: true, message: 'Default campaigns seeded successfully', banners: defaultBanners });
+    }
+
+    // ─── ADMIN: Toggle Banner Status (Active/Inactive) ───
+    if (url.match(/\/api\/v1\/admin\/banners\/[^/]+\/toggle$/) && req.method === 'PATCH') {
+      const parts = url.split('/');
+      const bannerId = parts[parts.length - 2];
+      let updatedBanner = null;
+
+      // 1. Try Supabase
+      try {
+        const { data: existing } = await supabase.from('store_banners').select('is_active').eq('id', bannerId).single();
+        if (existing) {
+          const newStatus = !existing.is_active;
+          const { data } = await supabase.from('store_banners').update({ is_active: newStatus, updated_at: new Date().toISOString() }).eq('id', bannerId).select().single();
+          if (data) updatedBanner = mapBanner(data);
+        }
+      } catch (e) {}
+
+      // 2. Fallback local file update
+      const localList = getLocalFallbackBanners();
+      const idx = localList.findIndex(b => b.id === bannerId);
+      if (idx !== -1) {
+        localList[idx].isActive = !localList[idx].isActive;
+        localList[idx].updatedAt = new Date().toISOString();
+        saveLocalFallbackBanners(localList);
+        if (!updatedBanner) updatedBanner = localList[idx];
+      }
+
+      if (global.fastApiCache) global.fastApiCache.clear();
+      return res.status(200).json({ success: true, banner: updatedBanner });
+    }
+
+    // ─── ADMIN: Create Store Banner ───
+    if (url.match(/\/api\/v1\/admin\/banners(\?.*)?$/) && req.method === 'POST') {
+      const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+      const bannerId = body.id || `banner_${Date.now()}`;
+      const newBanner = {
+        id: bannerId,
+        type: body.type || 'hero',
+        title: body.title || 'Untitled Banner',
+        subtitle: body.subtitle || '',
+        tagline: body.tagline || '',
+        imageUrl: body.imageUrl || body.image_url || '',
+        mobileImageUrl: body.mobileImageUrl || body.mobile_image_url || body.imageUrl || body.image_url || '',
+        linkUrl: body.linkUrl || body.link_url || '/products',
+        buttonText: body.buttonText || body.button_text || 'Explore Now',
+        badge: body.badge || '',
+        theme: body.theme || 'dark',
+        backgroundColor: body.backgroundColor || body.background_color || '#111111',
+        textColor: body.textColor || body.text_color || '#FFFFFF',
+        displayOrder: Number(body.displayOrder ?? body.display_order ?? 0),
+        isActive: body.isActive !== false && body.is_active !== false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      // 1. Try Supabase
+      try {
+        const dbPayload = formatBannerForDB(newBanner);
+        const { data, error } = await supabase.from('store_banners').insert(dbPayload).select().single();
+        if (!error && data) {
+          newBanner.id = data.id;
+        }
+      } catch (dbErr) {
+        console.warn('DB insert banner warning:', dbErr.message);
+      }
+
+      // 2. Persist to local fallback cache
+      const localList = getLocalFallbackBanners();
+      localList.push(newBanner);
+      saveLocalFallbackBanners(localList);
+
+      if (global.fastApiCache) global.fastApiCache.clear();
+      return res.status(201).json({ success: true, banner: newBanner, message: 'Campaign banner created successfully' });
+    }
+
+    // ─── ADMIN: Update Store Banner ───
+    if (url.match(/\/api\/v1\/admin\/banners\/[^/]+$/) && req.method === 'PUT') {
+      const bannerId = url.split('/').pop().split('?')[0];
+      const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+      let updatedBanner = null;
+
+      // 1. Try Supabase
+      try {
+        const dbPayload = formatBannerForDB(body);
+        const { data, error } = await supabase.from('store_banners').update(dbPayload).eq('id', bannerId).select().single();
+        if (!error && data) {
+          updatedBanner = mapBanner(data);
+        }
+      } catch (dbErr) {
+        console.warn('DB update banner warning:', dbErr.message);
+      }
+
+      // 2. Local fallback update
+      const localList = getLocalFallbackBanners();
+      const idx = localList.findIndex(b => b.id === bannerId);
+      if (idx !== -1) {
+        localList[idx] = {
+          ...localList[idx],
+          ...body,
+          id: bannerId,
+          updatedAt: new Date().toISOString(),
+        };
+        saveLocalFallbackBanners(localList);
+        if (!updatedBanner) updatedBanner = localList[idx];
+      }
+
+      if (global.fastApiCache) global.fastApiCache.clear();
+      return res.status(200).json({ success: true, banner: updatedBanner, message: 'Campaign banner updated successfully' });
+    }
+
+    // ─── ADMIN: Delete Store Banner ───
+    if (url.match(/\/api\/v1\/admin\/banners\/[^/]+$/) && req.method === 'DELETE') {
+      const bannerId = url.split('/').pop().split('?')[0];
+
+      // 1. Try Supabase
+      try {
+        await supabase.from('store_banners').delete().eq('id', bannerId);
+      } catch (e) {}
+
+      // 2. Local fallback update
+      let localList = getLocalFallbackBanners();
+      localList = localList.filter(b => b.id !== bannerId);
+      saveLocalFallbackBanners(localList);
+
+      if (global.fastApiCache) global.fastApiCache.clear();
+      return res.status(200).json({ success: true, message: 'Campaign banner deleted successfully' });
     }
 
     // ─── Fallback: Return all products ───

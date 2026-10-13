@@ -135,4 +135,4 @@ Disallow: /
 # ============================================
 # SITEMAP
 # ============================================
-Sitemap: https://julinacandles.in/sitemap.xml
+Sitemap: https://urvaa.in/sitemap.xml

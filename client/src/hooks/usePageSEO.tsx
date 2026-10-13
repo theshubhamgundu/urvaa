@@ -11,8 +11,8 @@ interface SEOProps {
   schema?: object | object[];
 }
 
-const BASE_URL = 'https://julinacandlesandmelts.in';
-const DEFAULT_IMAGE = `${BASE_URL}/logo.png`;
+const BASE_URL = 'https://urvaa.in';
+const DEFAULT_IMAGE = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png';
 
 /**
  * usePageSEO – sets <title>, all meta tags, canonical, and injects

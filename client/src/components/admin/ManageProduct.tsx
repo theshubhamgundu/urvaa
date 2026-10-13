@@ -26,7 +26,7 @@ import {
 } from 'react-icons/fa';
 import { uploadToCloudinary } from '../../utils/cloudinary';
 
-export interface CandleVariantItem {
+export interface ProductVariantItem {
   id: string;
   name: string;
   label: string;
@@ -37,6 +37,7 @@ export interface CandleVariantItem {
   inStock: boolean;
   pack?: string;
 }
+export type CandleVariantItem = ProductVariantItem;
 
 const AdminManageProduct: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -74,7 +75,7 @@ const AdminManageProduct: React.FC = () => {
       setPriceUpdate(p.price || 0);
       setStockUpdate(p.stock ?? 0);
       setDescriptionUpdate(p.description || '');
-      setPhotoUpdate(p.photo || '/logo.png');
+      setPhotoUpdate(p.photo || 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png');
       setIsFeatured(p.featured || false);
 
       if (p.variants && Array.isArray(p.variants) && p.variants.length > 0) {
@@ -266,29 +267,29 @@ const AdminManageProduct: React.FC = () => {
           href={`/product/${data?.product?._id}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs font-bold text-[#185E33] hover:text-[#C79A56] flex items-center gap-1.5 transition"
+          className="text-xs font-semibold text-neutral-900 hover:text-[#E57A22] flex items-center gap-1.5 transition"
         >
           <span>View on Live Store</span> <FaExternalLinkAlt className="text-[10px]" />
         </a>
       </div>
 
-      <div className="bg-white p-6 md:p-8 rounded-3xl border border-[#efe9db] shadow-sm space-y-6">
+      <div className="bg-white p-6 md:p-8 rounded-3xl border border-neutral-200 shadow-2xs space-y-6">
         <div className="flex flex-col md:flex-row gap-8">
           
           {/* Left Column: Image preview & Meta */}
           <div className="w-full md:w-1/3 space-y-4">
-            <div className="relative group rounded-2xl border border-[#efe9db] bg-[#faf6ee] overflow-hidden aspect-square flex items-center justify-center shadow-xs">
+            <div className="relative group rounded-2xl border border-neutral-200 bg-neutral-50 overflow-hidden aspect-square flex items-center justify-center shadow-2xs">
               <img 
                 src={photoUpdate} 
                 alt={nameUpdate} 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/logo.png';
+                  (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png';
                 }}
               />
               <div className="absolute top-3 right-3">
-                <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                  isFeatured ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-gray-150 text-gray-600'
+                <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
+                  isFeatured ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-neutral-100 text-neutral-600 border border-neutral-200'
                 }`}>
                   {isFeatured ? '★ Featured' : 'Standard'}
                 </span>
@@ -297,7 +298,7 @@ const AdminManageProduct: React.FC = () => {
 
             {/* Replace Image Button */}
             <div>
-              <label className="cursor-pointer block text-center bg-[#FAF6EE] hover:bg-[#EDE3CF] text-[#185E33] border border-[#EDE3CF] px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-2xs">
+              <label className="cursor-pointer block text-center bg-neutral-100 hover:bg-neutral-200 text-neutral-800 border border-neutral-200 px-4 py-2.5 rounded-xl font-semibold text-xs transition shadow-2xs">
                 <FaUpload className="inline mr-2" /> Upload New Photo
                 <input
                   type="file"
@@ -309,24 +310,24 @@ const AdminManageProduct: React.FC = () => {
             </div>
 
             {/* Metadata Card */}
-            <div className="p-4 rounded-2xl bg-[#faf6ee] border border-[#ede3cf]/60 space-y-2.5 text-xs">
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 space-y-2.5 text-xs">
               <div className="flex justify-between">
-                <span className="text-gray-400 font-bold uppercase text-[10px]">Created</span>
-                <span className="text-gray-700 font-medium">{dayjs(createdAt).format('DD MMM YYYY')}</span>
+                <span className="text-neutral-400 font-semibold uppercase text-[10px]">Created</span>
+                <span className="text-neutral-700 font-medium">{dayjs(createdAt).format('DD MMM YYYY')}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400 font-bold uppercase text-[10px]">Last Update</span>
-                <span className="text-gray-700 font-medium">{dayjs(updatedAt).format('DD MMM YYYY')}</span>
+                <span className="text-neutral-400 font-semibold uppercase text-[10px]">Last Update</span>
+                <span className="text-neutral-700 font-medium">{dayjs(updatedAt).format('DD MMM YYYY')}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400 font-bold uppercase text-[10px]">Total Stock</span>
-                <span className={`font-bold ${stockUpdate <= 0 ? 'text-rose-600' : stockUpdate < 10 ? 'text-amber-600' : 'text-emerald-700'}`}>
+                <span className="text-neutral-400 font-semibold uppercase text-[10px]">Total Stock</span>
+                <span className={`font-semibold ${stockUpdate <= 0 ? 'text-rose-600' : stockUpdate < 10 ? 'text-amber-600' : 'text-emerald-700'}`}>
                   {stockUpdate <= 0 ? 'Out of Stock' : `${stockUpdate} units`}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400 font-bold uppercase text-[10px]">Variants</span>
-                <span className="font-bold text-[#185E33]">{variantsState.length} active sizes</span>
+                <span className="text-neutral-400 font-semibold uppercase text-[10px]">Variants</span>
+                <span className="font-semibold text-neutral-900">{variantsState.length} active sizes</span>
               </div>
             </div>
           </div>
@@ -334,23 +335,23 @@ const AdminManageProduct: React.FC = () => {
           {/* Right Column: Form fields */}
           <div className="flex-1 space-y-6">
             <div>
-              <h2 className="text-xl font-serif font-bold text-[#185E33] flex items-center gap-2">
-                <FaBoxOpen /> Edit Product & Multi-Sizes
+              <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
+                <FaBoxOpen className="text-neutral-700" /> Edit Product & Multi-Sizes
               </h2>
-              <p className="text-xs text-gray-500 mt-0.5">
-                Update product details, category, options, and pricing.
+              <p className="text-xs text-neutral-500 mt-0.5">
+                Update product information, regional category, options, and pricing.
               </p>
             </div>
 
             <form onSubmit={submitHandler} className="space-y-5">
               {/* Product Name */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">Product Name</label>
+                <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">Product Name</label>
                 <input
                   type="text"
                   value={nameUpdate}
                   onChange={(e) => setNameUpdate(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
+                  className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium text-neutral-900"
                   required
                 />
               </div>
@@ -358,11 +359,11 @@ const AdminManageProduct: React.FC = () => {
               {/* Category & Base Price */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">Category</label>
+                  <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">Category</label>
                   <select
                     value={categoryUpdate}
                     onChange={(e) => setCategoryUpdate(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium text-neutral-900"
                     required
                   >
                     <option value="Tribal Araku Products">Tribal Araku Products</option>
@@ -374,17 +375,17 @@ const AdminManageProduct: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">
-                    Base Price (₹) {variantsState.length > 0 && <span className="text-[10px] text-gray-400 font-normal lowercase">(auto lowest variant)</span>}
+                  <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">
+                    Base Price (₹) {variantsState.length > 0 && <span className="text-[10px] text-neutral-400 font-normal lowercase">(auto lowest variant)</span>}
                   </label>
                   <div className="relative">
-                    <FaRupeeSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                    <FaRupeeSign className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-xs" />
                     <input
                       type="number"
                       value={priceUpdate}
                       onChange={(e) => setPriceUpdate(parseFloat(e.target.value) || 0)}
                       disabled={variantsState.length > 0}
-                      className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900 disabled:opacity-60"
+                      className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium text-neutral-900 disabled:opacity-50"
                     />
                   </div>
                 </div>
@@ -392,33 +393,33 @@ const AdminManageProduct: React.FC = () => {
 
               {/* Description */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">Description</label>
+                <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">Description</label>
                 <textarea
                   value={descriptionUpdate}
                   onChange={(e) => setDescriptionUpdate(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] text-gray-800 resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white text-neutral-900 resize-none"
                 />
               </div>
 
               {/* ═══════════════════════════════════════════════════════════════ */}
-              {/* CANDLE SIZE & MULTI-VARIANTS MANAGER */}
+              {/* SIZE & MULTI-VARIANTS MANAGER */}
               {/* ═══════════════════════════════════════════════════════════════ */}
-              <div className="border border-[#C79A56]/40 bg-[#FAF7F2] p-5 rounded-3xl space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#C79A56]/20 pb-3">
+              <div className="border border-neutral-200 bg-neutral-50/50 p-5 rounded-3xl space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-200/60 pb-3">
                   <div>
-                    <h3 className="text-sm font-serif font-bold text-[#185E33] flex items-center gap-2">
-                      <FaLayerGroup className="text-[#C79A56]" /> Size & Pack Variants ({variantsState.length})
+                    <h3 className="text-sm font-bold text-neutral-900 flex items-center gap-2">
+                      <FaLayerGroup className="text-neutral-500" /> Size & Pack Variants ({variantsState.length})
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
-                      Configure multi-sizes, burn times, or packaging options with distinct prices.
+                    <p className="text-[11px] text-neutral-500 mt-0.5">
+                      Configure multi-sizes, weights, or packaging options with distinct prices.
                     </p>
                   </div>
 
                   <button
                     type="button"
                     onClick={addCustomVariant}
-                    className="bg-[#185E33] hover:bg-[#134B28] text-white px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
+                    className="bg-[#111111] hover:bg-neutral-800 text-white px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs"
                   >
                     <FaPlus className="text-[10px]" /> Add Size
                   </button>
@@ -426,9 +427,9 @@ const AdminManageProduct: React.FC = () => {
 
                 {/* Variants List */}
                 {variantsState.length === 0 ? (
-                  <div className="bg-white rounded-2xl border border-dashed border-[#EDE3CF] p-6 text-center space-y-1">
-                    <p className="text-xs font-semibold text-gray-700">No multi-sizes configured.</p>
-                    <p className="text-[10px] text-gray-400">
+                  <div className="bg-white rounded-2xl border border-dashed border-neutral-200 p-6 text-center space-y-1">
+                    <p className="text-xs font-semibold text-neutral-700">No multi-sizes configured.</p>
+                    <p className="text-[10px] text-neutral-400">
                       Product is selling at single base price ₹{priceUpdate}. Click "+ Add Size" to offer choices.
                     </p>
                   </div>
@@ -443,19 +444,19 @@ const AdminManageProduct: React.FC = () => {
                         <div
                           key={v.id || idx}
                           className={`bg-white rounded-2xl border p-3.5 transition-all shadow-2xs space-y-3 ${
-                            !v.inStock ? 'border-rose-200 bg-rose-50/20' : 'border-[#EDE3CF]'
+                            !v.inStock ? 'border-rose-200 bg-rose-50/20' : 'border-neutral-200'
                           }`}
                         >
-                          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-gray-100 pb-2">
+                          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-100 pb-2">
                             <div className="flex items-center gap-2">
-                              <span className="w-5 h-5 rounded-full bg-[#C79A56]/20 text-[#185E33] font-bold flex items-center justify-center text-[10px]">
+                              <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-bold flex items-center justify-center text-[10px]">
                                 {idx + 1}
                               </span>
-                              <span className="font-bold text-gray-900 text-xs">
+                              <span className="font-semibold text-neutral-900 text-xs">
                                 {v.name || `Variant ${idx + 1}`}
                               </span>
                               {discount > 0 && (
-                                <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.2 rounded-full border border-emerald-200">
+                                <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200">
                                   {discount}% OFF
                                 </span>
                               )}
@@ -466,7 +467,7 @@ const AdminManageProduct: React.FC = () => {
                               <button
                                 type="button"
                                 onClick={() => updateVariant(idx, 'inStock', !v.inStock)}
-                                className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition flex items-center gap-1 ${
+                                className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border transition flex items-center gap-1 ${
                                   v.inStock
                                     ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
                                     : 'bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100'
@@ -480,7 +481,7 @@ const AdminManageProduct: React.FC = () => {
                               <button
                                 type="button"
                                 onClick={() => duplicateVariant(idx)}
-                                className="p-1 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+                                className="p-1 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition"
                                 title="Duplicate"
                               >
                                 <FaCopy className="text-xs" />
@@ -501,45 +502,45 @@ const AdminManageProduct: React.FC = () => {
                           {/* Variant Inputs */}
                           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
                             <div className="col-span-2 sm:col-span-1 space-y-1">
-                              <label className="text-[10px] font-bold uppercase text-gray-400">Size / Pack Label</label>
+                              <label className="text-[10px] font-semibold uppercase text-neutral-400">Size / Pack Label</label>
                               <input
                                 type="text"
                                 value={v.name}
                                 onChange={(e) => updateVariant(idx, 'name', e.target.value)}
-                                className="w-full px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-semibold focus:outline-none focus:border-[#185E33]"
+                                className="w-full px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-medium focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white text-neutral-900"
                               />
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[10px] font-bold uppercase text-gray-400">Selling (₹)</label>
+                              <label className="text-[10px] font-semibold uppercase text-neutral-400">Selling (₹)</label>
                               <input
                                 type="number"
                                 min="1"
                                 value={v.salePrice}
                                 onChange={(e) => updateVariant(idx, 'salePrice', parseFloat(e.target.value) || 0)}
-                                className="w-full px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-bold text-[#185E33] focus:outline-none focus:border-[#185E33]"
+                                className="w-full px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-bold text-neutral-900 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                               />
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[10px] font-bold uppercase text-gray-400">MRP (₹)</label>
+                              <label className="text-[10px] font-semibold uppercase text-neutral-400">MRP (₹)</label>
                               <input
                                 type="number"
                                 min="1"
                                 value={v.mrp}
                                 onChange={(e) => updateVariant(idx, 'mrp', parseFloat(e.target.value) || 0)}
-                                className="w-full px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-semibold text-gray-600 focus:outline-none focus:border-[#185E33]"
+                                className="w-full px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-medium text-neutral-600 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                               />
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[10px] font-bold uppercase text-gray-400">Stock Qty</label>
+                              <label className="text-[10px] font-semibold uppercase text-neutral-400">Stock Qty</label>
                               <input
                                 type="number"
                                 min="0"
                                 value={v.stock}
                                 onChange={(e) => updateVariant(idx, 'stock', parseInt(e.target.value) || 0)}
-                                className="w-full px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-semibold text-gray-800 focus:outline-none focus:border-[#185E33]"
+                                className="w-full px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-medium text-neutral-800 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                               />
                             </div>
                           </div>
@@ -551,12 +552,12 @@ const AdminManageProduct: React.FC = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-[#efe9db]">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-neutral-100">
                 <button
                   type="button"
                   onClick={deleteHandler}
                   disabled={isDeleting}
-                  className="inline-flex items-center gap-1.5 text-rose-600 border border-rose-200 hover:bg-rose-50 px-4 py-2.5 rounded-xl font-bold text-xs transition disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 text-rose-600 border border-rose-200 hover:bg-rose-50 px-4 py-2.5 rounded-xl font-semibold text-xs transition disabled:opacity-50"
                 >
                   <FaTrash /> {isDeleting ? 'Deleting...' : 'Delete Product'}
                 </button>
@@ -566,10 +567,10 @@ const AdminManageProduct: React.FC = () => {
                     type="button"
                     onClick={handleFeatureToggle}
                     disabled={isFeaturing}
-                    className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-bold text-xs border transition ${
+                    className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-semibold text-xs border transition ${
                       isFeatured 
                         ? 'text-amber-700 bg-amber-50 border-amber-200 hover:bg-amber-100' 
-                        : 'text-gray-600 border-gray-200 hover:bg-gray-50'
+                        : 'text-neutral-700 border-neutral-200 hover:bg-neutral-50'
                     }`}
                   >
                     <FaStar /> {isFeaturing ? 'Updating...' : isFeatured ? 'Featured Product' : 'Spotlight Product'}
@@ -578,7 +579,7 @@ const AdminManageProduct: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isUpdating || uploadingImage}
-                    className="inline-flex items-center gap-1.5 bg-[#185E33] hover:bg-[#134B28] text-white px-6 py-2.5 rounded-xl font-bold text-xs transition shadow-md shadow-[#185E33]/20 disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 bg-[#111111] hover:bg-neutral-800 text-white px-6 py-2.5 rounded-xl font-semibold text-xs transition shadow-xs disabled:opacity-50"
                   >
                     <FaSave /> {uploadingImage ? 'Uploading Image...' : isUpdating ? 'Saving Changes...' : 'Save All Changes'}
                   </button>

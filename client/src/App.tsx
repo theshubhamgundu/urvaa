@@ -5,9 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from './components/common/Loader';
 import GlobalLoadingOverlay from './components/common/GlobalLoadingOverlay';
 
-// Register Chart.js components
-import { CategoryScale, Chart as ChartJS, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 // Lazy load public components
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -36,6 +33,7 @@ const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminAddProduct = lazy(() => import('./components/admin/AddProduct'));
 const AdminCoupons = lazy(() => import('./pages/admin/Coupons'));
 const AdminFeaturedProducts = lazy(() => import('./pages/admin/FeaturedProduct'));
+const AdminBanners = lazy(() => import('./pages/admin/AdminBanners'));
 const AdminManageProduct = lazy(() => import('./components/admin/ManageProduct'));
 const AdminOrderDetails = lazy(() => import('./pages/admin/AdmiOrderDetails'));
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
@@ -83,6 +81,7 @@ const App: React.FC = () => {
                             <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
                                 <Route index element={<Navigate to="/admin/dashboard" replace />} />
                                 <Route path="dashboard" element={<AdminDashboard />} />
+                                <Route path="banners" element={<AdminBanners />} />
                                 <Route path="products" element={<AdminProducts />} />
                                 <Route path="featured" element={<AdminFeaturedProducts />} />
                                 <Route path="products/new" element={<AdminAddProduct />} />

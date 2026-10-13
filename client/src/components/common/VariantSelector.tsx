@@ -11,8 +11,8 @@ const VariantSelector: React.FC<Props> = ({ variants, selectedVariantId, onSelec
   if (!variants || variants.length === 0) return null;
 
   return (
-    <div className="my-4 bg-[#faf6ee] p-4 rounded-2xl border border-[#ede3cf] space-y-2.5">
-      <label className="block text-xs font-bold text-[#5C2333] uppercase tracking-wider">
+    <div className="my-4 bg-neutral-50 p-4 rounded-xl border border-neutral-200 space-y-2.5">
+      <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider">
         Select Pack Quantity / Weight:
       </label>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -26,36 +26,36 @@ const VariantSelector: React.FC<Props> = ({ variants, selectedVariantId, onSelec
               onClick={() => !isVariantOutOfStock && onSelect(variant.id)}
               disabled={isVariantOutOfStock}
               aria-pressed={isSelected}
-              className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-0.5 relative ${
+              className={`p-2.5 rounded-lg border text-center transition-all flex flex-col items-center justify-center gap-0.5 relative ${
                 isVariantOutOfStock
-                  ? 'border-red-200 bg-red-50/40 cursor-not-allowed opacity-70'
+                  ? 'border-neutral-200 bg-neutral-100 cursor-not-allowed opacity-50 text-neutral-400'
                   : isSelected
-                    ? 'border-2 border-[#5C2333] bg-[#5C2333] text-white shadow-md'
-                    : 'border-[#ede3cf] bg-white text-gray-800 hover:border-[#5C2333]/50'
+                    ? 'border-2 border-black bg-black text-white shadow-xs'
+                    : 'border-neutral-200 bg-white text-neutral-800 hover:border-black'
               }`}
             >
               <div className="flex flex-col items-center">
-                <span className={`text-xs font-bold ${isVariantOutOfStock ? 'text-red-400' : isSelected ? 'text-white/80' : 'text-[#5C2333]'}`}>
+                <span className={`text-xs font-semibold ${isVariantOutOfStock ? 'text-neutral-400' : isSelected ? 'text-white' : 'text-[#111111]'}`}>
                   {variant.label || variant.pack || variant.name}
                 </span>
 
                 {isVariantOutOfStock ? (
-                  <span className="text-[9px] font-bold text-red-500 mt-1">Out of Stock</span>
+                  <span className="text-[9px] font-medium text-neutral-400 mt-1">Out of Stock</span>
                 ) : (
                   <>
-                    <span className={`text-lg font-extrabold mt-1 ${isSelected ? 'text-white' : 'text-[#5C2333]'}`}>₹{variant.salePrice ?? variant.price ?? 0}</span>
+                    <span className={`text-base font-bold mt-0.5 ${isSelected ? 'text-white' : 'text-[#111111]'}`}>₹{variant.salePrice ?? variant.price ?? 0}</span>
                     {variant.mrp > (variant.salePrice ?? variant.price ?? 0) && (
-                      <span className={`text-[10px] line-through ${isSelected ? 'text-white/70' : 'text-gray-400'}`}>
+                      <span className={`text-[10px] line-through ${isSelected ? 'text-neutral-400' : 'text-neutral-400'}`}>
                         MRP ₹{variant.mrp}
                       </span>
                     )}
                     {variant.bulkPrice && (
-                      <span className={`text-[10px] mt-1 block ${isSelected ? 'text-white/80' : 'text-gray-500'}`}>
+                      <span className={`text-[10px] mt-0.5 block ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
                         Bulk: ₹{variant.bulkPrice} (MOQ {variant.bulkMOQ ?? '—'})
                       </span>
                     )}
                     {variant.pack && (
-                      <span className={`text-[10px] mt-0.5 block ${isSelected ? 'text-white/80' : 'text-gray-500'}`}>
+                      <span className={`text-[10px] mt-0.5 block ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
                         {variant.pack}
                       </span>
                     )}

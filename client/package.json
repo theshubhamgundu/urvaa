@@ -1,5 +1,5 @@
 {
-  "name": "julina-candles-melts-client",
+  "name": "urvaa-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,8 +20,10 @@
     "@vitejs/plugin-react": "^4.2.1",
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.11",
     "firebase": "^10.12.2",
+    "framer-motion": "^14.1.0",
     "leaflet": "^1.9.4",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
@@ -38,6 +40,7 @@
     "react-router-dom": "^6.23.1",
     "react-table": "^7.8.0",
     "react-toastify": "^10.0.5",
+    "tailwind-merge": "^3.7.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
@@ -54,4 +57,3 @@
     "tailwindcss": "^3.4.3"
   }
 }
-

@@ -126,19 +126,19 @@ const AdminOrders: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="loader"></div>
+        <div className="w-8 h-8 border-2 border-neutral-900 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="bg-white p-8 rounded-3xl border border-[#efe9db] text-center shadow-sm max-w-md mx-auto my-12">
-        <p className="text-red-500 font-semibold mb-2">Error loading orders.</p>
-        <p className="text-xs text-gray-500 mb-4">Please verify database connectivity and try again.</p>
+      <div className="bg-white p-8 rounded-3xl border border-neutral-200 text-center shadow-xs max-w-md mx-auto my-12 font-sans">
+        <p className="text-red-600 font-semibold mb-2 text-sm">Error loading orders.</p>
+        <p className="text-xs text-neutral-500 mb-4">Please verify database connectivity and try again.</p>
         <button
           onClick={() => refetch()}
-          className="bg-[#185e33] text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md hover:bg-[#134b28] transition"
+          className="bg-neutral-900 text-white px-5 py-2.5 rounded-xl text-xs font-semibold shadow-xs hover:bg-neutral-800 transition"
         >
           Retry
         </button>
@@ -147,18 +147,18 @@ const AdminOrders: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-sans">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-serif font-bold text-[#185e33]">Order Management</h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Order Management</h1>
+          <p className="text-xs text-neutral-500 mt-0.5">
             Track customer orders, manage real-time dispatch statuses, and communicate with buyers.
           </p>
         </div>
         <button
           onClick={() => refetch()}
-          className="self-start sm:self-auto bg-[#faf6ee] hover:bg-[#ede3cf] text-[#185e33] font-bold px-4 py-2 rounded-xl text-xs border border-[#ede3cf] transition"
+          className="self-start sm:self-auto bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-semibold px-4 py-2 rounded-xl text-xs border border-neutral-200 transition"
         >
           Refresh Orders
         </button>
@@ -166,68 +166,68 @@ const AdminOrders: React.FC = () => {
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-2xl border border-[#efe9db] shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-neutral-200 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Total Revenue</span>
-            <div className="w-8 h-8 rounded-lg bg-[#C79A56]/10 text-[#C79A56] flex items-center justify-center text-sm font-bold">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">Total Revenue</span>
+            <div className="w-8 h-8 rounded-lg bg-neutral-100 text-neutral-800 flex items-center justify-center text-sm font-bold">
               <FaRupeeSign />
             </div>
           </div>
-          <p className="text-2xl font-bold text-gray-900 font-serif mt-2">
+          <p className="text-2xl font-bold text-neutral-900 mt-2 tracking-tight">
             ₹{metrics.totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
           </p>
-          <p className="text-[11px] text-gray-500 mt-0.5">From all {metrics.total} orders</p>
+          <p className="text-[11px] text-neutral-500 mt-0.5">From all {metrics.total} orders</p>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#efe9db] shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-neutral-200 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Total Orders</span>
-            <div className="w-8 h-8 rounded-lg bg-[#185e33]/10 text-[#185e33] flex items-center justify-center text-sm">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">Total Orders</span>
+            <div className="w-8 h-8 rounded-lg bg-neutral-100 text-neutral-800 flex items-center justify-center text-sm">
               <FaShoppingBag />
             </div>
           </div>
-          <p className="text-2xl font-bold text-gray-900 font-serif mt-2">{metrics.total}</p>
-          <p className="text-[11px] text-gray-500 mt-0.5">Lifetime orders count</p>
+          <p className="text-2xl font-bold text-neutral-900 mt-2 tracking-tight">{metrics.total}</p>
+          <p className="text-[11px] text-neutral-500 mt-0.5">Lifetime orders count</p>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#efe9db] shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-neutral-200 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Action Required</span>
-            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">Action Required</span>
+            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-sm">
               <FaClock />
             </div>
           </div>
-          <p className="text-2xl font-bold text-amber-700 font-serif mt-2">{metrics.pendingProcessing}</p>
+          <p className="text-2xl font-bold text-amber-700 mt-2 tracking-tight">{metrics.pendingProcessing}</p>
           <p className="text-[11px] text-amber-600 font-medium mt-0.5">Pending or Processing</p>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-[#efe9db] shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border border-neutral-200 shadow-2xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Delivered</span>
-            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">Delivered</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm">
               <FaTruck />
             </div>
           </div>
-          <p className="text-2xl font-bold text-emerald-700 font-serif mt-2">{metrics.delivered}</p>
+          <p className="text-2xl font-bold text-emerald-700 mt-2 tracking-tight">{metrics.delivered}</p>
           <p className="text-[11px] text-emerald-600 font-medium mt-0.5">Successfully fulfilled</p>
         </div>
       </div>
 
       {/* Filter and Search */}
-      <div className="bg-white p-5 rounded-2xl border border-[#efe9db] shadow-sm space-y-4">
+      <div className="bg-white p-5 rounded-2xl border border-neutral-200 shadow-2xs space-y-4">
         <div className="relative">
-          <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+          <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-xs" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by Order ID, customer name, phone number or city..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee]/50 placeholder-gray-400 transition"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white placeholder-neutral-400 transition text-neutral-900"
           />
           {searchQuery && (
             <button 
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-neutral-400 hover:text-neutral-600"
             >
               Clear
             </button>
@@ -245,15 +245,15 @@ const AdminOrders: React.FC = () => {
               <button
                 key={st}
                 onClick={() => setSelectedStatus(st)}
-                className={`px-3.5 py-1.5 rounded-full font-medium transition whitespace-nowrap flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap flex items-center gap-1.5 ${
                   selectedStatus === st
-                    ? 'bg-[#185e33] text-white shadow-sm font-semibold'
-                    : 'bg-[#faf6ee] text-gray-600 hover:bg-[#ede3cf] border border-[#ede3cf]'
+                    ? 'bg-[#111111] text-white shadow-2xs font-semibold'
+                    : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
                 }`}
               >
                 <span>{st}</span>
                 <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                  selectedStatus === st ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'
+                  selectedStatus === st ? 'bg-white/20 text-white' : 'bg-neutral-200 text-neutral-700'
                 }`}>
                   {count}
                 </span>
@@ -264,15 +264,15 @@ const AdminOrders: React.FC = () => {
       </div>
 
       {/* Orders Table */}
-      <div className="bg-white rounded-3xl border border-[#efe9db] shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-[#efe9db] flex items-center justify-between">
-          <h2 className="font-serif font-bold text-[#185e33] text-base">
+      <div className="bg-white rounded-3xl border border-neutral-200 shadow-2xs overflow-hidden">
+        <div className="p-5 border-b border-neutral-100 flex items-center justify-between">
+          <h2 className="font-bold text-neutral-900 text-sm tracking-tight">
             Orders ({filteredOrders.length})
           </h2>
           {(searchQuery || selectedStatus !== 'All') && (
             <button
               onClick={() => { setSearchQuery(''); setSelectedStatus('All'); }}
-              className="text-xs font-semibold text-[#C79A56] hover:underline"
+              className="text-xs font-semibold text-neutral-600 hover:text-neutral-900 hover:underline"
             >
               Reset Filters
             </button>
@@ -281,18 +281,18 @@ const AdminOrders: React.FC = () => {
 
         {filteredOrders.length === 0 ? (
           <div className="text-center py-16 px-4">
-            <div className="w-16 h-16 rounded-full bg-[#faf6ee] text-[#185e33] text-2xl flex items-center justify-center mx-auto mb-3">
+            <div className="w-14 h-14 rounded-2xl bg-neutral-100 text-neutral-400 text-xl flex items-center justify-center mx-auto mb-3">
               <FaClipboardList />
             </div>
-            <p className="text-gray-900 font-semibold mb-1">No orders found</p>
-            <p className="text-xs text-gray-500 max-w-sm mx-auto">
+            <p className="text-neutral-900 font-semibold mb-1 text-sm">No orders found</p>
+            <p className="text-xs text-neutral-500 max-w-sm mx-auto">
               No orders matched your filter criteria or search query.
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[#efe9db] text-left text-xs">
-              <thead className="bg-[#faf6ee] text-gray-500 font-semibold uppercase tracking-wider text-[10px]">
+            <table className="min-w-full divide-y divide-neutral-100 text-left text-xs">
+              <thead className="bg-neutral-50 text-neutral-500 font-semibold uppercase tracking-wider text-[10px]">
                 <tr>
                   <th className="px-5 py-3.5">Order ID & Date</th>
                   <th className="px-5 py-3.5">Customer</th>
@@ -302,23 +302,23 @@ const AdminOrders: React.FC = () => {
                   <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#efe9db] bg-white">
+              <tbody className="divide-y divide-neutral-100 bg-white">
                 {filteredOrders.map((order) => {
                   const customer = getCustomerInfo(order);
                   const items = Array.isArray(order.orderItems) ? order.orderItems : [];
                   const itemCount = items.reduce((sum: number, it: any) => sum + (Number(it.quantity) || 1), 0);
 
                   return (
-                    <tr key={order._id} className="hover:bg-[#faf6ee]/50 transition-colors">
+                    <tr key={order._id} className="hover:bg-neutral-50/70 transition-colors">
                       {/* Order ID & Date */}
                       <td className="px-5 py-3.5">
                         <div className="flex items-center gap-1.5">
-                          <span className="font-mono text-xs font-bold text-gray-900">
+                          <span className="font-mono text-xs font-semibold text-neutral-900">
                             #{order._id ? order._id.slice(0, 8) : 'N/A'}
                           </span>
                           <button
                             onClick={() => handleCopy(order._id)}
-                            className="text-gray-400 hover:text-[#185e33] transition"
+                            className="text-neutral-400 hover:text-neutral-900 transition"
                             title="Copy full Order ID"
                           >
                             {copiedId === order._id ? (
@@ -328,7 +328,7 @@ const AdminOrders: React.FC = () => {
                             )}
                           </button>
                         </div>
-                        <span className="text-[11px] text-gray-400 block mt-0.5">
+                        <span className="text-[11px] text-neutral-400 block mt-0.5">
                           {order.createdAt ? dayjs(order.createdAt).format('DD MMM YYYY, hh:mm A') : 'Recent'}
                         </span>
                       </td>
@@ -336,12 +336,12 @@ const AdminOrders: React.FC = () => {
                       {/* Customer Details */}
                       <td className="px-5 py-3.5">
                         <div className="min-w-0">
-                          <span className="font-bold text-gray-900 block text-sm">
+                          <span className="font-semibold text-neutral-900 block text-xs">
                             {customer.name}
                           </span>
                           <div className="flex items-center gap-2 mt-0.5 flex-wrap">
                             {customer.city && (
-                              <span className="text-[11px] text-gray-500">
+                              <span className="text-[11px] text-neutral-500">
                                 📍 {customer.city}{customer.state ? `, ${customer.state}` : ''}
                               </span>
                             )}
@@ -350,7 +350,7 @@ const AdminOrders: React.FC = () => {
                                 href={`https://www.google.com/maps?q=${order.shippingInfo.latitude},${order.shippingInfo.longitude}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-[10px] font-bold bg-green-50 text-[#185e33] border border-green-200 px-1.5 py-0.2 rounded hover:bg-green-100"
+                                className="inline-flex items-center gap-1 text-[10px] font-semibold bg-neutral-100 text-neutral-800 border border-neutral-200 px-1.5 py-0.2 rounded hover:bg-neutral-200"
                               >
                                 GPS
                               </a>
@@ -361,11 +361,11 @@ const AdminOrders: React.FC = () => {
 
                       {/* Items */}
                       <td className="px-5 py-3.5">
-                        <span className="font-semibold text-gray-700 text-xs">
-                          {itemCount} {itemCount === 1 ? 'product' : 'products'}
+                        <span className="font-medium text-neutral-800 text-xs">
+                          {itemCount} {itemCount === 1 ? 'item' : 'items'}
                         </span>
                         {items[0]?.name && (
-                          <span className="text-[10px] text-gray-400 block truncate max-w-[150px] mt-0.5">
+                          <span className="text-[10px] text-neutral-400 block truncate max-w-[150px] mt-0.5">
                             {items[0].name}
                           </span>
                         )}
@@ -373,7 +373,7 @@ const AdminOrders: React.FC = () => {
 
                       {/* Total Amount */}
                       <td className="px-5 py-3.5">
-                        <span className="font-bold text-[#185e33] text-sm block">
+                        <span className="font-bold text-neutral-900 text-xs block">
                           ₹{Number(order.total || 0).toFixed(2)}
                         </span>
                         {Number(order.discount || 0) > 0 && (
@@ -388,7 +388,7 @@ const AdminOrders: React.FC = () => {
                         <select
                           value={order.status || 'Pending'}
                           onChange={(e) => handleQuickStatusChange(order._id, e.target.value)}
-                          className={`text-[11px] font-bold px-2.5 py-1 rounded-full border focus:outline-none cursor-pointer ${getStatusBadge(order.status)}`}
+                          className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border focus:outline-none cursor-pointer ${getStatusBadge(order.status)}`}
                         >
                           <option value="Pending">Pending</option>
                           <option value="Processing">Processing</option>
@@ -414,7 +414,7 @@ const AdminOrders: React.FC = () => {
                           )}
                           <button
                             onClick={() => navigate(`/admin/orders/${order._id}`)}
-                            className="px-3 py-1.5 rounded-xl bg-[#faf6ee] hover:bg-[#ede3cf] text-[#185e33] font-bold text-xs border border-[#ede3cf] transition flex items-center gap-1.5"
+                            className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-semibold text-xs border border-neutral-200 transition flex items-center gap-1.5"
                           >
                             <FaEye className="text-xs" /> View
                           </button>

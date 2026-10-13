@@ -18,7 +18,7 @@ import {
   FaImage
 } from 'react-icons/fa';
 
-export interface CandleVariantItem {
+export interface ProductVariantItem {
   id: string;
   name: string;
   label: string;
@@ -29,6 +29,7 @@ export interface CandleVariantItem {
   inStock: boolean;
   pack?: string;
 }
+export type CandleVariantItem = ProductVariantItem;
 
 const AdminAddProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const AdminAddProduct: React.FC = () => {
   });
 
   const [hasVariants, setHasVariants] = useState(false);
-  const [variants, setVariants] = useState<CandleVariantItem[]>([]);
+  const [variants, setVariants] = useState<ProductVariantItem[]>([]);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string>('');
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -69,7 +70,7 @@ const AdminAddProduct: React.FC = () => {
 
   // Add empty variant
   const addCustomVariant = () => {
-    const newVar: CandleVariantItem = {
+    const newVar: ProductVariantItem = {
       id: Date.now().toString(),
       name: `Variant ${variants.length + 1}`,
       label: `Option ${variants.length + 1}`,
@@ -86,7 +87,7 @@ const AdminAddProduct: React.FC = () => {
   // Duplicate a variant
   const duplicateVariant = (index: number) => {
     const target = variants[index];
-    const duplicated: CandleVariantItem = {
+    const duplicated: ProductVariantItem = {
       ...target,
       id: Date.now().toString(),
       name: `${target.name} (Copy)`,
@@ -97,7 +98,7 @@ const AdminAddProduct: React.FC = () => {
   };
 
   // Update a single variant field
-  const updateVariant = (index: number, field: keyof CandleVariantItem, value: any) => {
+  const updateVariant = (index: number, field: keyof ProductVariantItem, value: any) => {
     setVariants(prev => {
       const updated = [...prev];
       const current = { ...updated[index] };
@@ -197,19 +198,19 @@ const AdminAddProduct: React.FC = () => {
   }, [isError, error]);
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto pb-12">
+    <div className="space-y-6 max-w-4xl mx-auto pb-12 font-sans">
       <div className="flex items-center justify-between">
         <BackButton fallback="/admin/products" />
       </div>
 
-      <div className="bg-white p-6 md:p-8 rounded-3xl border border-[#efe9db] shadow-sm space-y-6">
-        <div className="border-b border-[#efe9db] pb-4 flex items-center justify-between flex-wrap gap-2">
+      <div className="bg-white p-6 md:p-8 rounded-3xl border border-neutral-200 shadow-2xs space-y-6">
+        <div className="border-b border-neutral-100 pb-4 flex items-center justify-between flex-wrap gap-2">
           <div>
-            <h1 className="text-2xl font-serif font-bold text-[#185e33] flex items-center gap-2">
-              <FaBoxOpen /> Add New Candle Product
+            <h1 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
+              <FaBoxOpen className="text-neutral-700" /> Add New Product
             </h1>
-            <p className="text-xs text-gray-500 mt-0.5">
-              Fill in product info, upload high-res imagery, and define multiple sizes / pack variants.
+            <p className="text-xs text-neutral-500 mt-0.5">
+              Fill in product details, upload Cloudinary photography, and configure sizing/pack varieties.
             </p>
           </div>
         </div>
@@ -219,7 +220,7 @@ const AdminAddProduct: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Product Name */}
             <div className="space-y-1.5 md:col-span-2">
-              <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">
+              <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">
                 Product Name *
               </label>
               <input
@@ -227,22 +228,22 @@ const AdminAddProduct: React.FC = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="e.g. Lotus Bloom Grand Urli Candle"
-                className="w-full px-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
+                placeholder="e.g. Urvaa Araku Arabica Coffee Powder"
+                className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium text-neutral-900"
                 required
               />
             </div>
 
             {/* Category */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">
+              <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">
                 Category *
               </label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold text-gray-900"
+                className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium text-neutral-900"
                 required
               >
                 <option value="Tribal Araku Products">Tribal Araku Products</option>
@@ -256,12 +257,12 @@ const AdminAddProduct: React.FC = () => {
             {/* Base Pricing (only if no variants) */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">
-                  Base Price (₹) {hasVariants && <span className="text-[10px] text-gray-400 font-normal normal-case">(Auto from variants)</span>}
+                <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">
+                  Base Price (₹) {hasVariants && <span className="text-[10px] text-neutral-400 font-normal lowercase">(auto from variants)</span>}
                 </label>
               </div>
               <div className="relative">
-                <FaRupeeSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                <FaRupeeSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-xs" />
                 <input
                   type="number"
                   name="price"
@@ -269,7 +270,7 @@ const AdminAddProduct: React.FC = () => {
                   onChange={handleChange}
                   disabled={hasVariants && variants.length > 0}
                   placeholder="e.g. 299"
-                  className="w-full pl-8 pr-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] font-semibold disabled:opacity-60 text-gray-900"
+                  className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white font-medium disabled:opacity-50 text-neutral-900"
                 />
               </div>
             </div>
@@ -277,7 +278,7 @@ const AdminAddProduct: React.FC = () => {
 
           {/* Description */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase text-gray-600 tracking-wider">
+            <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider">
               Product Description *
             </label>
             <textarea
@@ -285,29 +286,29 @@ const AdminAddProduct: React.FC = () => {
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              placeholder="Describe the product, including relevant materials, ingredients, and origin details..."
-              className="w-full px-4 py-3 rounded-xl border border-[#ede3cf] text-sm focus:outline-none focus:ring-2 focus:ring-[#185e33]/20 bg-[#faf6ee] text-gray-800 resize-none"
+              placeholder="Describe the product, authentic origin, regional craft, or organic ingredients..."
+              className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 bg-neutral-50 focus:bg-white text-neutral-900 resize-none"
               required
             />
           </div>
 
           {/* Product Photo Upload */}
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase text-gray-600 tracking-wider block">
-              Product Imagery *
+            <label className="text-xs font-semibold uppercase text-neutral-600 tracking-wider block">
+              Product Imagery (Cloudinary Direct) *
             </label>
             <div className="flex items-center gap-4 flex-wrap">
               {photoPreview ? (
-                <div className="relative w-24 h-24 rounded-2xl border border-[#ede3cf] overflow-hidden shadow-sm shrink-0">
+                <div className="relative w-24 h-24 rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs shrink-0 bg-neutral-50">
                   <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-24 h-24 rounded-2xl border-2 border-dashed border-[#ede3cf] bg-[#faf6ee] flex flex-col items-center justify-center text-gray-400 text-xs shrink-0">
-                  <FaImage className="text-xl mb-1 text-gray-300" />
-                  <span>No Image</span>
+                <div className="w-24 h-24 rounded-2xl border-2 border-dashed border-neutral-200 bg-neutral-50 flex flex-col items-center justify-center text-neutral-400 text-xs shrink-0">
+                  <FaImage className="text-xl mb-1 text-neutral-300" />
+                  <span className="text-[10px]">No Photo</span>
                 </div>
               )}
-              <label className="cursor-pointer bg-[#FAF6EE] hover:bg-[#EDE3CF] text-[#185E33] border border-[#EDE3CF] px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-2xs flex items-center gap-2">
+              <label className="cursor-pointer bg-neutral-100 hover:bg-neutral-200 text-neutral-800 border border-neutral-200 px-4 py-2.5 rounded-xl font-semibold text-xs transition shadow-2xs flex items-center gap-2">
                 <FaUpload /> Choose Photo
                 <input
                   type="file"
@@ -316,21 +317,21 @@ const AdminAddProduct: React.FC = () => {
                   className="hidden"
                 />
               </label>
-              <p className="text-[11px] text-gray-400">Recommended: Square format JPG/PNG, minimum 800x800px.</p>
+              <p className="text-[11px] text-neutral-400">High-resolution JPEG or PNG. Automatically optimized on Cloudinary.</p>
             </div>
           </div>
 
           {/* ═══════════════════════════════════════════════════════════════════ */}
-          {/* CANDLE SIZE & VARIANTS BUILDER */}
+          {/* PRODUCT SIZE & VARIANTS BUILDER */}
           {/* ═══════════════════════════════════════════════════════════════════ */}
-          <div className="border border-[#C79A56]/40 bg-[#FAF7F2] p-5 md:p-6 rounded-3xl space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#C79A56]/20 pb-4">
+          <div className="border border-neutral-200 bg-neutral-50/50 p-5 md:p-6 rounded-3xl space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-200/60 pb-4">
               <div>
-                <h3 className="text-base font-serif font-bold text-[#185E33] flex items-center gap-2">
-                  <FaLayerGroup className="text-[#C79A56]" /> Candle Sizes & Multi-Variants
+                <h3 className="text-sm font-bold text-neutral-900 flex items-center gap-2">
+                  <FaLayerGroup className="text-neutral-500" /> Sizes, Weights & Pack Varieties
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
-                  Offer buyers different sizes (e.g. Small / Large), wicks, or pack options (Pack of 2, 4).
+                <p className="text-xs text-neutral-500 mt-0.5">
+                  Offer buyers different sizes (e.g. 250g, 500g, 1kg), packs, or combo options.
                 </p>
               </div>
 
@@ -338,21 +339,21 @@ const AdminAddProduct: React.FC = () => {
                 <button
                   type="button"
                   onClick={addCustomVariant}
-                  className="bg-[#185E33] hover:bg-[#134B28] text-white px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
+                  className="bg-[#111111] hover:bg-neutral-800 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs"
                 >
-                  <FaPlus /> Add Size / Variant
+                  <FaPlus className="text-[10px]" /> Add Size / Variant
                 </button>
               </div>
             </div>
 
             {/* Variant Cards List */}
             {variants.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-dashed border-[#EDE3CF] p-8 text-center space-y-2">
-                <p className="text-xs font-semibold text-gray-600">
+              <div className="bg-white rounded-2xl border border-dashed border-neutral-200 p-8 text-center space-y-1.5">
+                <p className="text-xs font-semibold text-neutral-700">
                   No multi-sizes added yet — product will sell as a single standard item.
                 </p>
-                <p className="text-[11px] text-gray-400 max-w-sm mx-auto">
-                  Add a custom option above when a product is available in multiple sizes, packs, or formats.
+                <p className="text-[11px] text-neutral-400 max-w-sm mx-auto">
+                  Click "+ Add Size / Variant" if this product is sold in distinct weights, packs, or sizes.
                 </p>
               </div>
             ) : (
@@ -366,19 +367,19 @@ const AdminAddProduct: React.FC = () => {
                     <div
                       key={v.id}
                       className={`bg-white rounded-2xl border p-4 transition-all duration-200 shadow-2xs space-y-3 ${
-                        !v.inStock ? 'border-rose-200 bg-rose-50/20' : 'border-[#EDE3CF]'
+                        !v.inStock ? 'border-rose-200 bg-rose-50/20' : 'border-neutral-200'
                       }`}
                     >
-                      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-gray-100 pb-2.5">
+                      <div className="flex items-center justify-between flex-wrap gap-2 border-b border-neutral-100 pb-2.5">
                         <div className="flex items-center gap-2">
-                          <span className="w-5 h-5 rounded-full bg-[#C79A56]/20 text-[#185E33] font-bold flex items-center justify-center text-[10px]">
+                          <span className="w-5 h-5 rounded-full bg-neutral-100 text-neutral-700 font-bold flex items-center justify-center text-[10px]">
                             {idx + 1}
                           </span>
-                          <span className="font-bold text-gray-900 text-xs">
+                          <span className="font-semibold text-neutral-900 text-xs">
                             {v.name || `Variant ${idx + 1}`}
                           </span>
                           {discount > 0 && (
-                            <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.2 rounded-full border border-emerald-200">
+                            <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200">
                               {discount}% OFF
                             </span>
                           )}
@@ -389,7 +390,7 @@ const AdminAddProduct: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => updateVariant(idx, 'inStock', !v.inStock)}
-                            className={`text-[10px] font-bold px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${
+                            className={`text-[10px] font-semibold px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${
                               v.inStock
                                 ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
                                 : 'bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100'
@@ -403,7 +404,7 @@ const AdminAddProduct: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => duplicateVariant(idx)}
-                            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+                            className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition"
                             title="Duplicate variant"
                           >
                             <FaCopy className="text-xs" />
@@ -425,21 +426,21 @@ const AdminAddProduct: React.FC = () => {
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                         {/* Variant Title */}
                         <div className="col-span-2 sm:col-span-1 space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-gray-400">
+                          <label className="text-[10px] font-semibold uppercase text-neutral-400">
                             Size / Pack Label
                           </label>
                           <input
                             type="text"
                             value={v.name}
                             onChange={(e) => updateVariant(idx, 'name', e.target.value)}
-                            placeholder="e.g. Medium (300g)"
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold focus:outline-none focus:border-[#185E33]"
+                            placeholder="e.g. Medium (500g)"
+                            className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs font-medium focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white text-neutral-900"
                           />
                         </div>
 
                         {/* Sale Price */}
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-gray-400">
+                          <label className="text-[10px] font-semibold uppercase text-neutral-400">
                             Selling Price (₹) *
                           </label>
                           <input
@@ -447,14 +448,14 @@ const AdminAddProduct: React.FC = () => {
                             min="1"
                             value={v.salePrice}
                             onChange={(e) => updateVariant(idx, 'salePrice', parseFloat(e.target.value) || 0)}
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-bold text-[#185E33] focus:outline-none focus:border-[#185E33]"
+                            className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs font-bold text-neutral-900 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                             required
                           />
                         </div>
 
                         {/* MRP Price */}
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-gray-400">
+                          <label className="text-[10px] font-semibold uppercase text-neutral-400">
                             MRP Price (₹)
                           </label>
                           <input
@@ -462,13 +463,13 @@ const AdminAddProduct: React.FC = () => {
                             min="1"
                             value={v.mrp}
                             onChange={(e) => updateVariant(idx, 'mrp', parseFloat(e.target.value) || 0)}
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-600 focus:outline-none focus:border-[#185E33]"
+                            className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs font-medium text-neutral-600 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                           />
                         </div>
 
                         {/* Stock Units */}
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold uppercase text-gray-400">
+                          <label className="text-[10px] font-semibold uppercase text-neutral-400">
                             Stock Units
                           </label>
                           <input
@@ -476,7 +477,7 @@ const AdminAddProduct: React.FC = () => {
                             min="0"
                             value={v.stock}
                             onChange={(e) => updateVariant(idx, 'stock', parseInt(e.target.value) || 0)}
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-800 focus:outline-none focus:border-[#185E33]"
+                            className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs font-medium text-neutral-800 focus:outline-none focus:border-neutral-900 bg-neutral-50 focus:bg-white"
                           />
                         </div>
                       </div>
@@ -488,18 +489,18 @@ const AdminAddProduct: React.FC = () => {
           </div>
 
           {/* Submit Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#efe9db]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-neutral-100">
             <button
               type="button"
               onClick={() => navigate('/admin/products')}
-              className="px-5 py-2.5 rounded-xl border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs transition"
+              className="px-5 py-2.5 rounded-xl border border-neutral-200 hover:bg-neutral-50 text-neutral-700 font-semibold text-xs transition"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploadingImage}
-              className="bg-[#185E33] hover:bg-[#134B28] text-white px-7 py-2.5 rounded-xl font-bold text-xs transition shadow-md shadow-[#185E33]/20 disabled:opacity-50 flex items-center gap-2"
+              className="bg-[#111111] hover:bg-neutral-800 text-white px-7 py-2.5 rounded-xl font-semibold text-xs transition shadow-xs disabled:opacity-50 flex items-center gap-2"
             >
               {uploadingImage ? 'Uploading & Creating...' : 'Publish Product to Store'}
             </button>

@@ -86,7 +86,7 @@ const SignupPage: React.FC = () => {
         dispatch(userExists({
           _id: 'user_google_' + Date.now(),
           uid: 'user_google_uid_' + Date.now(),
-          email: 'customer@julinacandles.in',
+          email: 'customer@urvaa.in',
           name: 'URVA Customer',
           role: 'user',
           provider: 'google'
@@ -103,16 +103,16 @@ const SignupPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="w-full max-w-md bg-white rounded-lg p-2">
-        <h5 className="text-xl font-bold text-center mb-6 text-[#185e33] font-serif">Create Account</h5>
+        <h5 className="text-xl font-bold text-center mb-6 text-[#111111] font-sans tracking-tight">Create Account</h5>
 
         <form onSubmit={handleSignUp} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold mb-1.5 text-gray-700" htmlFor="name">Full Name</label>
+            <label className="block text-xs font-semibold mb-1.5 text-neutral-700" htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
               placeholder="John Doe"
-              className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 text-sm focus:outline-none focus:border-[#185e33]"
+              className="appearance-none border border-neutral-300 rounded-lg w-full py-2.5 px-3 text-[#111111] text-sm focus:outline-none focus:border-black transition-colors"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -120,12 +120,12 @@ const SignupPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold mb-1.5 text-gray-700" htmlFor="email">Email Address</label>
+            <label className="block text-xs font-semibold mb-1.5 text-neutral-700" htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
               placeholder="name@example.com"
-              className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 text-sm focus:outline-none focus:border-[#185e33]"
+              className="appearance-none border border-neutral-300 rounded-lg w-full py-2.5 px-3 text-[#111111] text-sm focus:outline-none focus:border-black transition-colors"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -133,12 +133,12 @@ const SignupPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold mb-1.5 text-gray-700" htmlFor="password">Password</label>
+            <label className="block text-xs font-semibold mb-1.5 text-neutral-700" htmlFor="password">Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="••••••••"
-              className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-[#185e33]"
+              className="appearance-none border border-neutral-300 rounded-lg w-full py-2.5 px-3 text-[#111111] text-sm leading-tight focus:outline-none focus:border-black transition-colors"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -146,12 +146,12 @@ const SignupPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold mb-1.5 text-gray-700" htmlFor="confirmPassword">Confirm Password</label>
+            <label className="block text-xs font-semibold mb-1.5 text-neutral-700" htmlFor="confirmPassword">Confirm Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
               id="confirmPassword"
               placeholder="••••••••"
-              className="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-[#185e33]"
+              className="appearance-none border border-neutral-300 rounded-lg w-full py-2.5 px-3 text-[#111111] text-sm leading-tight focus:outline-none focus:border-black transition-colors"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -164,15 +164,15 @@ const SignupPage: React.FC = () => {
               id="showPassword"
               checked={showPassword}
               onChange={() => setShowPassword(!showPassword)}
-              className="mr-2 cursor-pointer accent-[#185e33]"
+              className="mr-2 cursor-pointer accent-black"
             />
-            <label htmlFor="showPassword" className="text-xs text-gray-600">Show Password</label>
+            <label htmlFor="showPassword" className="text-xs text-neutral-600">Show Password</label>
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full bg-[#185e33] hover:bg-[#134b28] text-white font-bold py-3 px-4 rounded-xl text-sm focus:outline-none transition-colors shadow-md mt-2 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-full bg-black hover:bg-neutral-800 text-white font-medium py-3 px-4 rounded-xl text-sm focus:outline-none transition-colors shadow-sm mt-2 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>

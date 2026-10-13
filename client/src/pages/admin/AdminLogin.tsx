@@ -58,36 +58,41 @@ const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f7f4ec] via-[#efe9db] to-[#e8dfc7] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center p-4 font-sans">
       <div className="w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-[#1f5133] rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
-            <FaLock className="text-white text-3xl" />
+          <div className="w-16 h-16 bg-[#111111] rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm border border-neutral-800">
+            <FaLock className="text-white text-2xl" />
           </div>
-          <h1 className="text-3xl font-serif font-bold text-[#1f5133] mb-2">Admin Portal</h1>
-          <p className="text-sm text-gray-600">URVA Management System</p>
+          <img 
+            src="https://res.cloudinary.com/idi6k3ue/image/upload/v1791904965/urvaa/logo.png" 
+            alt="URVA" 
+            className="h-10 w-auto mx-auto mb-3 object-contain" 
+          />
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Admin Console</h1>
+          <p className="text-xs text-neutral-500 mt-1">URVA Merchant Management System</p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-2xl border border-[#efe9db] p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-white rounded-3xl shadow-xl border border-neutral-200 p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="text-gray-400" />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <FaEnvelope className="text-neutral-400 text-sm" />
                 </div>
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1f5133] focus:border-transparent outline-none transition"
-                  placeholder="Admin email"
+                  className="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-neutral-900/20 focus:border-neutral-900 outline-none transition text-sm text-neutral-900 bg-neutral-50 focus:bg-white"
+                  placeholder="admin@urvaa.in"
                   required
                   autoComplete="email"
                 />
@@ -96,19 +101,19 @@ const AdminLogin: React.FC = () => {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-2">
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="text-gray-400" />
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <FaLock className="text-neutral-400 text-sm" />
                 </div>
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1f5133] focus:border-transparent outline-none transition"
+                  className="w-full pl-10 pr-12 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-neutral-900/20 focus:border-neutral-900 outline-none transition text-sm text-neutral-900 bg-neutral-50 focus:bg-white"
                   placeholder="Enter your password"
                   required
                   autoComplete="current-password"
@@ -116,7 +121,7 @@ const AdminLogin: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-neutral-400 hover:text-neutral-600 transition"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
@@ -127,28 +132,28 @@ const AdminLogin: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full py-3 rounded-xl font-bold text-white transition shadow-lg ${
+              className={`w-full py-3 rounded-xl font-semibold text-white text-sm transition shadow-sm ${
                 isLoading
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#1f5133] hover:bg-[#163b26] active:scale-95'
+                  ? 'bg-neutral-400 cursor-not-allowed'
+                  : 'bg-[#111111] hover:bg-neutral-800 active:scale-[0.99]'
               }`}
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                   Authenticating...
                 </div>
               ) : (
-                'Sign In'
+                'Sign In to Dashboard'
               )}
             </button>
           </form>
 
           {/* Security Notice */}
-          <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <p className="text-xs text-amber-800 text-center">
-              <FaLock className="inline mr-1" />
-              This is a secure admin area. Unauthorized access is prohibited.
+          <div className="mt-6 p-3.5 bg-neutral-50 border border-neutral-200 rounded-xl">
+            <p className="text-xs text-neutral-600 text-center flex items-center justify-center gap-1.5">
+              <FaLock className="text-neutral-400 text-[10px]" />
+              Secure administrative access for URVA staff only.
             </p>
           </div>
         </div>
@@ -157,9 +162,9 @@ const AdminLogin: React.FC = () => {
         <div className="text-center mt-6">
           <button
             onClick={() => navigate('/')}
-            className="text-sm text-gray-600 hover:text-[#1f5133] transition font-medium"
+            className="text-xs text-neutral-500 hover:text-neutral-900 transition font-medium"
           >
-            ← Back to Website
+            ← Return to storefront
           </button>
         </div>
       </div>

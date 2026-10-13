@@ -41,39 +41,39 @@ const FAQSection: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-[#FBF6ED] border-t border-[#E6DACB]">
+    <section className="py-16 bg-[#FAFAFA] border-t border-neutral-200">
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 text-xs font-sans font-bold text-[#C79A56] uppercase tracking-[0.2em] mb-3">
-            <FaQuestionCircle className="text-[#5C2333]" /> Help & Support
+          <span className="inline-flex items-center gap-2 text-[11px] font-sans font-semibold text-neutral-400 uppercase tracking-[0.2em] mb-2">
+            <FaQuestionCircle className="text-neutral-500" /> Help & Support
           </span>
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
+          <h2 className="text-2xl sm:text-3xl font-sans font-semibold tracking-tight text-[#111111]">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-xs sm:text-sm text-neutral-500 mt-2">
             Questions about regional products, orders, or potential partnerships?
           </p>
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqData.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-[#E6DACB] overflow-hidden shadow-xs hover:shadow-md transition-all duration-300"
+                className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-xs hover:border-neutral-300 transition-colors"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
                 >
-                  <span className="font-serif font-bold text-[#2A1C22] text-sm sm:text-base pr-4">
+                  <span className="font-sans font-semibold text-[#111111] text-sm pr-4">
                     {faq.question}
                   </span>
                   <FaChevronDown
-                    className={`text-[#5C2333] transition-transform duration-300 shrink-0 text-sm ${
+                    className={`text-neutral-400 transition-transform duration-300 shrink-0 text-xs ${
                       isOpen ? 'rotate-180' : 'rotate-0'
                     }`}
                   />
@@ -81,10 +81,10 @@ const FAQSection: React.FC = () => {
 
                 <div
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? 'max-h-48 border-t border-gray-100' : 'max-h-0'
+                    isOpen ? 'max-h-48 border-t border-neutral-100' : 'max-h-0'
                   }`}
                 >
-                  <p className="p-5 text-xs sm:text-sm text-gray-600 leading-relaxed font-sans bg-gray-50/50">
+                  <p className="p-5 text-xs text-neutral-600 leading-relaxed font-sans bg-neutral-50/50">
                     {faq.answer}
                   </p>
                 </div>

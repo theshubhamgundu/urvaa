@@ -56,33 +56,37 @@ const MyOrders: React.FC = () => {
     }
 
     return (
-        <div className="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
+        <div className="container mx-auto my-8 p-6 bg-white rounded-2xl border border-neutral-200 shadow-xs max-w-5xl">
             <BackButton />
-            <h2 className="text-2xl font-bold mb-6 text-center">My Orders</h2>
+            <h2 className="text-2xl font-sans font-semibold tracking-tight mb-6 text-center text-[#111111]">My Orders</h2>
             {data.orders.length === 0 ? (
-                <p className="text-center text-lg">No orders found</p>
+                <p className="text-center text-sm text-neutral-500 py-8">No orders found</p>
             ) : (
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto rounded-xl border border-neutral-200">
                     <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-blue-100">
-                                <th className="p-4 text-sm md:text-base">Order ID</th>
-                                <th className="p-4 text-sm md:text-base">Date</th>
-                                <th className="p-4 text-sm md:text-base">Status</th>
-                                <th className="p-4 text-sm md:text-base">Total</th>
-                                <th className="p-4 text-sm md:text-base">Details</th>
+                        <thead className="bg-neutral-50">
+                            <tr className="border-b border-neutral-200 text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                                <th className="p-4">Order ID</th>
+                                <th className="p-4">Date</th>
+                                <th className="p-4">Status</th>
+                                <th className="p-4">Total</th>
+                                <th className="p-4 text-right">Details</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-neutral-200 text-xs sm:text-sm">
                             {data.orders.map((order) => (
-                                <tr className="border-b hover:bg-gray-100" key={order._id}>
-                                    <td className="p-4 text-sm md:text-base">{order._id}</td>
-                                    <td className="p-4 text-sm md:text-base">{new Date(order.createdAt).toLocaleDateString()}</td>
-                                    <td className="p-4 text-sm md:text-base">{order.status  }</td>
-                                    <td className="p-4 text-sm md:text-base font-bold text-[#5C2333]">₹ {order.total.toFixed(2)}</td>
+                                <tr className="hover:bg-neutral-50/50 transition-colors" key={order._id}>
+                                    <td className="p-4 font-mono text-xs text-neutral-700">{order._id}</td>
+                                    <td className="p-4 text-neutral-600">{new Date(order.createdAt).toLocaleDateString()}</td>
                                     <td className="p-4">
+                                        <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-800 border border-neutral-200">
+                                            {order.status}
+                                        </span>
+                                    </td>
+                                    <td className="p-4 font-semibold text-[#111111]">₹ {order.total.toFixed(2)}</td>
+                                    <td className="p-4 text-right">
                                         <button
-                                            className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base hover:bg-blue-600 transition"
+                                            className="bg-black text-white px-3.5 py-1.5 rounded-lg text-xs font-medium hover:bg-neutral-800 transition-colors"
                                             onClick={() => navigate(`/order/${order._id}`)}
                                         >
                                             View Details
